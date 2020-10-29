@@ -28,23 +28,26 @@ class DatabaseApiExceptionConverter
         $this->responseParser = new ErrorResponseParser();
     }
 
-    public function convertException(Throwable $exception): DatabaseException
+    /**
+     * @return DatabaseException
+     */
+    public function convertException(Throwable $exception): FirebaseException
     {
         if ($exception instanceof RequestException) {
             return $this->convertGuzzleRequestException($exception);
         }
 
-        if ($exception instanceof ConnectException) {
-            return new ApiConnectionFailed('Unable to connect to the API: '.$exception->getMessage(), $exception->getCode(), $exception);
-        }
-
         return new DatabaseError($exception->getMessage(), $exception->getCode(), $exception);
     }
 
-    private function convertGuzzleRequestException(RequestException $e): DatabaseException
+    private function convertGuzzleRequestException(RequestException $e)
     {
         $message = $e->getMessage();
         $code = $e->getCode();
+
+        if ($e instanceof ConnectException) {
+            return new ApiConnectionFailed('Unable to connect to the API: '.$message, $code, $e);
+        }
 
         if ($response = $e->getResponse()) {
             $message = $this->responseParser->getErrorReasonFromResponse($response);

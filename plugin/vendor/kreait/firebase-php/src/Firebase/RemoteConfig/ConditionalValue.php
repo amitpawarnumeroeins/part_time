@@ -49,10 +49,7 @@ class ConditionalValue implements \JsonSerializable
         return $conditionalValue;
     }
 
-    /**
-     * @return array<string, string>
-     */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return ['value' => $this->value];
     }

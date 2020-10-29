@@ -13,8 +13,6 @@ use Kreait\Firebase\RemoteConfig\Template;
 use Kreait\Firebase\RemoteConfig\Version;
 use Kreait\Firebase\RemoteConfig\VersionNumber;
 use Kreait\Firebase\Util\JSON;
-use Psr\Http\Message\ResponseInterface;
-use Traversable;
 
 /**
  * The Firebase Remote Config.
@@ -35,29 +33,27 @@ class RemoteConfig
         $this->client = $client;
     }
 
-    /**
-     * @throws RemoteConfigException if something went wrong
-     */
     public function get(): Template
     {
-        return $this->buildTemplateFromResponse($this->client->getTemplate());
+        return Template::fromResponse($this->client->getTemplate());
     }
 
     /**
      * Validates the given template without publishing it.
      *
-     * @param Template|array<string, mixed> $template
+     * @param Template|array $template
      *
      * @throws ValidationFailed if the validation failed
-     * @throws RemoteConfigException
      */
-    public function validate($template): void
+    public function validate($template)
     {
-        $this->client->validateTemplate($this->ensureTemplate($template));
+        $template = $template instanceof Template ? $template : Template::fromArray($template);
+
+        $this->client->validateTemplate($template);
     }
 
     /**
-     * @param Template|array<string, mixed> $template
+     * @param Template|array $template
      *
      * @throws RemoteConfigException
      *
@@ -65,9 +61,9 @@ class RemoteConfig
      */
     public function publish($template): string
     {
-        $etag = $this->client
-            ->publishTemplate($this->ensureTemplate($template))
-            ->getHeader('ETag');
+        $template = $template instanceof Template ? $template : Template::fromArray($template);
+
+        $etag = $this->client->publishTemplate($template)->getHeader('ETag');
 
         return \array_shift($etag) ?: '';
     }
@@ -75,14 +71,15 @@ class RemoteConfig
     /**
      * Returns a version with the given number.
      *
-     * @param VersionNumber|int|string $versionNumber
+     * @param VersionNumber|mixed $versionNumber
      *
      * @throws VersionNotFound
-     * @throws RemoteConfigException if something went wrong
      */
     public function getVersion($versionNumber): Version
     {
-        $versionNumber = $this->ensureVersionNumber($versionNumber);
+        $versionNumber = $versionNumber instanceof VersionNumber
+            ? $versionNumber
+            : VersionNumber::fromValue($versionNumber);
 
         foreach ($this->listVersions() as $version) {
             if ($version->versionNumber()->equalsTo($versionNumber)) {
@@ -96,26 +93,27 @@ class RemoteConfig
     /**
      * Returns a version with the given number.
      *
-     * @param VersionNumber|int|string $versionNumber
+     * @param VersionNumber|mixed $versionNumber
      *
      * @throws VersionNotFound
-     * @throws RemoteConfigException if something went wrong
      */
     public function rollbackToVersion($versionNumber): Template
     {
-        $versionNumber = $this->ensureVersionNumber($versionNumber);
+        $versionNumber = $versionNumber instanceof VersionNumber
+            ? $versionNumber
+            : VersionNumber::fromValue($versionNumber);
 
-        return $this->buildTemplateFromResponse($this->client->rollbackToVersion($versionNumber));
+        $response = $this->client->rollbackToVersion($versionNumber);
+
+        return Template::fromResponse($response);
     }
 
     /**
-     * @param FindVersions|array<string, mixed>|null $query
+     * @param FindVersions|array $query
      *
-     * @throws RemoteConfigException if something went wrong
-     *
-     * @return Traversable<Version>|Version[]
+     * @return \Generator|Version[]
      */
-    public function listVersions($query = null): Traversable
+    public function listVersions($query = null): \Generator
     {
         $query = $query instanceof FindVersions ? $query : FindVersions::fromArray((array) $query);
         $pageToken = null;
@@ -137,31 +135,5 @@ class RemoteConfig
 
             $pageToken = $result['nextPageToken'] ?? null;
         } while ($pageToken);
-    }
-
-    /**
-     * @param Template|array<string, mixed> $value
-     */
-    private function ensureTemplate($value): Template
-    {
-        return $value instanceof Template ? $value : Template::fromArray($value);
-    }
-
-    /**
-     * @param VersionNumber|int|string $value
-     */
-    private function ensureVersionNumber($value): VersionNumber
-    {
-        return $value instanceof VersionNumber ? $value : VersionNumber::fromValue($value);
-    }
-
-    private function buildTemplateFromResponse(ResponseInterface $response): Template
-    {
-        $etagHeader = $response->getHeader('ETag');
-        $etag = \array_shift($etagHeader) ?: '*';
-
-        $data = JSON::decode((string) $response->getBody(), true);
-
-        return Template::fromArray($data, $etag);
     }
 }

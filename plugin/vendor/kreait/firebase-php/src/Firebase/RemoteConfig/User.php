@@ -25,8 +25,6 @@ final class User
 
     /**
      * @internal
-     *
-     * @param array<string, string> $data
      */
     public static function fromArray(array $data): self
     {
@@ -38,17 +36,26 @@ final class User
         return $new;
     }
 
-    public function name(): ?string
+    /**
+     * @return string|null
+     */
+    public function name()
     {
         return $this->name;
     }
 
-    public function email(): ?Email
+    /**
+     * @return Email|null
+     */
+    public function email()
     {
         return $this->email;
     }
 
-    public function imageUri(): ?UriInterface
+    /**
+     * @return UriInterface|null
+     */
+    public function imageUri()
     {
         return $this->imageUri;
     }

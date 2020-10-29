@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\Http;
 
+use Generator;
 use IteratorAggregate;
 use Psr\Http\Message\RequestInterface;
-use Traversable;
 
-/**
- * @implements IteratorAggregate<RequestInterface>
- */
 final class Requests implements IteratorAggregate
 {
     /** @var RequestInterface[] */
@@ -21,7 +18,10 @@ final class Requests implements IteratorAggregate
         $this->requests = $requests;
     }
 
-    public function findBy(callable $callable): ?RequestInterface
+    /**
+     * @return RequestInterface|null
+     */
+    public function findBy(callable $callable)
     {
         $results = \array_filter($this->requests, $callable);
 
@@ -31,7 +31,7 @@ final class Requests implements IteratorAggregate
     /**
      * @codeCoverageIgnore
      *
-     * @return Traversable<RequestInterface>|RequestInterface[]
+     * @return Generator|RequestInterface[]
      */
     public function getIterator()
     {

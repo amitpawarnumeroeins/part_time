@@ -4,20 +4,15 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\Messaging;
 
-use JsonSerializable;
-
-final class ApnsConfig implements JsonSerializable
+class ApnsConfig implements Config
 {
-    /** @var array<string, mixed> */
+    /** @var array */
     private $rawConfig;
 
     private function __construct()
     {
     }
 
-    /**
-     * @param array<string, mixed> $data
-     */
     public static function fromArray(array $data): self
     {
         $config = new self();
@@ -26,10 +21,7 @@ final class ApnsConfig implements JsonSerializable
         return $config;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return \array_filter($this->rawConfig, static function ($value) {
             return $value !== null;

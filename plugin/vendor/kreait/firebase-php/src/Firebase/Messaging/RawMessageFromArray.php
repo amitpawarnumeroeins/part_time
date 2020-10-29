@@ -6,21 +6,15 @@ namespace Kreait\Firebase\Messaging;
 
 final class RawMessageFromArray implements Message
 {
-    /** @var array<mixed> */
+    /** @var array */
     private $data;
 
-    /**
-     * @param array<mixed> $data
-     */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    /**
-     * @return array<mixed>
-     */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return $this->data;
     }

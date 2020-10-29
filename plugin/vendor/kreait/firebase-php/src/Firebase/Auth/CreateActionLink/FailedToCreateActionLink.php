@@ -36,12 +36,18 @@ final class FailedToCreateActionLink extends RuntimeException implements Firebas
         return $error;
     }
 
-    public function action(): ?CreateActionLink
+    /**
+     * @return CreateActionLink|null
+     */
+    public function action()
     {
         return $this->action;
     }
 
-    public function response(): ?ResponseInterface
+    /**
+     * @return ResponseInterface|null
+     */
+    public function response()
     {
         return $this->response;
     }

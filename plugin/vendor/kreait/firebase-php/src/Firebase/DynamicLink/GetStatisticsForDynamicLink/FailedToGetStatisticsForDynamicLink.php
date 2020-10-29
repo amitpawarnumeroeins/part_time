@@ -26,12 +26,18 @@ final class FailedToGetStatisticsForDynamicLink extends RuntimeException impleme
         return $error;
     }
 
-    public function action(): ?GetStatisticsForDynamicLink
+    /**
+     * @return GetStatisticsForDynamicLink|null
+     */
+    public function action()
     {
         return $this->action;
     }
 
-    public function response(): ?ResponseInterface
+    /**
+     * @return ResponseInterface|null
+     */
+    public function response()
     {
         return $this->response;
     }

@@ -6,14 +6,11 @@ namespace Kreait\Firebase\Messaging;
 
 use JsonSerializable;
 
-final class FcmOptions implements JsonSerializable
+class FcmOptions implements JsonSerializable
 {
-    /** @var array<string, mixed> */
+    /** @var array */
     private $data;
 
-    /**
-     * @param array<string, mixed> $data
-     */
     private function __construct(array $data)
     {
         $this->data = $data;
@@ -24,9 +21,6 @@ final class FcmOptions implements JsonSerializable
         return new self([]);
     }
 
-    /**
-     * @param array<string, mixed> $data
-     */
     public static function fromArray(array $data): self
     {
         return new self($data);
@@ -40,10 +34,7 @@ final class FcmOptions implements JsonSerializable
         return $options;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return $this->data;
     }

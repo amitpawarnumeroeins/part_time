@@ -9,47 +9,40 @@ use IteratorAggregate;
 
 /**
  * @see https://firebase.google.com/docs/reference/dynamic-links/analytics#response_body
- * @implements IteratorAggregate<array>
  */
 final class EventStatistics implements Countable, IteratorAggregate
 {
-    public const PLATFORM_ANDROID = 'ANDROID';
-    public const PLATFORM_DESKTOP = 'DESKTOP';
-    public const PLATFORM_IOS = 'IOS';
+    const PLATFORM_ANDROID = 'ANDROID';
+    const PLATFORM_DESKTOP = 'DESKTOP';
+    const PLATFORM_IOS = 'IOS';
 
     // Any click on a Dynamic Link, irrespective to how it is handled and its destinations
-    public const TYPE_CLICK = 'CLICK';
+    const TYPE_CLICK = 'CLICK';
 
     // Attempts to redirect users, either to the App Store or Play Store to install or update the app,
     // or to some other destination
-    public const TYPE_REDIRECT = 'REDIRECT';
+    const TYPE_REDIRECT = 'REDIRECT';
 
     // Actual installs (only supported by the Play Store)
-    public const TYPE_APP_INSTALL = 'APP_INSTALL';
+    const TYPE_APP_INSTALL = 'APP_INSTALL';
 
     // First-opens after an install
-    public const TYPE_APP_FIRST_OPEN = 'APP_FIRST_OPEN';
+    const TYPE_APP_FIRST_OPEN = 'APP_FIRST_OPEN';
 
     // Re-opens of an app
-    public const TYPE_APP_RE_OPEN = 'APP_RE_OPEN';
+    const TYPE_APP_RE_OPEN = 'APP_RE_OPEN';
 
-    /** @var array<int, array<string, string>> */
+    /** @var array[] */
     private $events;
 
-    /**
-     * @param array<int, array<string, string>> $events
-     */
-    private function __construct(array $events)
+    private function __construct(array ...$events)
     {
         $this->events = $events;
     }
 
-    /**
-     * @param array<int, array<string, string>> $events
-     */
     public static function fromArray(array $events): self
     {
-        return new self($events);
+        return new self(...$events);
     }
 
     public function onAndroid(): self
@@ -108,21 +101,19 @@ final class EventStatistics implements Countable, IteratorAggregate
 
     public function filter(callable $filter): self
     {
-        return new self(\array_filter($this->events, $filter));
+        return new self(...\array_filter($this->events, $filter));
     }
 
     /**
      * @codeCoverageIgnore
-     *
-     * @return \Traversable<array<string, string>>
      */
     public function getIterator()
     {
         yield from $this->events;
     }
 
-    public function count(): int
+    public function count()
     {
-        return (int) \array_sum(\array_column($this->events, 'count'));
+        return \array_sum(\array_column($this->events, 'count'));
     }
 }

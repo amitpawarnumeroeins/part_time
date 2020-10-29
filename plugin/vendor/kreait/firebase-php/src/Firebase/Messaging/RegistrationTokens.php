@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Messaging;
 
 use Countable;
+use Generator;
 use IteratorAggregate;
 use Kreait\Firebase\Exception\InvalidArgumentException;
-use Traversable;
 
-/**
- * @implements IteratorAggregate<RegistrationToken>
- */
 final class RegistrationTokens implements Countable, IteratorAggregate
 {
     /** @var RegistrationToken[] */
@@ -23,7 +20,7 @@ final class RegistrationTokens implements Countable, IteratorAggregate
     }
 
     /**
-     * @param RegistrationTokens|RegistrationToken|RegistrationToken[]|string[]|string $values
+     * @param mixed $values
      *
      * @throws InvalidArgumentException
      */
@@ -55,7 +52,7 @@ final class RegistrationTokens implements Countable, IteratorAggregate
     /**
      * @codeCoverageIgnore
      *
-     * @return Traversable<RegistrationToken>|RegistrationToken[]
+     * @return Generator|RegistrationToken[]
      */
     public function getIterator()
     {
@@ -68,7 +65,7 @@ final class RegistrationTokens implements Countable, IteratorAggregate
     }
 
     /**
-     * @return array<RegistrationToken>
+     * @return RegistrationToken[]
      */
     public function values(): array
     {
@@ -83,24 +80,8 @@ final class RegistrationTokens implements Countable, IteratorAggregate
         return \array_map('strval', $this->tokens);
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->tokens);
-    }
-
-    /**
-     * @param RegistrationToken|string $token
-     */
-    public function has($token): bool
-    {
-        $token = $token instanceof RegistrationToken ? $token : RegistrationToken::fromValue($token);
-
-        foreach ($this->tokens as $existing) {
-            if ($existing->value() === $token->value()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

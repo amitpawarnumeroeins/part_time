@@ -35,8 +35,6 @@ final class Version
 
     /**
      * @internal
-     *
-     * @param array<string, mixed> $data
      */
     public static function fromArray(array $data): self
     {
@@ -91,7 +89,10 @@ final class Version
         return $this->updateType;
     }
 
-    public function rollbackSource(): ?VersionNumber
+    /**
+     * @return VersionNumber|null
+     */
+    public function rollbackSource()
     {
         return $this->rollbackSource;
     }

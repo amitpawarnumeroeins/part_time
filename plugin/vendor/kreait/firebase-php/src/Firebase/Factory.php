@@ -21,14 +21,11 @@ use Google\Auth\FetchAuthTokenCache;
 use Google\Auth\HttpHandler\HttpHandlerFactory;
 use Google\Auth\Middleware\AuthTokenMiddleware;
 use Google\Auth\ProjectIdProviderInterface;
-use Google\Auth\SignBlobInterface;
 use Google\Cloud\Firestore\FirestoreClient;
 use Google\Cloud\Storage\StorageClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\MessageFormatter;
 use function GuzzleHttp\Psr7\uri_for;
-use GuzzleHttp\RequestOptions;
 use Kreait\Clock;
 use Kreait\Clock\SystemClock;
 use Kreait\Firebase;
@@ -36,23 +33,20 @@ use Kreait\Firebase\Auth\CustomTokenViaGoogleIam;
 use Kreait\Firebase\Auth\DisabledLegacyCustomTokenGenerator;
 use Kreait\Firebase\Auth\DisabledLegacyIdTokenVerifier;
 use Kreait\Firebase\Auth\IdTokenVerifier;
-use Kreait\Firebase\Exception\InvalidArgumentException;
 use Kreait\Firebase\Exception\RuntimeException;
-use Kreait\Firebase\Http\HttpClientOptions;
 use Kreait\Firebase\Http\Middleware;
 use Kreait\Firebase\Project\ProjectId;
+use Kreait\Firebase\ServiceAccount\Discoverer;
 use Kreait\Firebase\Value\Email;
 use Kreait\Firebase\Value\Url;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Message\UriInterface;
-use Psr\Log\LoggerInterface;
-use Psr\Log\LogLevel;
 use Psr\SimpleCache\CacheInterface;
 use Throwable;
 
 class Factory
 {
-    public const API_CLIENT_SCOPES = [
+    const API_CLIENT_SCOPES = [
         'https://www.googleapis.com/auth/iam',
         'https://www.googleapis.com/auth/cloud-platform',
         'https://www.googleapis.com/auth/firebase',
@@ -75,63 +69,59 @@ class Factory
     /** @var ServiceAccountCredentials|UserRefreshCredentials|AppIdentityCredentials|GCECredentials|CredentialsLoader|null */
     protected $googleAuthTokenCredentials;
 
+    /** @var Discoverer|null */
+    protected $serviceAccountDiscoverer;
+
     /** @var ProjectId|null */
     protected $projectId;
 
     /** @var Email|null */
     protected $clientEmail;
 
-    /** @var CacheInterface */
+    /** @var string|null */
+    protected $uid;
+
+    /** @var array */
+    protected $claims = [];
+
+    /** @var CacheInterface|null */
     protected $verifierCache;
 
     /** @var CacheItemPoolInterface */
     protected $authTokenCache;
 
+    /** @var array */
+    protected $httpClientConfig = [];
+
+    /** @var array */
+    protected $httpClientMiddlewares = [];
+
     /** @var bool */
     protected $discoveryIsDisabled = false;
 
     /** @var bool */
-    protected $guzzleDebugModeIsEnabled = false;
+    protected $debug = false;
 
-    /**
-     * @var string|null
-     *
-     * @deprecated 5.7.0 Use {@see withClientOptions} instead.
-     */
+    /** @var string|null */
     protected $httpProxy;
 
-    /** @var string */
     protected static $databaseUriPattern = 'https://%s.firebaseio.com';
 
-    /** @var string */
     protected static $storageBucketNamePattern = '%s.appspot.com';
 
     /** @var Clock */
     protected $clock;
-
-    /** @var callable|null */
-    protected $httpLogMiddleware;
-
-    /** @var callable|null */
-    protected $httpDebugLogMiddleware;
-
-    /** @var HttpClientOptions */
-    protected $httpClientOptions;
 
     public function __construct()
     {
         $this->clock = new SystemClock();
         $this->verifierCache = new InMemoryCache();
         $this->authTokenCache = new MemoryCacheItemPool();
-        $this->httpClientOptions = HttpClientOptions::default();
     }
 
-    /**
-     * @param string|array<string, string>|ServiceAccount $value
-     */
-    public function withServiceAccount($value): self
+    public function withServiceAccount($serviceAccount): self
     {
-        $serviceAccount = ServiceAccount::fromValue($value);
+        $serviceAccount = ServiceAccount::fromValue($serviceAccount);
 
         $factory = clone $this;
         $factory->serviceAccount = $serviceAccount;
@@ -157,6 +147,22 @@ class Factory
         return $factory;
     }
 
+    /**
+     * @deprecated 4.42.0
+     */
+    public function withServiceAccountDiscoverer(Discoverer $discoverer): self
+    {
+        \trigger_error(
+            __METHOD__.' is deprecated. The auto-discovery provided by Google\'s libraries is used instead',
+            \E_USER_DEPRECATED
+        );
+
+        $factory = clone $this;
+        $factory->serviceAccountDiscoverer = $discoverer;
+
+        return $factory;
+    }
+
     public function withDisabledAutoDiscovery(): self
     {
         $factory = clone $this;
@@ -165,9 +171,6 @@ class Factory
         return $factory;
     }
 
-    /**
-     * @param UriInterface|string $uri
-     */
     public function withDatabaseUri($uri): self
     {
         $factory = clone $this;
@@ -176,7 +179,7 @@ class Factory
         return $factory;
     }
 
-    public function withDefaultStorageBucket(string $name): self
+    public function withDefaultStorageBucket($name): self
     {
         $factory = clone $this;
         $factory->defaultStorageBucket = $name;
@@ -200,61 +203,42 @@ class Factory
         return $factory;
     }
 
-    public function withEnabledDebug(?LoggerInterface $logger = null): self
+    public function withEnabledDebug(): self
     {
         $factory = clone $this;
-
-        if ($logger) {
-            $factory = $factory->withHttpDebugLogger($logger);
-        } else {
-            Firebase\Util\Deprecation::trigger(__METHOD__.' without a '.LoggerInterface::class);
-            // @codeCoverageIgnoreStart
-            $factory->guzzleDebugModeIsEnabled = true;
-            // @codeCoverageIgnoreEnd
-        }
-
-        return $factory;
-    }
-
-    public function withHttpClientOptions(HttpClientOptions $options): self
-    {
-        $factory = clone $this;
-        $factory->httpClientOptions = $options;
-
-        return $factory;
-    }
-
-    public function withHttpLogger(LoggerInterface $logger, ?MessageFormatter $formatter = null, ?string $logLevel = null, ?string $errorLogLevel = null): self
-    {
-        $formatter = $formatter ?: new MessageFormatter();
-        $logLevel = $logLevel ?: LogLevel::INFO;
-        $errorLogLevel = $errorLogLevel ?: LogLevel::NOTICE;
-
-        $factory = clone $this;
-        $factory->httpLogMiddleware = Middleware::log($logger, $formatter, $logLevel, $errorLogLevel);
-
-        return $factory;
-    }
-
-    public function withHttpDebugLogger(LoggerInterface $logger, ?MessageFormatter $formatter = null, ?string $logLevel = null, ?string $errorLogLevel = null): self
-    {
-        $formatter = $formatter ?: new MessageFormatter(MessageFormatter::DEBUG);
-        $logLevel = $logLevel ?: LogLevel::INFO;
-        $errorLogLevel = $errorLogLevel ?: LogLevel::NOTICE;
-
-        $factory = clone $this;
-        $factory->httpDebugLogMiddleware = Middleware::log($logger, $formatter, $logLevel, $errorLogLevel);
+        $factory->debug = true;
 
         return $factory;
     }
 
     public function withHttpProxy(string $proxy): self
     {
-        $factory = $this->withHttpClientOptions(
-            $this->httpClientOptions->withProxy($proxy)
-        );
+        $factory = clone $this;
+        $factory->httpProxy = $proxy;
 
-        $factory->httpProxy = $factory->httpClientOptions->proxy();
+        return $factory;
+    }
+
+    /**
+     * @deprecated 4.42.0
+     */
+    public function withHttpClientConfig(array $config = null): self
+    {
+        $factory = clone $this;
+        $factory->httpClientConfig = $config ?? [];
+
+        return $factory;
+    }
+
+    /**
+     * @deprecated 4.42.0
+     *
+     * @param callable[]|null $middlewares
+     */
+    public function withHttpClientMiddlewares(array $middlewares = null): self
+    {
+        $factory = clone $this;
+        $factory->httpClientMiddlewares = $middlewares ?? [];
 
         return $factory;
     }
@@ -267,46 +251,60 @@ class Factory
         return $factory;
     }
 
-    protected function getServiceAccount(): ?ServiceAccount
+    /**
+     * @deprecated 4.41
+     * @codeCoverageIgnore
+     */
+    public function asUser(string $uid, array $claims = null): self
+    {
+        $factory = clone $this;
+        $factory->uid = $uid;
+        $factory->claims = $claims ?? [];
+
+        return $factory;
+    }
+
+    /**
+     * @deprecated 4.33 Use the component-specific create*() methods instead.
+     * @see createAuth()
+     * @see createDatabase()
+     * @see createFirestore()
+     * @see createMessaging()
+     * @see createRemoteConfig()
+     * @see createStorage()
+     */
+    public function create(): Firebase
+    {
+        /* @noinspection PhpInternalEntityUsedInspection */
+        return new Firebase($this);
+    }
+
+    /**
+     * @return ServiceAccount|null
+     */
+    protected function getServiceAccount()
     {
         if ($this->serviceAccount) {
             return $this->serviceAccount;
         }
 
-        if ($credentials = Util::getenv('FIREBASE_CREDENTIALS')) {
+        if ($credentials = \getenv('FIREBASE_CREDENTIALS')) {
             return $this->serviceAccount = ServiceAccount::fromValue($credentials);
         }
 
-        if ($this->discoveryIsDisabled) {
-            return null;
+        if ($discoverer = $this->serviceAccountDiscoverer) {
+            return $this->serviceAccount = $discoverer->discover();
         }
 
-        if ($credentials = Util::getenv('GOOGLE_APPLICATION_CREDENTIALS')) {
-            try {
-                return $this->serviceAccount = ServiceAccount::fromValue($credentials);
-            } catch (InvalidArgumentException $e) {
-                // Do nothing, continue trying
-            }
-        }
-
-        // @codeCoverageIgnoreStart
-        // We can't reliably test this without re-implementing it ourselves
-        if ($credentials = CredentialsLoader::fromWellKnownFile()) {
-            try {
-                return $this->serviceAccount = ServiceAccount::fromValue($credentials);
-            } catch (InvalidArgumentException $e) {
-                // Do nothing, continue trying
-            }
-        }
-        // @codeCoverageIgnoreEnd
-
-        // ... or don't
         return null;
     }
 
-    protected function getProjectId(): ?ProjectId
+    /**
+     * @return ProjectId|null
+     */
+    protected function getProjectId()
     {
-        if ($this->projectId) {
+        if ($this->projectId !== null) {
             return $this->projectId;
         }
 
@@ -326,40 +324,24 @@ class Factory
             return $this->projectId = ProjectId::fromString($projectId);
         }
 
-        if ($projectId = Util::getenv('GOOGLE_CLOUD_PROJECT')) {
+        if ($projectId = \getenv('GOOGLE_CLOUD_PROJECT')) {
             return $this->projectId = ProjectId::fromString((string) $projectId);
         }
 
-        if ($projectId = Util::getenv('GCLOUD_PROJECT')) {
+        if ($projectId = \getenv('GCLOUD_PROJECT')) {
             return $this->projectId = ProjectId::fromString((string) $projectId);
         }
 
         return null;
+        // @codeCoverageIgnoreEnd
     }
 
-    protected function getClientEmail(): ?Email
+    /**
+     * @return Email|null
+     */
+    protected function getClientEmail()
     {
-        if ($this->clientEmail) {
-            return $this->clientEmail;
-        }
-
-        if ($serviceAccount = $this->getServiceAccount()) {
-            return $this->clientEmail = new Email($serviceAccount->getClientEmail());
-        }
-
-        if ($this->discoveryIsDisabled) {
-            return null;
-        }
-
-        if (
-            ($credentials = $this->getGoogleAuthTokenCredentials())
-            && ($credentials instanceof SignBlobInterface)
-            && ($clientEmail = $credentials->getClientName())
-        ) {
-            return $this->clientEmail = new Email($clientEmail);
-        }
-
-        return null;
+        return $this->clientEmail;
     }
 
     protected function getDatabaseUri(): UriInterface
@@ -375,7 +357,10 @@ class Factory
         throw new RuntimeException('Unable to build a database URI without a project ID');
     }
 
-    protected function getStorageBucketName(): ?string
+    /**
+     * @return string|null
+     */
+    protected function getStorageBucketName()
     {
         if ($this->defaultStorageBucket) {
             return $this->defaultStorageBucket;
@@ -441,9 +426,22 @@ class Factory
     {
         $http = $this->createApiClient();
 
+        $middlewares = [
+            'json_suffix' => Firebase\Http\Middleware::ensureJsonSuffix(),
+        ];
+
+        if ($this->uid) {
+            $authOverride = new Http\Auth\CustomToken($this->uid, $this->claims);
+
+            $middlewares['auth_override'] = Middleware::overrideAuth($authOverride);
+        }
+
         /** @var HandlerStack $handler */
         $handler = $http->getConfig('handler');
-        $handler->push(Firebase\Http\Middleware::ensureJsonSuffix(), 'realtime_database_json_suffix');
+
+        foreach ($middlewares as $name => $middleware) {
+            $handler->push($middleware, $name);
+        }
 
         return new Database($this->getDatabaseUri(), new Database\ApiClient($http));
     }
@@ -499,9 +497,12 @@ class Factory
         return DynamicLinks::withApiClient($apiClient);
     }
 
-    public function createFirestore(): Firestore
+    /**
+     * @param array|null $firestoreClientConfig Deprecated since 4.42.0
+     */
+    public function createFirestore(/* @deprecated */ array $firestoreClientConfig = null): Firestore
     {
-        $config = [];
+        $config = $firestoreClientConfig ?: [];
 
         if ($serviceAccount = $this->getServiceAccount()) {
             $config['keyFile'] = $serviceAccount->asArray();
@@ -527,9 +528,12 @@ class Factory
         return Firestore::withFirestoreClient($firestoreClient);
     }
 
-    public function createStorage(): Storage
+    /**
+     * @param array|null $storageClientConfig Deprecated since 4.42.0
+     */
+    public function createStorage(/* @deprecated */ array $storageClientConfig = null): Storage
     {
-        $config = [];
+        $config = $storageClientConfig ?: [];
 
         if ($serviceAccount = $this->getServiceAccount()) {
             $config['keyFile'] = $serviceAccount->asArray();
@@ -557,33 +561,19 @@ class Factory
 
     /**
      * @internal
-     *
-     * @param array<string, mixed>|null $config
      */
-    public function createApiClient(?array $config = null): Client
+    public function createApiClient(array $config = null): Client
     {
         $config = $config ?? [];
+        // If present, the config given to this method override fields passed to withHttpClientConfig()
+        $config = \array_merge($this->httpClientConfig, $config);
 
-        // @codeCoverageIgnoreStart
-        if ($this->guzzleDebugModeIsEnabled) {
-            $config[RequestOptions::DEBUG] = true;
-        }
-        // @codeCoverageIgnoreEnd
-
-        if ($proxy = $this->httpClientOptions->proxy()) {
-            $config[RequestOptions::PROXY] = $proxy;
+        if ($this->debug) {
+            $config['debug'] = true;
         }
 
-        if ($connectTimeout = $this->httpClientOptions->connectTimeout()) {
-            $config[RequestOptions::CONNECT_TIMEOUT] = $connectTimeout;
-        }
-
-        if ($readTimeout = $this->httpClientOptions->readTimeout()) {
-            $config[RequestOptions::READ_TIMEOUT] = $readTimeout;
-        }
-
-        if ($totalTimeout = $this->httpClientOptions->timeout()) {
-            $config[RequestOptions::TIMEOUT] = $totalTimeout;
+        if ($this->httpProxy) {
+            $config['proxy'] = $this->httpProxy;
         }
 
         $handler = $config['handler'] ?? null;
@@ -592,14 +582,8 @@ class Factory
             $handler = HandlerStack::create($handler);
         }
 
-        if ($handler instanceof HandlerStack) {
-            if ($this->httpLogMiddleware) {
-                $handler->push($this->httpLogMiddleware, 'http_logs');
-            }
-
-            if ($this->httpDebugLogMiddleware) {
-                $handler->push($this->httpDebugLogMiddleware, 'http_debug_logs');
-            }
+        foreach ($this->httpClientMiddlewares as $middleware) {
+            $handler->push($middleware);
         }
 
         if ($credentials = $this->getGoogleAuthTokenCredentials()) {
@@ -651,9 +635,13 @@ class Factory
         }
 
         try {
-            return $this->googleAuthTokenCredentials = ApplicationDefaultCredentials::getCredentials(self::API_CLIENT_SCOPES);
+            if ($credentials = ApplicationDefaultCredentials::getCredentials(self::API_CLIENT_SCOPES)) {
+                return $this->googleAuthTokenCredentials = $credentials;
+            }
         } catch (Throwable $e) {
             return null;
         }
+
+        return null;
     }
 }

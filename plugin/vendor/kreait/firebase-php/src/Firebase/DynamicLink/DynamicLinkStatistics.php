@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 
 final class DynamicLinkStatistics
 {
-    /** @var array<string, array<int, array<string, string>>> */
+    /** @var array */
     private $rawData;
 
     /** @var EventStatistics */
@@ -38,9 +38,6 @@ final class DynamicLinkStatistics
         return $this->events;
     }
 
-    /**
-     * @return array<string, array<int, array<string, string>>>
-     */
     public function rawData(): array
     {
         return $this->rawData;

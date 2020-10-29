@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Messaging;
 
 use Kreait\Firebase\Exception\InvalidArgumentException;
+use Throwable;
 
-final class Notification implements \JsonSerializable
+class Notification implements \JsonSerializable
 {
     /** @var string|null */
     private $title;
@@ -17,10 +18,7 @@ final class Notification implements \JsonSerializable
     /** @var string|null */
     private $imageUrl;
 
-    /**
-     * @throws InvalidArgumentException if both title and body are null
-     */
-    private function __construct(?string $title = null, ?string $body = null, ?string $imageUrl = null)
+    private function __construct(string $title = null, string $body = null, string $imageUrl = null)
     {
         $this->title = $title;
         $this->body = $body;
@@ -31,26 +29,22 @@ final class Notification implements \JsonSerializable
         }
     }
 
-    /**
-     * @throws InvalidArgumentException if both title and body are null
-     */
-    public static function create(?string $title = null, ?string $body = null, ?string $imageUrl = null): self
+    public static function create(string $title = null, string $body = null, string $imageUrl = null): self
     {
         return new self($title, $body, $imageUrl);
     }
 
-    /**
-     * @param array<string, string> $data
-     *
-     * @throws InvalidArgumentException if both title and body are null
-     */
     public static function fromArray(array $data): self
     {
-        return new self(
-            $data['title'] ?? null,
-            $data['body'] ?? null,
-            $data['image'] ?? null
-        );
+        try {
+            return new self(
+                $data['title'] ?? null,
+                $data['body'] ?? null,
+                $data['image'] ?? null
+            );
+        } catch (Throwable $e) {
+            throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
     public function withTitle(string $title): self
@@ -77,25 +71,31 @@ final class Notification implements \JsonSerializable
         return $notification;
     }
 
-    public function title(): ?string
+    /**
+     * @return string|null
+     */
+    public function title()
     {
         return $this->title;
     }
 
-    public function body(): ?string
+    /**
+     * @return string|null
+     */
+    public function body()
     {
         return $this->body;
     }
 
-    public function imageUrl(): ?string
+    /**
+     * @return string|null
+     */
+    public function imageUrl()
     {
         return $this->imageUrl;
     }
 
-    /**
-     * @return array<string, string>
-     */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return \array_filter([
             'title' => $this->title,

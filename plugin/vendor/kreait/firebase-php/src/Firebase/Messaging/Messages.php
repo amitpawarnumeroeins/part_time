@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Messaging;
 
 use Countable;
+use Generator;
 use IteratorAggregate;
-use Traversable;
 
-/**
- * @implements IteratorAggregate<Message>
- */
 final class Messages implements Countable, IteratorAggregate
 {
     /** @var Message[] */
@@ -24,14 +21,14 @@ final class Messages implements Countable, IteratorAggregate
     /**
      * @codeCoverageIgnore
      *
-     * @return Traversable<Message>|Message[]
+     * @return Generator|Message[]
      */
     public function getIterator()
     {
         yield from $this->messages;
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->messages);
     }

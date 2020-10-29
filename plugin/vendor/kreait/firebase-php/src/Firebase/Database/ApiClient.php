@@ -48,13 +48,11 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @internal This method should only be used in the context of Database translations
+     * @internal This method should only be used in the context of Database transations
      *
      * @param UriInterface|string $uri
      *
      * @throws DatabaseException
-     *
-     * @return array<string, mixed>
      */
     public function getWithETag($uri): array
     {
@@ -89,7 +87,7 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @internal This method should only be used in the context of Database translations
+     * @internal This method should only be used in the context of Database transations
      *
      * @param UriInterface|string $uri
      * @param mixed $value
@@ -111,13 +109,13 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @internal This method should only be used in the context of Database translations
+     * @internal This method should only be used in the context of Database transations
      *
      * @param UriInterface|string $uri
      *
      * @throws DatabaseException
      */
-    public function removeWithEtag($uri, string $etag): void
+    public function removeWithEtag($uri, string $etag)
     {
         $this->requestApi('DELETE', $uri, [
             'headers' => [
@@ -160,29 +158,27 @@ class ApiClient implements ClientInterface
      *
      * @throws DatabaseException
      */
-    public function remove($uri): void
+    public function remove($uri)
     {
         $this->requestApi('DELETE', $uri);
     }
 
     /**
      * @param UriInterface|string $uri
-     * @param array<mixed> $values
      *
      * @throws DatabaseException
      */
-    public function update($uri, array $values): void
+    public function update($uri, array $values)
     {
         $this->requestApi('PATCH', $uri, ['json' => $values]);
     }
 
     /**
      * @param UriInterface|string $uri
-     * @param array<string, mixed>|null $options
      *
      * @throws DatabaseException
      */
-    private function requestApi(string $method, $uri, ?array $options = null): ResponseInterface
+    private function requestApi(string $method, $uri, array $options = null): ResponseInterface
     {
         $options = $options ?? [];
 

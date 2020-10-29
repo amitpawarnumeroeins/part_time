@@ -13,7 +13,6 @@ final class OrderByChild implements Sorter
 {
     use ModifierTrait;
 
-    /** @var string */
     private $childKey;
 
     public function __construct(string $childKey)

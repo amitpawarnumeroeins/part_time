@@ -6,27 +6,13 @@ namespace Kreait\Firebase\Auth;
 
 class UserInfo implements \JsonSerializable
 {
-    /** @var string|null */
     public $uid;
-
-    /** @var string|null */
     public $displayName;
-
-    /** @var string|null */
     public $email;
-
-    /** @var string|null */
     public $photoUrl;
-
-    /** @var string|null */
     public $providerId;
-
-    /** @var string|null */
     public $phoneNumber;
 
-    /**
-     * @param array<string, string> $data
-     */
     public static function fromResponseData(array $data): self
     {
         $info = new self();
@@ -41,9 +27,14 @@ class UserInfo implements \JsonSerializable
     }
 
     /**
-     * @return array<string, string|null>
+     * @deprecated 4.33
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
+    {
+        return \get_object_vars($this);
+    }
+
+    public function jsonSerialize()
     {
         return \get_object_vars($this);
     }

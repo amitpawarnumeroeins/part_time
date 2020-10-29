@@ -21,4 +21,5 @@
       <path value="$PROJECT_DIR$/ChatApplication/vendor/react/socket" />
     </include_path>
   </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7" />
 </project>

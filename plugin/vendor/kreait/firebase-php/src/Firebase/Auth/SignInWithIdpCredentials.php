@@ -15,9 +15,6 @@ final class SignInWithIdpCredentials implements SignIn
     /** @var string */
     private $provider;
 
-    /** @var string|null */
-    private $oauthTokenSecret;
-
     /** @var string */
     private $requestUri = 'http://localhost';
 
@@ -30,14 +27,6 @@ final class SignInWithIdpCredentials implements SignIn
         $instance = new self();
         $instance->provider = $provider;
         $instance->accessToken = $accessToken;
-
-        return $instance;
-    }
-
-    public static function withAccessTokenAndOauthTokenSecret(string $provider, string $accessToken, string $oauthTokenSecret): self
-    {
-        $instance = self::withAccessToken($provider, $accessToken);
-        $instance->oauthTokenSecret = $oauthTokenSecret;
 
         return $instance;
     }
@@ -64,17 +53,18 @@ final class SignInWithIdpCredentials implements SignIn
         return $this->provider;
     }
 
-    public function oauthTokenSecret(): ?string
-    {
-        return $this->oauthTokenSecret;
-    }
-
-    public function accessToken(): ?string
+    /**
+     * @return string|null
+     */
+    public function accessToken()
     {
         return $this->accessToken;
     }
 
-    public function idToken(): ?string
+    /**
+     * @return string|null
+     */
+    public function idToken()
     {
         return $this->idToken;
     }

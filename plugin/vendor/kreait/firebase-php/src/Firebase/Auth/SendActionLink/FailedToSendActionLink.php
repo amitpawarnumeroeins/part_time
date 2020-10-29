@@ -36,12 +36,18 @@ final class FailedToSendActionLink extends RuntimeException implements FirebaseE
         return $error;
     }
 
-    public function action(): ?SendActionLink
+    /**
+     * @return SendActionLink|null
+     */
+    public function action()
     {
         return $this->action;
     }
 
-    public function response(): ?ResponseInterface
+    /**
+     * @return ResponseInterface|null
+     */
+    public function response()
     {
         return $this->response;
     }

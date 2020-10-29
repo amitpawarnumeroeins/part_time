@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Auth;
 
 use GuzzleHttp\ClientInterface;
+use Kreait\Firebase\Auth;
+use Kreait\Firebase\Exception\Auth\CredentialsMismatch;
 use Kreait\Firebase\Exception\Auth\EmailNotFound;
 use Kreait\Firebase\Exception\Auth\ExpiredOobCode;
+use Kreait\Firebase\Exception\Auth\InvalidCustomToken;
 use Kreait\Firebase\Exception\Auth\InvalidOobCode;
 use Kreait\Firebase\Exception\Auth\OperationNotAllowed;
 use Kreait\Firebase\Exception\Auth\UserDisabled;
@@ -16,6 +19,7 @@ use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase\Http\WrappedGuzzleClient;
 use Kreait\Firebase\Request;
 use Kreait\Firebase\Value\Provider;
+use Lcobucci\JWT\Token;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -39,6 +43,28 @@ class ApiClient implements ClientInterface
     }
 
     /**
+     * @deprecated 4.41
+     * @see Auth::signInWithCustomToken()
+     * @codeCoverageIgnore
+     *
+     * Takes a custom token and exchanges it with an ID token.
+     *
+     * @see https://firebase.google.com/docs/reference/rest/auth/#section-verify-custom-token
+     *
+     * @throws InvalidCustomToken
+     * @throws CredentialsMismatch
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function exchangeCustomTokenForIdAndRefreshToken(Token $token): ResponseInterface
+    {
+        return $this->requestApi('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken', [
+            'token' => (string) $token,
+            'returnSecureToken' => true,
+        ]);
+    }
+
+    /**
      * @throws AuthException
      * @throws FirebaseException
      */
@@ -57,17 +83,29 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @param array<string, mixed> $claims
+     * @deprecated 4.2.0
+     * @see ApiClient::createUser()
+     *
+     * @codeCoverageIgnore
      *
      * @throws AuthException
      * @throws FirebaseException
      */
-    public function setCustomUserClaims(string $uid, array $claims): ResponseInterface
+    public function signupNewUser(string $email = null, string $password = null): ResponseInterface
     {
-        return $this->requestApi('https://identitytoolkit.googleapis.com/v1/accounts:update', [
-            'localId' => $uid,
-            'customAttributes' => \json_encode((object) $claims),
-        ]);
+        \trigger_error(__METHOD__.' is deprecated.', \E_USER_DEPRECATED);
+
+        $request = Request\CreateUser::new();
+
+        if ($email) {
+            $request = $request->withUnverifiedEmail($email);
+        }
+
+        if ($password) {
+            $request = $request->withClearTextPassword($password);
+        }
+
+        return $this->createUser($request);
     }
 
     /**
@@ -99,7 +137,7 @@ class ApiClient implements ClientInterface
      * @throws AuthException
      * @throws FirebaseException
      */
-    public function downloadAccount(?int $batchSize = null, ?string $nextPageToken = null): ResponseInterface
+    public function downloadAccount(int $batchSize = null, string $nextPageToken = null): ResponseInterface
     {
         $batchSize = $batchSize ?? 1000;
 
@@ -107,6 +145,50 @@ class ApiClient implements ClientInterface
             'maxResults' => $batchSize,
             'nextPageToken' => $nextPageToken,
         ]));
+    }
+
+    /**
+     * @deprecated 4.2.0
+     * @see ApiClient::updateUser()
+     *
+     * @param mixed $uid
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function enableUser($uid): ResponseInterface
+    {
+        \trigger_error(__METHOD__.' is deprecated.', \E_USER_DEPRECATED);
+
+        return $this->updateUser(
+            Request\UpdateUser::new()
+                ->withUid($uid)
+                ->markAsEnabled()
+        );
+    }
+
+    /**
+     * @param mixed $uid
+     *
+     * @codeCoverageIgnore
+     *
+     * @deprecated 4.2.0
+     * @see ApiClient::updateUser()
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function disableUser($uid): ResponseInterface
+    {
+        \trigger_error(__METHOD__.' is deprecated.', \E_USER_DEPRECATED);
+
+        return $this->updateUser(
+            Request\UpdateUser::new()
+                ->withUid($uid)
+                ->markAsDisabled()
+        );
     }
 
     /**
@@ -121,28 +203,118 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @param string|array<string> $uids
+     * @deprecated 4.2.0
+     * @see ApiClient::updateUser()
+     *
+     * @codeCoverageIgnore
      *
      * @throws AuthException
      * @throws FirebaseException
      */
-    public function getAccountInfo($uids): ResponseInterface
+    public function changeUserPassword(string $uid, string $newPassword): ResponseInterface
     {
-        if (!\is_array($uids)) {
-            $uids = [$uids];
-        }
+        \trigger_error(__METHOD__.' is deprecated.', \E_USER_DEPRECATED);
 
+        return $this->updateUser(
+            Request\UpdateUser::new()
+                ->withUid($uid)
+                ->withClearTextPassword($newPassword)
+        );
+    }
+
+    /**
+     * @deprecated 4.2.0
+     * @see ApiClient::updateUser()
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function changeUserEmail(string $uid, string $newEmail): ResponseInterface
+    {
+        \trigger_error(__METHOD__.' is deprecated.', \E_USER_DEPRECATED);
+
+        return $this->updateUser(
+            Request\UpdateUser::new()
+                ->withUid($uid)
+                ->withEmail($newEmail)
+        );
+    }
+
+    /**
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function getAccountInfo(string $uid): ResponseInterface
+    {
         return $this->requestApi('getAccountInfo', [
-            'localId' => $uids,
+            'localId' => [$uid],
         ]);
+    }
+
+    /**
+     * @deprecated 4.41
+     * @see \Kreait\Firebase\Auth::signInWithEmailAndPassword()
+     * @codeCoverageIgnore
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function verifyPassword(string $email, string $password): ResponseInterface
+    {
+        return $this->requestApi('verifyPassword', [
+            'email' => $email,
+            'password' => $password,
+        ]);
+    }
+
+    /**
+     * @deprecated 4.37.0
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function sendEmailVerification(string $idToken, string $continueUrl = null, string $locale = null): ResponseInterface
+    {
+        $headers = $locale ? ['X-Firebase-Locale' => $locale] : null;
+
+        $data = \array_filter([
+            'requestType' => 'VERIFY_EMAIL',
+            'idToken' => $idToken,
+            'continueUrl' => $continueUrl,
+        ]);
+
+        return $this->requestApi('getOobConfirmationCode', $data, $headers);
+    }
+
+    /**
+     * @deprecated 4.37.0
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function sendPasswordResetEmail(string $email, string $continueUrl = null, string $locale = null): ResponseInterface
+    {
+        $headers = $locale ? ['X-Firebase-Locale' => $locale] : null;
+
+        $data = \array_filter([
+            'email' => $email,
+            'requestType' => 'PASSWORD_RESET',
+            'continueUrl' => $continueUrl,
+        ]);
+
+        return $this->requestApi('getOobConfirmationCode', $data, $headers);
     }
 
     /**
      * @throws ExpiredOobCode
      * @throws InvalidOobCode
      * @throws OperationNotAllowed
-     * @throws AuthException
-     * @throws FirebaseException
      */
     public function verifyPasswordResetCode(string $oobCode): ResponseInterface
     {
@@ -156,8 +328,6 @@ class ApiClient implements ClientInterface
      * @throws InvalidOobCode
      * @throws OperationNotAllowed
      * @throws UserDisabled
-     * @throws AuthException
-     * @throws FirebaseException
      */
     public function confirmPasswordReset(string $oobCode, string $newPassword): ResponseInterface
     {
@@ -180,8 +350,6 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @param array<int, string|Provider> $providers
-     *
      * @throws AuthException
      * @throws FirebaseException
      */
@@ -194,13 +362,62 @@ class ApiClient implements ClientInterface
     }
 
     /**
-     * @param mixed $data
-     * @param array<string, mixed>|null $headers
+     * @deprecated 4.41
+     * @see \Kreait\Firebase\Auth::signInWithIdpAccessToken()
+     * @codeCoverageIgnore
      *
      * @throws AuthException
      * @throws FirebaseException
      */
-    private function requestApi(string $uri, $data, ?array $headers = null): ResponseInterface
+    public function linkProviderThroughAccessToken(Provider $provider, string $accessToken): ResponseInterface
+    {
+        return $this->linkProvider($provider, $accessToken, 'access_token');
+    }
+
+    /**
+     * @deprecated 4.41
+     * @see \Kreait\Firebase\Auth::signInWithIdpIdToken()
+     * @codeCoverageIgnore
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    public function linkProviderThroughIdToken(Provider $provider, string $idToken): ResponseInterface
+    {
+        return $this->linkProvider($provider, $idToken, 'id_token');
+    }
+
+    /**
+     * @deprecated 4.41
+     * @codeCoverageIgnore
+     *
+     * Links the given OAuth credential (e.g. Google ID token, or Facebook access token, etc) to Firebase.
+     * Basically logs in the user to Firebase, if the authentication provider is enabled for the project.
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    private function linkProvider(Provider $provider, string $token, string $tokenKeyName): ResponseInterface
+    {
+        return $this->requestApi('https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp', [
+            'postBody' => \http_build_query([
+                $tokenKeyName => $token,
+                'providerId' => (string) $provider,
+            ]),
+            'returnSecureToken' => true,
+            'returnIdpCredential' => true,
+            'requestUri' => 'http://localhost', // this doesn't matter here, but required
+        ]);
+    }
+
+    /**
+     * @param mixed $data
+     * @param array $headers
+     *
+     * @throws AuthException
+     * @throws FirebaseException
+     */
+    private function requestApi(string $uri, $data, array $headers = null): ResponseInterface
     {
         if ($data instanceof \JsonSerializable && empty($data->jsonSerialize())) {
             $data = (object) []; // Will be '{}' instead of '[]' when JSON encoded

@@ -9,16 +9,16 @@ use Psr\Http\Message\UriInterface;
 
 class Validator
 {
-    public const MAX_DEPTH = 32;
-    public const MAX_KEY_SIZE = 768;
-    public const INVALID_KEY_CHARS = '.$#[]';
+    const MAX_DEPTH = 32;
+    const MAX_KEY_SIZE = 768;
+    const INVALID_KEY_CHARS = '.$#[]';
 
     /**
      * Checks the reference URI for invalid properties.
      *
      * @throws InvalidArgumentException on
      */
-    public function validateUri(UriInterface $uri): void
+    public function validateUri(UriInterface $uri)
     {
         $path = \trim($uri->getPath(), '/');
 
@@ -30,7 +30,7 @@ class Validator
         }
     }
 
-    private function validateDepth(string $path): void
+    private function validateDepth(string $path)
     {
         $depth = \mb_substr_count($path, '/') + 1;
 
@@ -42,7 +42,7 @@ class Validator
         }
     }
 
-    private function validateKeySize(string $key): void
+    private function validateKeySize(string $key)
     {
         if (($length = \mb_strlen($key, '8bit')) > self::MAX_KEY_SIZE) {
             throw new InvalidArgumentException(\sprintf(
@@ -52,7 +52,7 @@ class Validator
         }
     }
 
-    private function validateChars(string $key): void
+    private function validateChars($key)
     {
         $key = \rawurldecode($key);
 

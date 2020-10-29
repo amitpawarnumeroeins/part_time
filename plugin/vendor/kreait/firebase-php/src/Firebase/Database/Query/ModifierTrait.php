@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\Database\Query;
 
-use GuzzleHttp\Psr7\Query;
+use function GuzzleHttp\Psr7\build_query;
+use function GuzzleHttp\Psr7\parse_query;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -12,14 +13,11 @@ use Psr\Http\Message\UriInterface;
  */
 trait ModifierTrait
 {
-    /**
-     * @param mixed $value
-     */
     protected function appendQueryParam(UriInterface $uri, string $key, $value): UriInterface
     {
-        $queryParams = \array_merge(Query::parse($uri->getQuery()), [$key => $value]);
+        $queryParams = \array_merge(parse_query($uri->getQuery()), [$key => $value]);
 
-        $queryString = Query::build($queryParams);
+        $queryString = build_query($queryParams);
 
         return $uri->withQuery($queryString);
     }

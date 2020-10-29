@@ -13,7 +13,6 @@ final class LimitToLast implements Filter
 {
     use ModifierTrait;
 
-    /** @var int */
     private $limit;
 
     public function __construct(int $limit)

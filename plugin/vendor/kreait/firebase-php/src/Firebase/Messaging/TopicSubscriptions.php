@@ -5,12 +5,9 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Messaging;
 
 use Countable;
+use Generator;
 use IteratorAggregate;
-use Traversable;
 
-/**
- * @implements IteratorAggregate<TopicSubscription>
- */
 final class TopicSubscriptions implements Countable, IteratorAggregate
 {
     /** @var TopicSubscription[] */
@@ -29,14 +26,14 @@ final class TopicSubscriptions implements Countable, IteratorAggregate
     /**
      * @codeCoverageIgnore
      *
-     * @return Traversable<TopicSubscription>|TopicSubscription[]
+     * @return Generator|TopicSubscription[]
      */
     public function getIterator()
     {
         yield from $this->subscriptions;
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->subscriptions);
     }

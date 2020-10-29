@@ -42,12 +42,18 @@ final class FailedToSignIn extends RuntimeException implements FirebaseException
         return new self('Sign in failed: '.$e->getMessage(), $e->getCode(), $e);
     }
 
-    public function action(): ?SignIn
+    /**
+     * @return SignIn|null
+     */
+    public function action()
     {
         return $this->action;
     }
 
-    public function response(): ?ResponseInterface
+    /**
+     * @return ResponseInterface|null
+     */
+    public function response()
     {
         return $this->response;
     }

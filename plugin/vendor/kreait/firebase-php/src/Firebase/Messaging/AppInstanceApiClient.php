@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Messaging;
 
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Promise;
+use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase\Exception\MessagingApiExceptionConverter;
-use Kreait\Firebase\Util\JSON;
+use Kreait\Firebase\Exception\MessagingException;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
@@ -32,141 +32,58 @@ class AppInstanceApiClient
     }
 
     /**
-     * @see https://developers.google.com/instance-id/reference/server#manage_relationship_maps_for_multiple_app_instances
+     * @param Topic|string $topic
+     * @param RegistrationToken[]|string[] $tokens
      *
-     * @param array<Topic> $topics
-     *
-     * @return array<string, array<string, string>>
+     * @throws FirebaseException
+     * @throws MessagingException
      */
-    public function subscribeToTopics(array $topics, RegistrationTokens $tokens): array
+    public function subscribeToTopic($topic, array $tokens): ResponseInterface
     {
-        $promises = [];
-        $tokenStrings = $tokens->asStrings();
-
-        foreach ($topics as $topic) {
-            /** @var Topic $topic */
-            $topicName = $topic->value();
-
-            $promises[$topicName] = $this->client->requestAsync('POST', '/iid/v1:batchAdd', [
-                'json' => [
-                    'to' => '/topics/'.$topicName,
-                    'registration_tokens' => $tokenStrings,
-                ],
-            ])->then(static function (ResponseInterface $response) {
-                return JSON::decode((string) $response->getBody(), true);
-            });
-        }
-
-        $responses = Promise\Utils::settle($promises)->wait();
-
-        $result = [];
-
-        foreach ($responses as $topicName => $response) {
-            $topicName = (string) $topicName;
-
-            switch ($response['state']) {
-                case 'fulfilled':
-                    $topicResults = [];
-
-                    foreach ($response['value']['results'] as $index => $tokenResult) {
-                        $token = $tokenStrings[$index];
-
-                        if (empty($tokenResult)) {
-                            $topicResults[$token] = 'OK';
-                            continue;
-                        }
-
-                        if (isset($tokenResult['error'])) {
-                            $topicResults[$token] = $tokenResult['error'];
-                            continue;
-                        }
-
-                        $topicResults[$token] = 'UNKNOWN';
-                    }
-
-                    $result[$topicName] = $topicResults;
-                    break;
-                case 'rejected':
-                    $result[$topicName] = $response['value']->getMessage();
-                    break;
-            }
-        }
-
-        return $result;
+        return $this->requestApi('POST', '/iid/v1:batchAdd', [
+            'json' => [
+                'to' => '/topics/'.$topic,
+                'registration_tokens' => $tokens,
+            ],
+        ]);
     }
 
     /**
-     * @param array<Topic> $topics
+     * @param Topic|string $topic
+     * @param RegistrationToken[]|string[] $tokens
      *
-     * @return array<string, array<string, string>>
+     * @throws FirebaseException
+     * @throws MessagingException
      */
-    public function unsubscribeFromTopics(array $topics, RegistrationTokens $tokens): array
+    public function unsubscribeFromTopic($topic, array $tokens): ResponseInterface
     {
-        $promises = [];
-        $tokenStrings = $tokens->asStrings();
-
-        foreach ($topics as $topic) {
-            /** @var Topic $topic */
-            $topicName = $topic->value();
-
-            $promises[$topicName] = $this->client->requestAsync('POST', '/iid/v1:batchRemove', [
-                'json' => [
-                    'to' => '/topics/'.$topicName,
-                    'registration_tokens' => $tokenStrings,
-                ],
-            ])->then(static function (ResponseInterface $response) {
-                return JSON::decode((string) $response->getBody(), true);
-            });
-        }
-
-        $responses = Promise\Utils::settle($promises)->wait();
-
-        $result = [];
-
-        foreach ($responses as $topicName => $response) {
-            $topicName = (string) $topicName;
-
-            switch ($response['state']) {
-                case 'fulfilled':
-                    $topicResults = [];
-
-                    foreach ($response['value']['results'] as $index => $tokenResult) {
-                        $token = $tokenStrings[$index];
-
-                        if (empty($tokenResult)) {
-                            $topicResults[$token] = 'OK';
-                            continue;
-                        }
-
-                        if (isset($tokenResult['error'])) {
-                            $topicResults[$token] = (string) $tokenResult['error'];
-                            continue;
-                        }
-
-                        $topicResults[$token] = 'UNKNOWN';
-                    }
-
-                    $result[$topicName] = $topicResults;
-                    break;
-                case 'rejected':
-                    $result[$topicName] = $response['value']->getMessage();
-                    break;
-            }
-        }
-
-        return $result;
+        return $this->requestApi('POST', '/iid/v1:batchRemove', [
+            'json' => [
+                'to' => '/topics/'.$topic,
+                'registration_tokens' => $tokens,
+            ],
+        ]);
     }
 
-    public function getAppInstanceAsync(RegistrationToken $registrationToken): Promise\PromiseInterface
+    /**
+     * @throws FirebaseException
+     * @throws MessagingException
+     */
+    public function getAppInstance(string $registrationToken): ResponseInterface
     {
-        return $this->client->requestAsync('GET', '/iid/'.$registrationToken->value().'?details=true')
-            ->then(static function (ResponseInterface $response) use ($registrationToken) {
-                $data = JSON::decode((string) $response->getBody(), true);
+        return $this->requestApi('GET', '/iid/'.$registrationToken.'?details=true');
+    }
 
-                return AppInstance::fromRawData($registrationToken, $data);
-            })
-            ->otherwise(function (Throwable $e) {
-                return Promise\Create::rejectionFor($this->errorHandler->convertException($e));
-            });
+    /**
+     * @throws FirebaseException
+     * @throws MessagingException
+     */
+    private function requestApi(string $method, string $endpoint, array $options = null): ResponseInterface
+    {
+        try {
+            return $this->client->request($method, $endpoint, $options ?? []);
+        } catch (Throwable $e) {
+            throw $this->errorHandler->convertException($e);
+        }
     }
 }

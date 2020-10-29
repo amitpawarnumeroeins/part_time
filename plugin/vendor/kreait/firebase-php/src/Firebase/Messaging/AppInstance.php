@@ -15,7 +15,7 @@ final class AppInstance implements JsonSerializable
     /** @var RegistrationToken */
     private $registrationToken;
 
-    /** @var array<string, mixed> */
+    /** @var array */
     private $rawData = [];
 
     /** @var TopicSubscriptions */
@@ -28,8 +28,6 @@ final class AppInstance implements JsonSerializable
 
     /**
      * @internal
-     *
-     * @param array<string, mixed> $rawData
      */
     public static function fromRawData(RegistrationToken $registrationToken, array $rawData): self
     {
@@ -61,9 +59,6 @@ final class AppInstance implements JsonSerializable
         return $this->topicSubscriptions;
     }
 
-    /**
-     * @param Topic|string $topic
-     */
     public function isSubscribedToTopic($topic): bool
     {
         $topic = $topic instanceof Topic ? $topic : Topic::fromValue((string) $topic);
@@ -75,18 +70,12 @@ final class AppInstance implements JsonSerializable
         return $filtered->count() > 0;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
     public function rawData(): array
     {
         return $this->rawData;
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return $this->rawData;
     }

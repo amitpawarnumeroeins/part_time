@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Kreait\Firebase\Value;
 
 use Kreait\Firebase\Exception\InvalidArgumentException;
+use Kreait\Firebase\Value;
 
-class Email implements \JsonSerializable
+class Email implements \JsonSerializable, Value
 {
     /** @var string */
     private $value;
@@ -23,19 +24,16 @@ class Email implements \JsonSerializable
         $this->value = $value;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return $this->value;
     }
 
-    public function jsonSerialize(): string
+    public function jsonSerialize()
     {
         return $this->value;
     }
 
-    /**
-     * @param self|string $other
-     */
     public function equalsTo($other): bool
     {
         return $this->value === (string) $other;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kreait\Firebase\RemoteConfig;
 
 use GuzzleHttp\ClientInterface;
+use Kreait\Firebase\Exception\FirebaseException;
 use Kreait\Firebase\Exception\RemoteConfigApiExceptionConverter;
 use Kreait\Firebase\Exception\RemoteConfigException;
 use Kreait\Firebase\Http\WrappedGuzzleClient;
@@ -33,6 +34,7 @@ class ApiClient implements ClientInterface
     }
 
     /**
+     * @throws FirebaseException
      * @throws RemoteConfigException
      */
     public function getTemplate(): ResponseInterface
@@ -41,6 +43,7 @@ class ApiClient implements ClientInterface
     }
 
     /**
+     * @throws FirebaseException
      * @throws RemoteConfigException
      */
     public function validateTemplate(Template $template): ResponseInterface
@@ -58,6 +61,7 @@ class ApiClient implements ClientInterface
     }
 
     /**
+     * @throws FirebaseException
      * @throws RemoteConfigException
      */
     public function publishTemplate(Template $template): ResponseInterface
@@ -74,9 +78,10 @@ class ApiClient implements ClientInterface
     /**
      * @see https://firebase.google.com/docs/reference/remote-config/rest/v1/projects.remoteConfig/listVersions
      *
+     * @throws FirebaseException
      * @throws RemoteConfigException
      */
-    public function listVersions(FindVersions $query, ?string $nextPageToken = null): ResponseInterface
+    public function listVersions(FindVersions $query, string $nextPageToken = null): ResponseInterface
     {
         $uri = \rtrim((string) $this->client->getConfig('base_uri'), '/').':listVersions';
 
@@ -102,6 +107,7 @@ class ApiClient implements ClientInterface
     }
 
     /**
+     * @throws FirebaseException
      * @throws RemoteConfigException
      */
     public function rollbackToVersion(VersionNumber $versionNumber): ResponseInterface
@@ -120,11 +126,11 @@ class ApiClient implements ClientInterface
     /**
      * @param string $method
      * @param string|UriInterface $uri
-     * @param array<string, mixed>|null $options
      *
+     * @throws FirebaseException
      * @throws RemoteConfigException
      */
-    private function requestApi($method, $uri, ?array $options = null): ResponseInterface
+    private function requestApi($method, $uri, array $options = null): ResponseInterface
     {
         $options = $options ?? [];
 
