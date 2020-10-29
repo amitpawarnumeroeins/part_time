@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/ChatApplication/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/stream" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/cboden/ratchet" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/ratchet/rfc6455" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/evenement/evenement" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/composer" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/cache" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/dns" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/event-loop" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/promise" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/promise-timer" />
+      <path value="$PROJECT_DIR$/ChatApplication/vendor/react/socket" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1jKDQkOMkw4XphfI8t5VH7MRRyl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="" />
+      <created>1603543875378</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603543875378</updated>
+      <workItem from="1603543876414" duration="2275000" />
+      <workItem from="1603867833337" duration="3451000" />
+      <workItem from="1603886695444" duration="4897000" />
+      <workItem from="1603947884619" duration="652000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="275" y="22" key="#Deployment" timestamp="1603891323509">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="22" key="#Deployment/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603891323509" />
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1603543906088">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603543906088" />
+    <state x="472" y="94" key="ftp.server.browser" timestamp="1603891321765">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="472" y="94" key="ftp.server.browser/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603891321765" />
+  </component>
+</project>

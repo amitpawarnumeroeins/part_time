@@ -1,0 +1,249 @@
+[16-Oct-2020 07:34:16 America/New_York] PHP Warning:  require(/home/numeropx/public_html/job_portal/twilio-php-main/src/Twilio/autoload.php): failed to open stream: No such file or directory in /home/numeropx/public_html/job_portal/test.php on line 3
+[16-Oct-2020 07:34:16 America/New_York] PHP Fatal error:  require(): Failed opening required '/home/numeropx/public_html/job_portal/twilio-php-main/src/Twilio/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/numeropx/public_html/job_portal/test.php on line 3
+[16-Oct-2020 07:35:43 America/New_York] PHP Warning:  require(/home/numeropx/public_html/job_portal/twilio-php-main/src/Twilio/autoload.php): failed to open stream: No such file or directory in /home/numeropx/public_html/job_portal/test.php on line 3
+[16-Oct-2020 07:35:43 America/New_York] PHP Fatal error:  require(): Failed opening required '/home/numeropx/public_html/job_portal/twilio-php-main/src/Twilio/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/numeropx/public_html/job_portal/test.php on line 3
+[16-Oct-2020 07:39:34 America/New_York] PHP Warning:  require(/home/numeropx/public_html/job_portal/twilio-php-main/src/Twilio/autoload.php): failed to open stream: No such file or directory in /home/numeropx/public_html/job_portal/test.php on line 3
+[16-Oct-2020 07:39:34 America/New_York] PHP Fatal error:  require(): Failed opening required '/home/numeropx/public_html/job_portal/twilio-php-main/src/Twilio/autoload.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/numeropx/public_html/job_portal/test.php on line 3
+[16-Oct-2020 07:40:19 America/New_York] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The From phone number +5597154186 is not a valid, SMS-capable inbound phone number or short code for your account. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/ACea2...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/test.php(23): Twilio\Rest\Api\V2010\Account\MessageList->create('+919584092141', Object(Twilio\Values))
+#3 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[16-Oct-2020 07:43:32 America/New_York] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The From phone number +15597154186 is not a valid, SMS-capable inbound phone number or short code for your account. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/ACea2...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/test.php(23): Twilio\Rest\Api\V2010\Account\MessageList->create('+919584092141', Object(Twilio\Values))
+#3 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 01:30:22 America/New_York] PHP Parse error:  syntax error, unexpected end of file in /home/numeropx/public_html/job_portal/api.php on line 440
+[17-Oct-2020 01:37:14 America/New_York] PHP Parse error:  syntax error, unexpected ''job_work' (T_ENCAPSED_AND_WHITESPACE), expecting ']' in /home/numeropx/public_html/job_portal/api.php on line 1093
+[17-Oct-2020 11:08:05 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Class 'Client' not found in /home/numeropx/public_html/job_portal/api.php:200
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp('8770515861')
+#1 {main}
+  thrown in /home/numeropx/public_html/job_portal/api.php on line 200
+[17-Oct-2020 11:08:18 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 8770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('8770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp('8770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:13:41 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp('918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:16:32 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:17:11 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:18:01 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:18:33 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:18:53 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:19:30 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:20:03 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 918770515861 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 918770515861', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 918770515861')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:48:53 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 919109991781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 919109991781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 919109991781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:49:47 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 919109991781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 919109991781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 919109991781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:50:16 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number 919109991781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create(' 919109991781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 919109991781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 11:50:37 Asia/Kolkata] PHP Notice:  Undefined variable: thisOtp in /home/numeropx/public_html/job_portal/api.php on line 1894
+[17-Oct-2020 11:54:55 Asia/Kolkata] PHP Notice:  Undefined variable: result in /home/numeropx/public_html/job_portal/api.php on line 210
+[17-Oct-2020 11:55:24 Asia/Kolkata] PHP Notice:  Undefined variable: result in /home/numeropx/public_html/job_portal/api.php on line 210
+[17-Oct-2020 13:43:45 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +9109991781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+9109991781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1906): getAndSendOtp('9109991781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 13:52:40 Asia/Kolkata] PHP Notice:  Undefined index: user_id in /home/numeropx/public_html/job_portal/api.php on line 1917
+[17-Oct-2020 13:52:40 Asia/Kolkata] PHP Notice:  Undefined index: user_id in /home/numeropx/public_html/job_portal/api.php on line 1919
+[17-Oct-2020 14:05:58 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +91910999781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+ 91910999781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 91910999781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 14:06:23 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +91910999781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+ 91910999781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 91910999781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 14:07:17 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +91910999781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+ 91910999781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 91910999781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 14:07:23 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +91910999781 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+ 91910999781', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp(' 91910999781')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 17:30:41 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +9669584092141 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+9669584092141', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp('9669584092141')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 17:31:43 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +9669584092141 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(206): Twilio\Rest\Api\V2010\Account\MessageList->create('+9669584092141', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1803): getAndSendOtp('9669584092141')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[17-Oct-2020 17:34:16 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Class 'Twilio' not found in /home/numeropx/public_html/job_portal/api.php:203
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/api.php(1812): getAndSendOtp('9669584092141')
+#1 {main}
+  thrown in /home/numeropx/public_html/job_portal/api.php on line 203
+[17-Oct-2020 17:35:18 Asia/Kolkata] PHP Fatal error:  Uncaught Twilio\Exceptions\RestException: [HTTP 400] Unable to create record: The 'To' number +9669584092141 is not a valid phone number. in /home/numeropx/public_html/job_portal/src/Twilio/Version.php:88
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/src/Twilio/Version.php(223): Twilio\Version->exception(Object(Twilio\Http\Response), 'Unable to creat...')
+#1 /home/numeropx/public_html/job_portal/src/Twilio/Rest/Api/V2010/Account/MessageList.php(66): Twilio\Version->create('POST', '/Accounts/AC583...', Array, Array)
+#2 /home/numeropx/public_html/job_portal/api.php(209): Twilio\Rest\Api\V2010\Account\MessageList->create('+9669584092141', Object(Twilio\Values))
+#3 /home/numeropx/public_html/job_portal/api.php(1811): getAndSendOtp('9669584092141')
+#4 {main}
+  thrown in /home/numeropx/public_html/job_portal/src/Twilio/Version.php on line 88
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: user_image in /home/numeropx/public_html/part_time/api.php on line 2072
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_logo in /home/numeropx/public_html/part_time/api.php on line 2174
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_name in /home/numeropx/public_html/part_time/api.php on line 2216
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_email in /home/numeropx/public_html/part_time/api.php on line 2217
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: mobile_no in /home/numeropx/public_html/part_time/api.php on line 2218
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_address in /home/numeropx/public_html/part_time/api.php on line 2219
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_desc in /home/numeropx/public_html/part_time/api.php on line 2220
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_work_day in /home/numeropx/public_html/part_time/api.php on line 2221
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_work_time in /home/numeropx/public_html/part_time/api.php on line 2222
+[23-Oct-2020 13:03:24 Asia/Kolkata] PHP Notice:  Undefined index: company_website in /home/numeropx/public_html/part_time/api.php on line 2223
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: user_image in /home/numeropx/public_html/part_time/api.php on line 2072
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_logo in /home/numeropx/public_html/part_time/api.php on line 2174
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_name in /home/numeropx/public_html/part_time/api.php on line 2216
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_email in /home/numeropx/public_html/part_time/api.php on line 2217
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: mobile_no in /home/numeropx/public_html/part_time/api.php on line 2218
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_address in /home/numeropx/public_html/part_time/api.php on line 2219
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_desc in /home/numeropx/public_html/part_time/api.php on line 2220
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_work_day in /home/numeropx/public_html/part_time/api.php on line 2221
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_work_time in /home/numeropx/public_html/part_time/api.php on line 2222
+[23-Oct-2020 13:03:30 Asia/Kolkata] PHP Notice:  Undefined index: company_website in /home/numeropx/public_html/part_time/api.php on line 2223
+[23-Oct-2020 13:03:40 Asia/Kolkata] PHP Notice:  Undefined index: user_resume in /home/numeropx/public_html/part_time/api.php on line 1166
+[23-Oct-2020 13:03:40 Asia/Kolkata] PHP Notice:  Undefined index: user_resume in /home/numeropx/public_html/part_time/api.php on line 1167
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: user_image in /home/numeropx/public_html/part_time/api.php on line 2072
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_logo in /home/numeropx/public_html/part_time/api.php on line 2174
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_name in /home/numeropx/public_html/part_time/api.php on line 2216
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_email in /home/numeropx/public_html/part_time/api.php on line 2217
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: mobile_no in /home/numeropx/public_html/part_time/api.php on line 2218
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_address in /home/numeropx/public_html/part_time/api.php on line 2219
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_desc in /home/numeropx/public_html/part_time/api.php on line 2220
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_work_day in /home/numeropx/public_html/part_time/api.php on line 2221
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_work_time in /home/numeropx/public_html/part_time/api.php on line 2222
+[24-Oct-2020 10:59:01 Asia/Kolkata] PHP Notice:  Undefined index: company_website in /home/numeropx/public_html/part_time/api.php on line 2223
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: user_image in /home/numeropx/public_html/part_time/api.php on line 2072
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_logo in /home/numeropx/public_html/part_time/api.php on line 2174
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_name in /home/numeropx/public_html/part_time/api.php on line 2216
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_email in /home/numeropx/public_html/part_time/api.php on line 2217
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: mobile_no in /home/numeropx/public_html/part_time/api.php on line 2218
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_address in /home/numeropx/public_html/part_time/api.php on line 2219
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_desc in /home/numeropx/public_html/part_time/api.php on line 2220
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_work_day in /home/numeropx/public_html/part_time/api.php on line 2221
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_work_time in /home/numeropx/public_html/part_time/api.php on line 2222
+[24-Oct-2020 11:00:48 Asia/Kolkata] PHP Notice:  Undefined index: company_website in /home/numeropx/public_html/part_time/api.php on line 2223
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: user_image in /home/numeropx/public_html/part_time/api.php on line 2072
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_logo in /home/numeropx/public_html/part_time/api.php on line 2174
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_name in /home/numeropx/public_html/part_time/api.php on line 2216
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_email in /home/numeropx/public_html/part_time/api.php on line 2217
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: mobile_no in /home/numeropx/public_html/part_time/api.php on line 2218
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_address in /home/numeropx/public_html/part_time/api.php on line 2219
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_desc in /home/numeropx/public_html/part_time/api.php on line 2220
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_work_day in /home/numeropx/public_html/part_time/api.php on line 2221
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_work_time in /home/numeropx/public_html/part_time/api.php on line 2222
+[24-Oct-2020 11:01:02 Asia/Kolkata] PHP Notice:  Undefined index: company_website in /home/numeropx/public_html/part_time/api.php on line 2223

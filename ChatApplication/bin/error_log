@@ -1,0 +1,7 @@
+[16-Oct-2020 03:32:56 America/New_York] PHP Fatal error:  Uncaught RuntimeException: Failed to listen on "tcp://0.0.0.0:8080": Address already in use in /home/numeropx/public_html/job_portal/ChatApplication/vendor/react/socket/src/TcpServer.php:164
+Stack trace:
+#0 /home/numeropx/public_html/job_portal/ChatApplication/vendor/react/socket/src/Server.php(36): React\Socket\TcpServer->__construct('tcp://0.0.0.0:8...', Object(React\EventLoop\StreamSelectLoop), Array)
+#1 /home/numeropx/public_html/job_portal/ChatApplication/vendor/cboden/ratchet/src/Ratchet/Server/IoServer.php(59): React\Socket\Server->__construct('0.0.0.0:8080', Object(React\EventLoop\StreamSelectLoop))
+#2 /home/numeropx/public_html/job_portal/ChatApplication/bin/server.php(15): Ratchet\Server\IoServer::factory(Object(Ratchet\Http\HttpServer), 8080)
+#3 {main}
+  thrown in /home/numeropx/public_html/job_portal/ChatApplication/vendor/react/socket/src/TcpServer.php on line 164

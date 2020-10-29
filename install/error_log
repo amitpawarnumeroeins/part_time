@@ -1,0 +1,4 @@
+[06-Oct-2020 09:05:17 America/New_York] PHP Notice:  Undefined index: host in /home/numeropx/public_html/job_portal/install/android_install.php on line 247
+[06-Oct-2020 09:05:17 America/New_York] PHP Notice:  Undefined index: user in /home/numeropx/public_html/job_portal/install/android_install.php on line 248
+[06-Oct-2020 09:05:17 America/New_York] PHP Notice:  Undefined index: pass in /home/numeropx/public_html/job_portal/install/android_install.php on line 249
+[06-Oct-2020 09:05:17 America/New_York] PHP Notice:  Undefined index: name in /home/numeropx/public_html/job_portal/install/android_install.php on line 250
