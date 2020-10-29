@@ -11,7 +11,7 @@ $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/parttime-c858c-fireba
 $firebase = (new Factory)
     ->withServiceAccount($serviceAccount)
     ->withDatabaseUri('parttime-c858c.firebaseio.com')
-    ->create();
+    ->createDatabase();
 
-$database = $firebase->getDatabase();
+$database = $firebase;
 ?>

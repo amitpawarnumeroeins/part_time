@@ -25,6 +25,9 @@ class Transaction
         $this->etags = [];
     }
 
+    /**
+     * @throws DatabaseException
+     */
     public function snapshot(Reference $reference): Snapshot
     {
         $uri = (string) $reference->getUri();
@@ -42,7 +45,7 @@ class Transaction
      * @throws ReferenceHasNotBeenSnapshotted
      * @throws TransactionFailed
      */
-    public function set(Reference $reference, $value)
+    public function set(Reference $reference, $value): void
     {
         $etag = $this->getEtagForReference($reference);
 
@@ -57,7 +60,7 @@ class Transaction
      * @throws ReferenceHasNotBeenSnapshotted
      * @throws TransactionFailed
      */
-    public function remove(Reference $reference)
+    public function remove(Reference $reference): void
     {
         $etag = $this->getEtagForReference($reference);
 

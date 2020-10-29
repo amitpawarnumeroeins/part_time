@@ -42,10 +42,14 @@ class MessagingApiExceptionConverter
             return $this->convertGuzzleRequestException($exception);
         }
 
+        if ($exception instanceof ConnectException) {
+            return new ApiConnectionFailed('Unable to connect to the API: '.$exception->getMessage(), $exception->getCode(), $exception);
+        }
+
         return new MessagingError($exception->getMessage(), $exception->getCode(), $exception);
     }
 
-    public function convertResponse(ResponseInterface $response, Throwable $previous = null): MessagingException
+    public function convertResponse(ResponseInterface $response, ?Throwable $previous = null): MessagingException
     {
         $code = $response->getStatusCode();
 
@@ -78,19 +82,13 @@ class MessagingApiExceptionConverter
                 break;
         }
 
-        return $convertedError
-            ->withErrors($errors)
-            ->withResponse($response);
+        return $convertedError->withErrors($errors);
     }
 
     private function convertGuzzleRequestException(RequestException $e): MessagingException
     {
-        if ($e instanceof ConnectException) {
-            return new ApiConnectionFailed($e->getMessage(), $e->getCode(), $e);
-        }
-
         if ($response = $e->getResponse()) {
-            return $this->convertResponse($response);
+            return $this->convertResponse($response, $e);
         }
 
         return new MessagingError($e->getMessage(), $e->getCode(), $e);

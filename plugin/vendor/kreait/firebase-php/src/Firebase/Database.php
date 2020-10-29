@@ -9,6 +9,7 @@ use Kreait\Firebase\Database\ApiClient;
 use Kreait\Firebase\Database\Reference;
 use Kreait\Firebase\Database\RuleSet;
 use Kreait\Firebase\Database\Transaction;
+use Kreait\Firebase\Exception\DatabaseException;
 use Kreait\Firebase\Exception\InvalidArgumentException;
 use Kreait\Firebase\Exception\OutOfRangeException;
 use Psr\Http\Message\UriInterface;
@@ -20,7 +21,7 @@ use Psr\Http\Message\UriInterface;
  */
 class Database
 {
-    const SERVER_TIMESTAMP = ['.sv' => 'timestamp'];
+    public const SERVER_TIMESTAMP = ['.sv' => 'timestamp'];
 
     /** @var ApiClient */
     private $client;
@@ -44,7 +45,7 @@ class Database
      *
      * @throws InvalidArgumentException
      */
-    public function getReference(string $path = null): Reference
+    public function getReference(?string $path = null): Reference
     {
         if ($path === null || \trim($path) === '') {
             $path = '/';
@@ -85,6 +86,8 @@ class Database
      * Retrieve Firebase Database Rules.
      *
      * @see https://firebase.google.com/docs/database/rest/app-management#retrieving-firebase-realtime-database-rules
+     *
+     * @throws DatabaseException
      */
     public function getRuleSet(): RuleSet
     {
@@ -94,31 +97,20 @@ class Database
     }
 
     /**
-     * Retrieve Firebase Database Rules.
-     *
-     * @deprecated 4.32.0 Use \Kreait\Firebase\Database::getRuleSet() instead
-     * @see getRuleSet()
-     */
-    public function getRules(): RuleSet
-    {
-        \trigger_error(
-            __METHOD__.' is deprecated. Use \Kreait\Firebase\Database::getRuleSet() instead.',
-            \E_USER_DEPRECATED
-        );
-
-        return $this->getRuleSet();
-    }
-
-    /**
      * Update Firebase Database Rules.
      *
      * @see https://firebase.google.com/docs/database/rest/app-management#updating-firebase-realtime-database-rules
+     *
+     * @throws DatabaseException
      */
-    public function updateRules(RuleSet $ruleSet)
+    public function updateRules(RuleSet $ruleSet): void
     {
         $this->client->updateRules($this->uri->withPath('.settings/rules'), $ruleSet);
     }
 
+    /**
+     * @return mixed
+     */
     public function runTransaction(callable $callable)
     {
         $transaction = new Transaction($this->client);

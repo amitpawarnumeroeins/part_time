@@ -10,7 +10,6 @@ if (!(PHP_VERSION_ID >= 70205)) {
 
 $missingExtensions = array();
 extension_loaded('ctype') || $missingExtensions[] = 'ctype';
-extension_loaded('fileinfo') || $missingExtensions[] = 'fileinfo';
 extension_loaded('json') || $missingExtensions[] = 'json';
 extension_loaded('mbstring') || $missingExtensions[] = 'mbstring';
 extension_loaded('openssl') || $missingExtensions[] = 'openssl';

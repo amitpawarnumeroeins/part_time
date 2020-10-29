@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f4c03536d868db02b57a03ed7732b78ac6551892',
+    'reference' => 'd1425083be96d69eff201bb4ef215138af10d485',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f4c03536d868db02b57a03ed7732b78ac6551892',
+      'reference' => 'd1425083be96d69eff201bb4ef215138af10d485',
     ),
     'fig/http-message-util' => 
     array (
@@ -107,12 +107,12 @@ private static $installed = array (
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '6.5.5',
-      'version' => '6.5.5.0',
+      'pretty_version' => '7.2.0',
+      'version' => '7.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9d4290de1cfd701f38099ef7e183b64b4b7b0c5e',
+      'reference' => '0aa74dfb41ae110835923ef10a9d803a22d50e79',
     ),
     'guzzlehttp/promises' => 
     array (
@@ -143,12 +143,12 @@ private static $installed = array (
     ),
     'kreait/firebase-php' => 
     array (
-      'pretty_version' => '4.44.0',
-      'version' => '4.44.0.0',
+      'pretty_version' => '5.10.0',
+      'version' => '5.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '61264eddd4ff5d9d6726318dbcabce39decea1e0',
+      'reference' => '9c85fe5e26c88cfd406ac08f671d4cd99595f1d0',
     ),
     'kreait/firebase-tokens' => 
     array (
@@ -159,15 +159,6 @@ private static $installed = array (
       ),
       'reference' => '26dcb56cb49cea30fd020a416f53f59d2d78a58b',
     ),
-    'kreait/gcp-metadata' => 
-    array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '7ab206ba1d7b59a502be07e5ec2df617a7b1ba38',
-    ),
     'lcobucci/jwt' => 
     array (
       'pretty_version' => '3.3.3',
@@ -176,24 +167,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c1123697f6a2ec29162b82f170dd4a491f524773',
-    ),
-    'league/flysystem' => 
-    array (
-      'pretty_version' => '1.1.3',
-      'version' => '1.1.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
-    ),
-    'league/mime-type-detection' => 
-    array (
-      'pretty_version' => '1.5.1',
-      'version' => '1.5.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '353f66d7555d8a90781f6f5e7091932f9a4250aa',
     ),
     'monolog/monolog' => 
     array (
@@ -221,6 +194,22 @@ private static $installed = array (
       array (
       ),
       'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
+    ),
+    'psr/http-client' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
+    ),
+    'psr/http-client-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '1.0',
+      ),
     ),
     'psr/http-message' => 
     array (
@@ -290,33 +279,6 @@ private static $installed = array (
       ),
       'reference' => '9e5fdd5c47147aa5adf7f760002ee591ed37b9ca',
     ),
-    'superbalist/flysystem-google-storage' => 
-    array (
-      'pretty_version' => '7.2.2',
-      'version' => '7.2.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '87e2f450c0e4b5200fef9ffe6863068cc873d734',
-    ),
-    'symfony/polyfill-intl-idn' => 
-    array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3b75acd829741c768bc8b1f84eb33265e7cc5117',
-    ),
-    'symfony/polyfill-intl-normalizer' => 
-    array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '727d1096295d807c309fb01a851577302394c897',
-    ),
     'symfony/polyfill-mbstring' => 
     array (
       'pretty_version' => 'v1.20.0',
@@ -325,15 +287,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '39d483bdf39be819deabf04ec872eb0b2410b531',
-    ),
-    'symfony/polyfill-php72' => 
-    array (
-      'pretty_version' => 'v1.20.0',
-      'version' => '1.20.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'cede45fcdfabdd6043b3592e83678e42ec69e930',
     ),
   ),
 );

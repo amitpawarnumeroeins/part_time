@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kreait\Firebase;
 
 use Kreait\Firebase\Exception\InvalidArgumentException;
-use Kreait\Firebase\ServiceAccount\Discoverer;
 use Kreait\Firebase\Util\JSON;
 use Throwable;
 
@@ -14,101 +13,17 @@ use Throwable;
  */
 class ServiceAccount
 {
-    /** @var array */
+    /** @var array<string, string> */
     private $data = [];
-
-    /** @var string|null */
-    private $filePath;
-
-    /**
-     * @deprecated 4.42.0
-     *
-     * @return string|null
-     */
-    public function getFilePath()
-    {
-        return $this->filePath;
-    }
 
     public function getProjectId(): string
     {
         return $this->data['project_id'] ?? '';
     }
 
-    /**
-     * @deprecated 4.42.0
-     */
-    public function getSanitizedProjectId(): string
-    {
-        $sanitized = \preg_replace('/[^A-Za-z0-9\-]/', '-', $projectId = $this->getProjectId());
-
-        return \is_string($sanitized) ? $sanitized : $projectId;
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public function withProjectId(string $value): self
-    {
-        $serviceAccount = clone $this;
-        $serviceAccount->data['project_id'] = $value;
-
-        return $serviceAccount;
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public function hasClientId(): bool
-    {
-        return $this->getClientId() !== '';
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public function getClientId(): string
-    {
-        return $this->data['client_id'] ?? '';
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public function withClientId(string $value): self
-    {
-        $serviceAccount = clone $this;
-        $serviceAccount->data['client_id'] = $value;
-
-        return $serviceAccount;
-    }
-
     public function getClientEmail(): string
     {
         return $this->data['client_email'] ?? '';
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public function withClientEmail(string $value): self
-    {
-        if (!\filter_var($value, \FILTER_VALIDATE_EMAIL)) {
-            throw new InvalidArgumentException(\sprintf('"%s" is not a valid email.', $value));
-        }
-
-        $serviceAccount = clone $this;
-        $serviceAccount->data['client_email'] = $value;
-
-        return $serviceAccount;
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public function hasPrivateKey(): bool
-    {
-        return $this->getPrivateKey() !== '';
     }
 
     public function getPrivateKey(): string
@@ -117,16 +32,8 @@ class ServiceAccount
     }
 
     /**
-     * @deprecated 4.42.0
+     * @return array<string, string>
      */
-    public function withPrivateKey(string $value): self
-    {
-        $serviceAccount = clone $this;
-        $serviceAccount->data['private_key'] = \str_replace('\n', "\n", $value);
-
-        return $serviceAccount;
-    }
-
     public function asArray(): array
     {
         $array = $this->data;
@@ -136,7 +43,7 @@ class ServiceAccount
     }
 
     /**
-     * @param mixed $value
+     * @param self|string|array<mixed>|mixed $value
      *
      * @throws InvalidArgumentException
      *
@@ -148,36 +55,33 @@ class ServiceAccount
             return $value;
         }
 
-        if (\is_string($value) && \mb_strpos($value, '{') === 0) {
+        if (\is_string($value)) {
             try {
-                return self::fromJson($value);
-            } catch (InvalidArgumentException $e) {
-                throw new InvalidArgumentException('Invalid service account specification');
-            }
-        }
+                if (\mb_strpos($value, '{') === 0) {
+                    return self::fromJson($value);
+                }
 
-        if (\is_string($value) && \mb_strpos($value, '{') !== 0) {
-            try {
                 return self::fromJsonFile($value);
-            } catch (InvalidArgumentException $e) {
-                throw new InvalidArgumentException('Invalid service account specification');
+            } catch (Throwable $e) {
+                throw new InvalidArgumentException('Invalid service account: '.$e->getMessage(), $e->getCode(), $e);
             }
         }
 
         if (\is_array($value)) {
-            return self::fromArray($value);
+            try {
+                return self::fromArray($value);
+            } catch (Throwable $e) {
+                throw new InvalidArgumentException('Invalid service account: '.$e->getMessage(), $e->getCode(), $e);
+            }
         }
 
-        throw new InvalidArgumentException('Invalid service account specification.');
+        throw new InvalidArgumentException('Invalid service account: Unsupported value');
     }
 
     /**
-     * @internal
-     *
-     * @deprecated 4.42.0 Use {@see \Kreait\Firebase\ServiceAccount::fromValue()} instead.
-     * @see fromValue()
+     * @param array<string, string> $data
      */
-    public static function fromArray(array $data): self
+    private static function fromArray(array $data): self
     {
         $type = $data['type'] ?? '';
 
@@ -196,26 +100,14 @@ class ServiceAccount
         return $serviceAccount;
     }
 
-    /**
-     * @internal
-     *
-     * @deprecated 4.42.0 Use {@see \Kreait\Firebase\ServiceAccount::fromValue()} instead.
-     * @see fromValue()
-     */
-    public static function fromJson(string $json): self
+    private static function fromJson(string $json): self
     {
         $config = JSON::decode($json, true);
 
         return self::fromArray($config);
     }
 
-    /**
-     * @internal
-     *
-     * @deprecated 4.42.0 Use {@see \Kreait\Firebase\ServiceAccount::fromValue()} instead.
-     * @see fromValue()
-     */
-    public static function fromJsonFile(string $filePath): self
+    private static function fromJsonFile(string $filePath): self
     {
         try {
             $file = new \SplFileObject($filePath);
@@ -230,32 +122,6 @@ class ServiceAccount
             throw new InvalidArgumentException(\sprintf('%s could not be parsed to a Service Account: %s', $filePath, $e->getMessage()));
         }
 
-        $serviceAccount->filePath = $filePath;
-
         return $serviceAccount;
-    }
-
-    /**
-     * @deprecated 4.42.0
-     *
-     * @internal
-     */
-    public static function withProjectIdAndServiceAccountId(string $projectId, string $serviceAccountId): self
-    {
-        return self::fromArray([
-            'type' => 'service_account',
-            'project_id' => $projectId,
-            'client_email' => $serviceAccountId,
-        ]);
-    }
-
-    /**
-     * @deprecated 4.42.0
-     */
-    public static function discover(Discoverer $discoverer = null): self
-    {
-        $discoverer = $discoverer ?: new Discoverer();
-
-        return $discoverer->discover();
     }
 }

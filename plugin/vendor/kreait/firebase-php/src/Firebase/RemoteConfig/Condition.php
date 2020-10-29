@@ -15,13 +15,16 @@ class Condition implements \JsonSerializable
     /** @var TagColor|null */
     private $tagColor;
 
-    private function __construct(string $name, string $expression, TagColor $tagColor = null)
+    private function __construct(string $name, string $expression, ?TagColor $tagColor = null)
     {
         $this->name = $name;
         $this->expression = $expression;
         $this->tagColor = $tagColor;
     }
 
+    /**
+     * @param array<string, string> $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(
@@ -41,6 +44,11 @@ class Condition implements \JsonSerializable
         return $this->name;
     }
 
+    public function expression(): string
+    {
+        return $this->expression;
+    }
+
     public function withExpression(string $expression): self
     {
         $condition = clone $this;
@@ -49,6 +57,9 @@ class Condition implements \JsonSerializable
         return $condition;
     }
 
+    /**
+     * @param TagColor|string $tagColor
+     */
     public function withTagColor($tagColor): self
     {
         $tagColor = $tagColor instanceof TagColor ? $tagColor : new TagColor($tagColor);
@@ -59,7 +70,10 @@ class Condition implements \JsonSerializable
         return $condition;
     }
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, string>
+     */
+    public function jsonSerialize(): array
     {
         return \array_filter([
             'name' => $this->name,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase;
 
-use function GuzzleHttp\Psr7\uri_for;
+use GuzzleHttp\Psr7\Utils;
 use JsonSerializable;
 use Kreait\Firebase\Util\JSON;
 use Psr\Http\Message\ResponseInterface;
@@ -12,7 +12,7 @@ use Psr\Http\Message\UriInterface;
 
 final class DynamicLink implements JsonSerializable
 {
-    /** @var array */
+    /** @var array<string, mixed> */
     private $data = [];
 
     private function __construct()
@@ -32,12 +32,12 @@ final class DynamicLink implements JsonSerializable
 
     public function uri(): UriInterface
     {
-        return uri_for($this->data['shortLink']);
+        return Utils::uriFor($this->data['shortLink']);
     }
 
     public function previewUri(): UriInterface
     {
-        return uri_for($this->data['previewLink']);
+        return Utils::uriFor($this->data['previewLink']);
     }
 
     public function domain(): string
@@ -50,6 +50,9 @@ final class DynamicLink implements JsonSerializable
         return \trim($this->uri()->getPath(), '/');
     }
 
+    /**
+     * @return string[]
+     */
     public function warnings(): array
     {
         return $this->data['warning'] ?? [];
@@ -60,12 +63,15 @@ final class DynamicLink implements JsonSerializable
         return !empty($this->warnings());
     }
 
-    public function jsonSerialize()
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
     {
         return $this->data;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->uri();
     }
