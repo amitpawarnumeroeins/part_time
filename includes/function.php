@@ -83,7 +83,6 @@ function Update($table_name, $form_data, $where_clause='')
 
     // append the where statement
     $sql .= $whereSQL;
-
     // run and return the query result
     return mysqli_query($mysqli,$sql);
 }

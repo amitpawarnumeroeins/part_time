@@ -58,6 +58,7 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>App Details</b>(Method: get_app_details)(Parameter: user_id)
                      <br><b>Resend OTP</b>(Method: resend_otp)(Parameter: phone)
                      <br><b>Initiate Add Money To Wallet </b>(Method: add_to_wallet_init)(Parameter: user_id, amount, mode)
+                     <br><b>Update Add Money To Wallet </b>(Method: add_to_wallet_update)(Parameter: transaction_id, user_id, status, bank_trans_id, bank_trans_response)
 
 			 </code> 
              </pre>
