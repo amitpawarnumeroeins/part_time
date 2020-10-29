@@ -902,15 +902,20 @@ else if ($get_method['method_name'] == "get_single_job") {
 
     $jsonObj = array();
 
-    $query = "SELECT * FROM tbl_jobs
+    $query = "SELECT tbl_jobs.*,tbl_category.*,tbl_users.name as user_name,tbl_users.email as user_email,tbl_users.user_image FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid`
+		LEFT JOIN tbl_users ON tbl_jobs.`user_id`= tbl_users.`id`
 		WHERE tbl_jobs.`id`='" . $job_id . "'";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
     while ($data = mysqli_fetch_assoc($sql)) {
         $row['id'] = $data['id'];
+        $row['user_name'] = $data['user_name'];
+        $row['user_email'] = $data['user_email'];
+        $row['user_image'] = $data['user_image'];
         $row['cat_id'] = $data['cat_id'];
+        $row['user_id'] = $data['user_id'];
         $row['city_id'] = $data['city_id'];
         $row['city_name'] = get_city_name($data['city_id']);
         $row['job_type'] = $data['job_type'];

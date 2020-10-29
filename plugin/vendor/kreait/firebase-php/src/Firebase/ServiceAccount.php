@@ -107,7 +107,7 @@ class ServiceAccount
         return self::fromArray($config);
     }
 
-    private static function fromJsonFile(string $filePath): self
+    public static function fromJsonFile(string $filePath): self
     {
         try {
             $file = new \SplFileObject($filePath);

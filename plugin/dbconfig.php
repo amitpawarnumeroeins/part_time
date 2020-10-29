@@ -8,10 +8,9 @@ use Kreait\Firebase\ServiceAccount;
 // This assumes that you have placed the Firebase credentials in the same directory
 // as this PHP file.
 $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/parttime-c858c-firebase-adminsdk-yhr95-43f2777ee8.json');
-$firebase = (new Factory)
-    ->withServiceAccount($serviceAccount)
-    ->withDatabaseUri('parttime-c858c.firebaseio.com')
-    ->createDatabase();
 
-$database = $firebase;
+$database = (new Factory)->withServiceAccount(__DIR__ . '/parttime-c858c-firebase-adminsdk-yhr95-43f2777ee8.json')
+        ->createDatabase();
+
 ?>
+
