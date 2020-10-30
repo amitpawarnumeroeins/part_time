@@ -224,7 +224,7 @@ AAA;
                         <th>Transaction Id</th>
                         <th>User</th>
                         <th>Transaction Type</th>
-                        <th>created_at</th>
+                        <th>Created At</th>
                     </tr>
                     </thead>
                     <tbody>

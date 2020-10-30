@@ -119,6 +119,7 @@ else if (isset($_POST['user_search'])) {
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Status</th>
+                        <th>Wallet Amount</th>
                         <th class="cat_action_list">Action</th>
                     </tr>
                     </thead>
@@ -165,6 +166,9 @@ else if (isset($_POST['user_search'])) {
                                     <a onclick="$(this).hide();$('#btn3').show();" style="cursor: pointer;font-size: 10px">change</a>
                                     <a id="btn3"  title="Change Status" class="toggle_btn_a" style="display: none" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="verify" data-column="status"><span class="badge badge-warning badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Verify </span></span></a>
                                 <?php } ?>
+                            </td>
+                            <td>
+                                <?=$users_row['current_wallet_amount'];?>
                             </td>
                             <td>
                                 <a href="user_profile.php?user_id=<?php echo $users_row['id']; ?>" class="btn btn-success btn_cust" data-toggle="tooltip" data-tooltip="User Profile"><i class="fa fa-eye"></i></a>

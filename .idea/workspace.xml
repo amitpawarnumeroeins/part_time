@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,15 +22,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="Chat Done except user images">
-      <change afterPath="$PROJECT_DIR$/manage_transaction.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transaction.php" afterDir="false" />
+    <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="wallet withdrawal working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api_urls.php" beforeDir="false" afterPath="$PROJECT_DIR$/api_urls.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/vendor.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/vendor.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/messages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage_transaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_transaction.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +98,7 @@
       <workItem from="1603886695444" duration="4897000" />
       <workItem from="1603947884619" duration="26387000" />
       <workItem from="1604033616713" duration="22315000" />
-      <workItem from="1604060300137" duration="970000" />
+      <workItem from="1604060300137" duration="4618000" />
     </task>
     <task id="LOCAL-00001" summary="2nd">
       <created>1603964930301</created>
@@ -134,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603979552285</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="wallet withdrawal working">
+      <created>1604061437469</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1604061437469</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,17 +165,18 @@
     <MESSAGE value="2nd" />
     <MESSAGE value="5" />
     <MESSAGE value="Chat Done except user images" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chat Done except user images" />
+    <MESSAGE value="wallet withdrawal working" />
+    <option name="LAST_COMMIT_MESSAGE" value="wallet withdrawal working" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="22" key="#Deployment" timestamp="1603965865307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Deployment/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603965865307" />
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1603965815769">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1604064560406">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603965815769" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604064560406" />
     <state x="561" y="262" width="333" height="204" key="Github.ShareDialog" timestamp="1603949965449">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -184,10 +193,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604035107131" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1603979598225">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1604061443455">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603979598225" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604061443455" />
     <state x="528" y="98" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1603964960151">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -196,10 +205,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603967546986" />
-    <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1604050187819">
+    <state x="390" y="97" width="585" height="534" key="find.popup" timestamp="1604064455876">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604050187819" />
+    <state x="390" y="97" width="585" height="534" key="find.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604064455876" />
     <state x="472" y="94" key="ftp.server.browser" timestamp="1603891321765">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -208,10 +217,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603972582841" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604047155708">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604065060629">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604047155708" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604065060629" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

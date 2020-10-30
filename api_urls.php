@@ -60,7 +60,10 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>Initiate Add Money To Wallet </b>(Method: add_to_wallet_init)(Parameter: user_id, amount, mode)
                      <br><b>Update Add Money To Wallet </b>(Method: add_to_wallet_update)(Parameter: transaction_id, user_id, status, bank_trans_id, bank_trans_response)
                      <br><b>Submit Account Details </b>(Method: submit_account_details)(Parameter: user_id, account_number, account_holder_name, linked_mobile, ifsc_code)
-			 </code> 
+                     <br><b>Withdrawal From Wallet Init </b>(Method: withdrawal_from_wallet_init)(Parameter: user_id, amount)
+                     <br><b>Withdrawal From Wallet Update </b>(Method: withdrawal_from_wallet_update)(Parameter: transaction_id, status, bank_trans_id, bank_trans_response)
+
+			 </code>
              </pre>
             </div>
         </div>

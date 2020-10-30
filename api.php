@@ -112,7 +112,7 @@ function getGUIDnoHash()
     $c = unpack("C*", $charid);
     $c = implode("", $c);
 
-    return substr($c, 0, 20);
+    return substr($c, 0, 10);
 }
 
 function get_job_info($job_id, $field_name)
@@ -1874,7 +1874,7 @@ if ($get_method['method_name'] == "get_home") {
             $row = mysqli_fetch_assoc($result);
             $current_wallet_amount = $row["amount"];
             mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` +$current_wallet_amount WHERE `id` = '$user_id'");
-            $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
+            // $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
 
             $dataUpdate = array(
                 'user_updated' => 1 //0- not updated, 1-updated
@@ -1959,7 +1959,7 @@ else if ($get_method['method_name'] == "withdrawal_from_wallet_init") {
                         $set['JOBS_APP'][] = array('status' => "Account Details Successfully Updated", 'success' => '1');*/
 
                     }else{
-                        $set['JOBS_APP'][] = array('msg' => "Failed !! Wallet Is Empty", 'success' => '0');
+                        $set['JOBS_APP'][] = array('msg' => "Failed !!  Invalid Amount", 'success' => '0');
                     }
 
                 }else{
@@ -1971,14 +1971,86 @@ else if ($get_method['method_name'] == "withdrawal_from_wallet_init") {
         }else{
             $set['JOBS_APP'][] = array('msg' => "Failed !! User Details Not Valid", 'success' => '0');
         }
-        $account_number = filter_var($get_method['account_number'], FILTER_SANITIZE_STRING);
-        $ifsc_code = filter_var($get_method['ifsc_code'], FILTER_SANITIZE_STRING);
-        $account_holder_name = filter_var($get_method['account_holder_name'], FILTER_SANITIZE_STRING);
-        $linked_mobile = filter_var($get_method['linked_mobile'], FILTER_SANITIZE_STRING);
-        $user_id = filter_var($get_method['user_id'], FILTER_SANITIZE_STRING);
-
     } else {
         $set['JOBS_APP'][] = array('msg' => "Failed !! Please Provide User Details", 'success' => '0');
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    die();
+}
+else if ($get_method['method_name'] == "withdrawal_from_wallet_update") {
+    if ($get_method['transaction_id'] != "") {
+
+        $transaction_id = filter_var($get_method['transaction_id'], FILTER_SANITIZE_STRING);
+        $status = filter_var($get_method['status'], FILTER_SANITIZE_STRING);
+        $bank_trans_id = filter_var($get_method['bank_trans_id'], FILTER_SANITIZE_STRING);
+        $bank_trans_response = filter_var($get_method['bank_trans_response'], FILTER_SANITIZE_STRING);
+
+
+        $updated_at = strtotime(date('d-m-Y h:i A'));
+
+        $query1 = "SELECT * FROM tbl_transaction_details WHERE transaction_id = $transaction_id AND trans_type = 1 AND  type = 2 AND status = 4 AND `user_updated` = 0";
+        $sql1 = mysqli_query($mysqli, $query1) or die(mysqli_error($mysqli));
+        if(mysqli_num_rows($sql1))
+        {
+            $row = mysqli_fetch_assoc($sql1);
+
+            $amount = $row["amount"];
+            $user_id = $row["user_id"];
+
+
+            $query2 = "SELECT * FROM tbl_users WHERE id = $user_id";
+            $sql2 = mysqli_query($mysqli, $query2) or die(mysqli_error($mysqli));
+
+            $row2 = mysqli_fetch_assoc($sql2);
+            $current_wallet_amount = $row2["current_wallet_amount"];
+
+            if($amount<=$current_wallet_amount)
+            {
+                $data = array(
+                    'status' => $status,
+                    'bank_trans_id' => $bank_trans_id,
+                    'bank_trans_response' => $bank_trans_response,
+                    'updated_at' => $updated_at
+                );
+
+                $user_edit = Update('tbl_transaction_details', $data, "WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = '" . $user_id . "'");
+
+                $qry = "SELECT * FROM tbl_transaction_details WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = $user_id AND `status` = 1 AND `user_updated` = 0";
+                $result = mysqli_query($mysqli, $qry) or die('Error in fetch data ->' . mysqli_error($mysqli));
+
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $thisAmount = $row["amount"];
+                    mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` -$thisAmount WHERE `id` = '$user_id'");
+
+                    $dataUpdate = array(
+                        'user_updated' => 1 //0- not updated, 1-updated
+                    );
+
+                    Update('tbl_transaction_details', $dataUpdate, "WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = '" . $user_id . "'");
+
+                    $query5 = "SELECT * FROM tbl_users WHERE id = $user_id";
+                    $sqlw = mysqli_query($mysqli, $query5) or die(mysqli_error($mysqli));
+
+                    $rows = mysqli_fetch_assoc($sqlw);
+                    $current_wallet_amount_updated = $rows["current_wallet_amount"];
+
+                    $set['JOBS_APP'][] = array('transaction_id' => $transaction_id, 'current_wallet_amount' => $current_wallet_amount_updated, 'success' => '1');
+                } else {
+                    $set['JOBS_APP'][] = array('msg' => "Transaction update Failed!!", 'success' => '0');
+                }
+
+            }else{
+                $set['JOBS_APP'][] = array('msg' => "Failed !!  Invalid Amount", 'success' => '0');
+            }
+
+        }else{
+            $set['JOBS_APP'][] = array('msg' => "Failed !! Transaction Details Not Valid", 'success' => '0');
+        }
+    } else {
+        $set['JOBS_APP'][] = array('msg' => "Failed !! Please Provide Transaction Details", 'success' => '0');
     }
 
     header('Content-Type: application/json; charset=utf-8');
@@ -2011,7 +2083,7 @@ else if ($get_method['method_name'] == "job_completed") {
             $row = mysqli_fetch_assoc($result);
             $current_wallet_amount = $row["amount"];
             mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` +$current_wallet_amount WHERE `id` = '$user_id'");
-            $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
+            //$user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
 
             $dataUpdate = array(
                 'user_updated' => 1 //0- not updated, 1-updated
@@ -2065,11 +2137,11 @@ else if ($get_method['method_name'] == "job_completed") {
         $user_id = filter_var($get_method['user_id'], FILTER_SANITIZE_STRING);
 
         $data = array(
-                        "account_number" => $account_number,
-                        "ifsc_code" => $ifsc_code,
-                        "account_holder_name" => $account_holder_name,
-                        "linked_mobile" => $linked_mobile
-            );
+            "account_number" => $account_number,
+            "ifsc_code" => $ifsc_code,
+            "account_holder_name" => $account_holder_name,
+            "linked_mobile" => $linked_mobile
+        );
         $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
         $set['JOBS_APP'][] = array('status' => "Account Details Successfully Updated", 'success' => '1');
     } else {
