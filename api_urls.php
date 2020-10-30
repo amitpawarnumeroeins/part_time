@@ -5,26 +5,26 @@ include("includes/function.php");
 $file_path = getBaseUrl().'api.php';
 $ios_file_path = getBaseUrl().'ios_api.php';
 ?>
-<div class="row">
-  <div class="col-sm-12 col-xs-12">
-    <div class="card">
-      <div class="card-header">
-        Example API urls
-      </div>
-      <div class="card-body no-padding">
+    <div class="row">
+    <div class="col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="card-header">
+                Example API urls
+            </div>
+            <div class="card-body no-padding">
         <pre>
                <code class="html">
-                <?php 
-                  if(file_exists('api.php'))
-                  {
-                    echo '<br><b>Android API URL</b>&nbsp; '.$file_path;    
-                  }
-                  
-                  if(file_exists('ios_api.php'))
-                  {
-                    echo '<br><b>iOS API URL</b>&nbsp; '.$ios_file_path;    
-                  }
-                	?>
+                <?php
+                if(file_exists('api.php'))
+                {
+                    echo '<br><b>Main API URL</b>&nbsp; '.$file_path;
+                }
+
+                if(file_exists('ios_api.php'))
+                {
+                   // echo '<br><b>iOS API URL</b>&nbsp; '.$ios_file_path;
+                }
+                ?>
                 	
 				     <br><b>Home</b>(Method: get_home)(Parameter: user_id)
                      <br><b>Latest Job</b>(Method: get_latest_job)(Parameter: page,user_id)
@@ -59,13 +59,13 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>Resend OTP</b>(Method: resend_otp)(Parameter: phone)
                      <br><b>Initiate Add Money To Wallet </b>(Method: add_to_wallet_init)(Parameter: user_id, amount, mode)
                      <br><b>Update Add Money To Wallet </b>(Method: add_to_wallet_update)(Parameter: transaction_id, user_id, status, bank_trans_id, bank_trans_response)
-
+                     <br><b>Submit Account Details </b>(Method: submit_account_details)(Parameter: user_id, account_number, account_holder_name, linked_mobile, ifsc_code)
 			 </code> 
              </pre>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <br />
-  <div class="clearfix"></div>
+    <br />
+    <div class="clearfix"></div>
 
-  <?php include("includes/footer.php"); ?>
+<?php include("includes/footer.php"); ?>

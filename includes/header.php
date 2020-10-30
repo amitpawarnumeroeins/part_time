@@ -207,9 +207,18 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
           </li>
           <li <?php if ($currentFile == "messages.php") { ?>class="active" <?php } ?>> <a href="messages.php">
 
-              <div class="icon"> <i class="fa fa-mobile" aria-hidden="true"></i> </div>
+              <div class="icon"> <i class="fa fa-envelope" aria-hidden="true"></i> </div>
 
               <div class="title">Messages</div>
+
+            </a>
+
+          </li>
+          <li <?php if ($currentFile == "manage_transaction.php") { ?>class="active" <?php } ?>> <a href="manage_transaction.php">
+
+              <div class="icon"> <i class="fa fa-dollar" aria-hidden="true"></i> </div>
+
+              <div class="title">Transaction</div>
 
             </a>
 

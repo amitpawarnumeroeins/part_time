@@ -335,8 +335,7 @@ if ($get_method['method_name'] == "get_home") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_category") {
+} else if ($get_method['method_name'] == "get_category") {
     if (isset($get_method['page'])) {
         $query_rec = "SELECT COUNT(*) as num FROM tbl_category WHERE `status`= 1";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
@@ -382,8 +381,7 @@ else if ($get_method['method_name'] == "get_category") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_city") {
+} else if ($get_method['method_name'] == "get_city") {
     $jsonObj = array();
 
     $query = "SELECT `c_id`,`city_name` FROM tbl_city WHERE tbl_city.`status`=1 ORDER BY tbl_city.`c_id` DESC";
@@ -403,8 +401,7 @@ else if ($get_method['method_name'] == "get_city") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_list") {
+} else if ($get_method['method_name'] == "get_list") {
 
     $jsonObj0 = array();
 
@@ -462,8 +459,7 @@ else if ($get_method['method_name'] == "get_list") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_job_by_cat_id") {
+} else if ($get_method['method_name'] == "get_job_by_cat_id") {
     $post_order_by = API_CAT_POST_ORDER_BY;
 
     $cat_id = $get_method['cat_id'];
@@ -530,8 +526,7 @@ else if ($get_method['method_name'] == "get_job_by_cat_id") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "get_latest_job") {
+} else if ($get_method['method_name'] == "get_latest_job") {
     $latest_limit = API_LATEST_LIMIT;
     $jsonObj = array();
 
@@ -601,8 +596,7 @@ else if ($get_method['method_name'] == "get_latest_job") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "get_recent_job") {
+} else if ($get_method['method_name'] == "get_recent_job") {
     $user_id = $get_method['user_id'];
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
@@ -666,8 +660,7 @@ else if ($get_method['method_name'] == "get_recent_job") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "get_search_job") {
+} else if ($get_method['method_name'] == "get_search_job") {
 
     $job_search = $get_method['search_text'];
 
@@ -827,8 +820,7 @@ else if ($get_method['method_name'] == "get_search_job") {
     die();
 
 
-}
-else if ($get_method['method_name'] == "search_by_keyword") {
+} else if ($get_method['method_name'] == "search_by_keyword") {
 
     $job_search = $get_method['search_text'];
 
@@ -895,8 +887,7 @@ else if ($get_method['method_name'] == "search_by_keyword") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "get_single_job") {
+} else if ($get_method['method_name'] == "get_single_job") {
     $user_id = $get_method['user_id'];
     $job_id = $get_method['job_id'];
 
@@ -999,8 +990,7 @@ else if ($get_method['method_name'] == "get_single_job") {
     die();
 
 
-}
-else if ($get_method['method_name'] == "get_similar_jobs") {
+} else if ($get_method['method_name'] == "get_similar_jobs") {
 
     //Get cat id using job id
     $query_job = "SELECT * FROM tbl_jobs
@@ -1072,8 +1062,7 @@ else if ($get_method['method_name'] == "get_similar_jobs") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "apply_job_add") {
+} else if ($get_method['method_name'] == "apply_job_add") {
 
     $apply_user_id = $get_method['apply_user_id'];
     $apply_job_id = $get_method['apply_job_id'];
@@ -1237,8 +1226,7 @@ else if ($get_method['method_name'] == "apply_job_add") {
     die();
 
 
-}
-else if ($get_method['method_name'] == "saved_job_add") {
+} else if ($get_method['method_name'] == "saved_job_add") {
 
     $saved_user_id = $get_method['saved_user_id'];
     $saved_job_id = $get_method['saved_job_id'];
@@ -1274,8 +1262,7 @@ else if ($get_method['method_name'] == "saved_job_add") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "delete_job") {
+} else if ($get_method['method_name'] == "delete_job") {
 
 
     Delete('tbl_jobs', 'id=' . $get_method['delete_job_id'] . '');
@@ -1290,8 +1277,7 @@ else if ($get_method['method_name'] == "delete_job") {
     die();
 
 
-}
-else if ($get_method['method_name'] == "job_list") {
+} else if ($get_method['method_name'] == "job_list") {
 
     $jsonObj = array();
 
@@ -1354,8 +1340,7 @@ else if ($get_method['method_name'] == "job_list") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "user_job_apply_list") {
+} else if ($get_method['method_name'] == "user_job_apply_list") {
 
     $jsonObj = array();
 
@@ -1398,8 +1383,7 @@ else if ($get_method['method_name'] == "user_job_apply_list") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "user_apply_list") {
+} else if ($get_method['method_name'] == "user_apply_list") {
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_apply  
  	 			  WHERE  tbl_apply.`user_id`=" . $get_method['user_id'] . "";
@@ -1463,8 +1447,7 @@ else if ($get_method['method_name'] == "user_apply_list") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "user_apply_job_seen") {
+} else if ($get_method['method_name'] == "user_apply_job_seen") {
 
     $data = array('seen' => '1');
     $edit_status = Update('tbl_apply', $data, "WHERE user_id = '" . $get_method['apply_user_id'] . "' AND job_id = '" . $get_method['job_id'] . "'");
@@ -1474,8 +1457,7 @@ else if ($get_method['method_name'] == "user_apply_job_seen") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "user_saved_list") {
+} else if ($get_method['method_name'] == "user_saved_list") {
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_saved  WHERE  tbl_saved.`user_id`=" . $get_method['user_id'] . "";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
@@ -1531,8 +1513,7 @@ else if ($get_method['method_name'] == "user_saved_list") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "job_add") {
+} else if ($get_method['method_name'] == "job_add") {
 
     $job_image = rand(0, 99999) . "_" . $_FILES['job_image']['name'];
 
@@ -1584,8 +1565,7 @@ else if ($get_method['method_name'] == "job_add") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "edit_job") {
+} else if ($get_method['method_name'] == "edit_job") {
     if ($_FILES['job_image']['name'] != "") {
 
         $job_image = rand(0, 99999) . "_" . $_FILES['job_image']['name'];
@@ -1665,8 +1645,7 @@ else if ($get_method['method_name'] == "edit_job") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_company_details") {
+} else if ($get_method['method_name'] == "get_company_details") {
 
     $jsonObj = array();
 
@@ -1699,8 +1678,7 @@ else if ($get_method['method_name'] == "get_company_details") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "user_register") {
+} else if ($get_method['method_name'] == "user_register") {
     $register_date = strtotime(date('d-m-Y h:i A'));
 
     $user_type = $get_method['user_type'];
@@ -1831,8 +1809,7 @@ else if ($get_method['method_name'] == "user_register") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "add_to_wallet_init") {
+} else if ($get_method['method_name'] == "add_to_wallet_init") {
     $date = strtotime(date('d-m-Y h:i A'));
     $transaction_id = getGUIDnoHash();
     $type = 1; // for credit transaction only //1-credit, 2-debit
@@ -1864,14 +1841,13 @@ else if ($get_method['method_name'] == "add_to_wallet_init") {
     if ($trans_id) {
         $set['JOBS_APP'][] = array('transaction_id' => $transaction_id, 'amount' => $amount, 'success' => '1');
     } else {
-        $set['JOBS_APP'][] = array('msg' => $app_lang['invalid_mobile_number'], 'success' => '0');
+        $set['JOBS_APP'][] = array('msg' => "Update Failed!!!  Try Again", 'success' => '0');
     }
 
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "add_to_wallet_update") {
+} else if ($get_method['method_name'] == "add_to_wallet_update") {
     $date = strtotime(date('d-m-Y h:i A'));
     $transaction_id = $get_method['transaction_id'];
     $user_id = $get_method['user_id'];
@@ -1911,6 +1887,98 @@ else if ($get_method['method_name'] == "add_to_wallet_update") {
         }
     } else {
         $set['JOBS_APP'][] = array('msg' => "Transaction update Failed!!", 'success' => '0');
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    die();
+}
+else if ($get_method['method_name'] == "withdrawal_from_wallet_init") {
+    if ($get_method['user_id'] != "") {
+
+        $user_id = filter_var($get_method['user_id'], FILTER_SANITIZE_STRING);
+        $amount = filter_var($get_method['amount'], FILTER_SANITIZE_STRING);
+
+        $query1 = "SELECT * FROM tbl_users WHERE id = $user_id";
+        $sql1 = mysqli_query($mysqli, $query1) or die(mysqli_error($mysqli));
+        if(mysqli_num_rows($sql1))
+        {
+            $row = mysqli_fetch_assoc($sql1);
+            $account_number = $row["account_number"];
+            $ifsc_code = $row["ifsc_code"];
+            $account_holder_name = $row["account_holder_name"];
+            $linked_mobile = $row["linked_mobile"];
+            $current_wallet_amount = $row["current_wallet_amount"];
+
+            if($account_number && $ifsc_code && $account_holder_name && $linked_mobile)
+            {
+                if($current_wallet_amount>0)
+                {
+                    if($amount<=$current_wallet_amount)
+                    {
+                        $date = strtotime(date('d-m-Y h:i A'));
+                        $transaction_id = getGUIDnoHash();
+                        $type = 2; // for credit transaction only //1-credit, 2-debit
+                        $status = 4; //0-null, 1-approved, 2-rejected, 3-failed, 4-init/pending
+                        $mode = "";//for diffrent type of payment gateway diffrent payment methods.. stripe,hyperpay
+                        $bank_trans_id = null;//to be filled at update only
+                        $bank_trans_response = null;//to be filled at update only
+                        $trans_type = 1;//to be filled at update only 	1-bank, 2- wallet
+                        $updated_at = $date;
+
+                        $data = array(
+                            'transaction_id' => $transaction_id,
+                            'type' => $type,
+                            'user_id' => $user_id,
+                            'amount' => $amount,
+                            'status' => $status,
+                            'mode' => $mode,
+                            'bank_trans_id' => $bank_trans_id,
+                            'bank_trans_response' => $bank_trans_response,
+                            'trans_type' => $trans_type,
+                            'updated_at' => $updated_at
+                        );
+
+                        $qry = Insert('tbl_transaction_details', $data);
+
+                        $trans_id = mysqli_insert_id($mysqli);
+
+                        if ($trans_id) {
+                            $set['JOBS_APP'][] = array('transaction_id' => $transaction_id, 'amount' => $amount, 'success' => '1');
+                        } else {
+                            $set['JOBS_APP'][] = array('msg' => "Update Failed!!!  Try Again", 'success' => '0');
+                        }
+
+                        /*$data = array(
+                            "account_number" => $account_number,
+                            "ifsc_code" => $ifsc_code,
+                            "account_holder_name" => $account_holder_name,
+                            "linked_mobile" => $linked_mobile
+                        );
+                        $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
+                        $set['JOBS_APP'][] = array('status' => "Account Details Successfully Updated", 'success' => '1');*/
+
+                    }else{
+                        $set['JOBS_APP'][] = array('msg' => "Failed !! Wallet Is Empty", 'success' => '0');
+                    }
+
+                }else{
+                    $set['JOBS_APP'][] = array('msg' => "Failed !! Wallet Is Empty", 'success' => '0');
+                }
+            }else{
+                $set['JOBS_APP'][] = array('msg' => "Failed !! Account Details Invalid", 'success' => '0');
+            }
+        }else{
+            $set['JOBS_APP'][] = array('msg' => "Failed !! User Details Not Valid", 'success' => '0');
+        }
+        $account_number = filter_var($get_method['account_number'], FILTER_SANITIZE_STRING);
+        $ifsc_code = filter_var($get_method['ifsc_code'], FILTER_SANITIZE_STRING);
+        $account_holder_name = filter_var($get_method['account_holder_name'], FILTER_SANITIZE_STRING);
+        $linked_mobile = filter_var($get_method['linked_mobile'], FILTER_SANITIZE_STRING);
+        $user_id = filter_var($get_method['user_id'], FILTER_SANITIZE_STRING);
+
+    } else {
+        $set['JOBS_APP'][] = array('msg' => "Failed !! Please Provide User Details", 'success' => '0');
     }
 
     header('Content-Type: application/json; charset=utf-8');
@@ -1961,8 +2029,7 @@ else if ($get_method['method_name'] == "job_completed") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "resend_otp") {
+} else if ($get_method['method_name'] == "resend_otp") {
 
     $phone = filter_var($get_method['phone'], FILTER_SANITIZE_STRING);
     $country_code = $get_method['country_code'];
@@ -1973,8 +2040,7 @@ else if ($get_method['method_name'] == "resend_otp") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "verify_user") {
+} else if ($get_method['method_name'] == "verify_user") {
 
     $user_id = filter_var($get_method['user_id'], FILTER_SANITIZE_STRING);
 
@@ -1983,13 +2049,39 @@ else if ($get_method['method_name'] == "verify_user") {
         $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
         $set['JOBS_APP'][] = array('status' => "User Successfully Verified", 'success' => '1');
     } else {
-        $set['JOBS_APP'][] = array('msg' => "Verification Failed$user_id", 'success' => '0');
+        $set['JOBS_APP'][] = array('msg' => "Verification Failed", 'success' => '0');
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    die();
+} else if ($get_method['method_name'] == "submit_account_details") {
+    if ($get_method['user_id'] != "" && $get_method['account_number'] != "" && $get_method['account_holder_name'] != "" && $get_method['linked_mobile'] != "") {
+
+        $account_number = filter_var($get_method['account_number'], FILTER_SANITIZE_STRING);
+        $ifsc_code = filter_var($get_method['ifsc_code'], FILTER_SANITIZE_STRING);
+        $account_holder_name = filter_var($get_method['account_holder_name'], FILTER_SANITIZE_STRING);
+        $linked_mobile = filter_var($get_method['linked_mobile'], FILTER_SANITIZE_STRING);
+        $user_id = filter_var($get_method['user_id'], FILTER_SANITIZE_STRING);
+
+        $data = array(
+                        "account_number" => $account_number,
+                        "ifsc_code" => $ifsc_code,
+                        "account_holder_name" => $account_holder_name,
+                        "linked_mobile" => $linked_mobile
+            );
+        $user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
+        $set['JOBS_APP'][] = array('status' => "Account Details Successfully Updated", 'success' => '1');
+    } else {
+        $set['JOBS_APP'][] = array('msg' => "Failed !! Please Enter All Fields", 'success' => '0');
     }
 
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 }
+
+
 else if ($get_method['method_name'] == "user_login") {
 
     $email = cleanInput($get_method['email']);
@@ -2009,7 +2101,7 @@ else if ($get_method['method_name'] == "user_login") {
 
             if ($row['password'] == md5($password)) {
 
-                $set['JOBS_APP'][] = array('user_type' => $row['user_type'], 'user_id' => $row['id'], 'name' => $row['name'], 'user_image' => $user_image, 'success' => '1');
+                $set['JOBS_APP'][] = array('account_number' => $row['account_number'], 'ifsc_code' => $row['ifsc_code'], 'account_holder_name' => $row['account_holder_name'], 'account_holder_name' => $row['account_holder_name'], 'linked_mobile' => $row['linked_mobile'], 'user_type' => $row['user_type'], 'user_id' => $row['id'], 'name' => $row['name'], 'user_image' => $user_image, 'success' => '1');
             } else {
                 $set['JOBS_APP'][] = array('msg' => $app_lang['invalid_password'], 'success' => '0');
             }
@@ -2027,8 +2119,7 @@ else if ($get_method['method_name'] == "user_login") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "user_profile") {
+} else if ($get_method['method_name'] == "user_profile") {
 
     $qry = "SELECT * FROM tbl_users WHERE `id` = '" . $get_method['id'] . "'";
     $result = mysqli_query($mysqli, $qry);
@@ -2090,8 +2181,7 @@ else if ($get_method['method_name'] == "user_profile") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "user_profile_update") {
+} else if ($get_method['method_name'] == "user_profile_update") {
     $path = '';
 
     $qry = "SELECT * FROM tbl_users WHERE `email` = '" . $get_method['email'] . "'";
@@ -2245,8 +2335,7 @@ else if ($get_method['method_name'] == "user_profile_update") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 
-}
-else if ($get_method['method_name'] == "forgot_pass") {
+} else if ($get_method['method_name'] == "forgot_pass") {
 
     $email = htmlentities(trim($get_method['email']));
 
@@ -2311,8 +2400,7 @@ else if ($get_method['method_name'] == "forgot_pass") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_app_update") {
+} else if ($get_method['method_name'] == "get_app_update") {
 
     $jsonObj = array();
 
@@ -2334,8 +2422,7 @@ else if ($get_method['method_name'] == "get_app_update") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else if ($get_method['method_name'] == "get_app_details") {
+} else if ($get_method['method_name'] == "get_app_details") {
     //User status
     $qry_user = "SELECT * FROM tbl_users WHERE `id` = '" . $get_method['user_id'] . "'";
     $result_user = mysqli_query($mysqli, $qry_user);
@@ -2401,7 +2488,6 @@ else if ($get_method['method_name'] == "get_app_details") {
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
-}
-else {
+} else {
     $get_method = checkSignSalt($_POST['data']);
 }
