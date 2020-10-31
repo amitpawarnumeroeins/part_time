@@ -223,6 +223,13 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
+          <li <?php if ($currentFile == "manage_withdrawals.php") { ?>class="active" <?php } ?>> <a href="manage_withdrawals.php" style="background: #c39043;color: #fff;">
+
+              <div class="title">Withdrawal Request</div>
+
+            </a>
+
+          </li>
 
           <li <?php if ($currentFile == "manage_applied_users.php") { ?>class="active" <?php } ?>> <a href="manage_applied_users.php">
 
@@ -253,6 +260,16 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
               </a>
 
             </li>-->
+
+            <li <?php if ($currentFile == "manage_subscription_plan.php" or $currentFile == "add_subscription_plan.php") { ?>class="active" <?php } ?>> <a href="manage_subscription_plan.php">
+
+                    <div class="icon"> <i class="fa fa-briefcase" aria-hidden="true"></i> </div>
+
+                    <div class="title">Subscription Plan</div>
+
+                </a>
+
+            </li>
 
          	<li <?php if ($currentFile == "settings.php") { ?>class="active" <?php } ?>> <a href="settings.php">
 

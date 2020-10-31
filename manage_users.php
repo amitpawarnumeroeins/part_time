@@ -119,7 +119,7 @@ else if (isset($_POST['user_search'])) {
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Status</th>
-                        <th>Wallet Amount</th>
+                        <th>Extra</th>
                         <th class="cat_action_list">Action</th>
                     </tr>
                     </thead>
@@ -138,9 +138,9 @@ else if (isset($_POST['user_search'])) {
                             <td>
                                 <?php
                                 if ($users_row['user_type'] == 1) {
-                                    echo $user_type = 'Job Seeker';
+                                    echo $user_type = 'Seeker';
                                 } else {
-                                    echo $user_type = 'Job Provider';
+                                    echo $user_type = 'Provider';
                                 }
                                 ?>
                             </td>
@@ -168,7 +168,22 @@ else if (isset($_POST['user_search'])) {
                                 <?php } ?>
                             </td>
                             <td>
-                                <?=$users_row['current_wallet_amount'];?>
+                                Wallet :<?=$users_row['current_wallet_amount'];?>
+
+                                <?php
+                                if($users_row['subscription_plan_id'])
+                                {
+                                    $queryPlan = "SELECT * FROM tbl_subscription_plan WHERE `id`=".$users_row['subscription_plan_id'];
+                                    $resultPlan = mysqli_query($mysqli, $queryPlan);
+                                    if(mysqli_num_rows($resultPlan))
+                                    {
+                                        $rowPlan = mysqli_fetch_assoc($resultPlan);
+                                        $subscriptionPlanName = $rowPlan["name"];
+                                        echo "Subscription: $subscriptionPlanName (".$users_row['credits_remaining']." credits remaining)";
+                                    }
+                                }
+                                ?>
+
                             </td>
                             <td>
                                 <a href="user_profile.php?user_id=<?php echo $users_row['id']; ?>" class="btn btn-success btn_cust" data-toggle="tooltip" data-tooltip="User Profile"><i class="fa fa-eye"></i></a>

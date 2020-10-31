@@ -179,18 +179,18 @@ if (isset($_POST['app_pri_poly'])) {
           <ul class="nav nav-tabs" role="tablist">
             <!--<li role="presentation" class="active"><a href="#app_settings" aria-controls="app_settings" role="tab" data-toggle="tab">App Settings</a></li>-->
             <!--<li role="presentation"><a href="#admob_settings" aria-controls="admob_settings" role="tab" data-toggle="tab">Ads Settings</a></li>-->
-            <li role="presentation"><a href="#api_settings" aria-controls="api_settings" role="tab" data-toggle="tab">API Settings</a></li>
-            <li role="presentation"><a href="#api_privacy_policy" aria-controls="api_privacy_policy" role="tab" data-toggle="tab">App Privacy Policy</a></li>
+            <!--<li role="presentation" ><a href="#api_settings" aria-controls="api_settings" role="tab" data-toggle="tab">API Settings</a></li>-->
+            <li role="presentation" class="active"><a href="#api_privacy_policy" aria-controls="api_privacy_policy" role="tab" data-toggle="tab">App Privacy Policy</a></li>
             <li role="presentation"><a href="#app_update" aria-controls="app_update" role="tab" data-toggle="tab">App Update</a></li>
           </ul>
 
           <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="app_settings">
+            <!--<div role="tabpanel" class="tab-pane " id="app_settings">
               <form action="" name="settings_from" method="post" class="form form-horizontal" enctype="multipart/form-data">
                 <div class="section">
                   <div class="section-body">
 
-                    <?php if($settings_details['ios_envato_purchased_status'] == '1'){?>
+                    <?php /*if($settings_details['ios_envato_purchased_status'] == '1'){*/?>
                       <div class="checkbox" style="margin-bottom :30px;">
                         <input type="checkbox" name="checkbox" id="checkbox_app_settings" class="btn_import_a" data-type="app_settings_ios">
                         <label for="checkbox_app_settings">
@@ -198,12 +198,12 @@ if (isset($_POST['app_pri_poly'])) {
                         </label>
                       </div>
                       <br/>
-                    <?php }?>
+                    <?php /*}*/?>
                     
                     <div class="form-group">
                       <label class="col-md-3 control-label">App Name :-</label>
                       <div class="col-md-6">
-                        <input type="text" name="app_name" id="app_name" value="<?php echo $settings_row['app_name']; ?>" class="form-control">
+                        <input type="text" name="app_name" id="app_name" value="<?php /*echo $settings_row['app_name']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -212,11 +212,11 @@ if (isset($_POST['app_pri_poly'])) {
                         <div class="fileupload_block">
                           <input type="file" name="app_logo" id="fileupload" onchange="readURL(this);">
 
-                          <?php if ($settings_row['app_logo'] != "") { ?>
-                            <div class="fileupload_img"><img type="image" src="images/<?php echo $settings_row['app_logo']; ?>" alt="image" id="ImdID" /></div>
-                          <?php } else { ?>
+                          <?php /*if ($settings_row['app_logo'] != "") { */?>
+                            <div class="fileupload_img"><img type="image" src="images/<?php /*echo $settings_row['app_logo']; */?>" alt="image" id="ImdID" /></div>
+                          <?php /*} else { */?>
                             <div class="fileupload_img"><img type="image" src="assets/images/landscape.jpg" alt="image" id="ImdID" /></div>
-                          <?php } ?>
+                          <?php /*} */?>
 
                         </div>
                       </div>
@@ -225,7 +225,7 @@ if (isset($_POST['app_pri_poly'])) {
                       <label class="col-md-3 control-label">App Description :-</label>
                       <div class="col-md-6">
 
-                        <textarea name="app_description" id="app_description" class="form-control"><?php echo $settings_row['app_description']; ?></textarea>
+                        <textarea name="app_description" id="app_description" class="form-control"><?php /*echo $settings_row['app_description']; */?></textarea>
                         <script>
                           CKEDITOR.replace('app_description');
                         </script>
@@ -235,37 +235,37 @@ if (isset($_POST['app_pri_poly'])) {
                     <div class="form-group">
                       <label class="col-md-3 control-label">App Version :-</label>
                       <div class="col-md-6">
-                        <input type="text" name="app_version" id="app_version" value="<?php echo $settings_row['app_version']; ?>" class="form-control">
+                        <input type="text" name="app_version" id="app_version" value="<?php /*echo $settings_row['app_version']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Author :-</label>
                       <div class="col-md-6">
-                        <input type="text" name="app_author" id="app_author" value="<?php echo $settings_row['app_author']; ?>" class="form-control">
+                        <input type="text" name="app_author" id="app_author" value="<?php /*echo $settings_row['app_author']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Contact :- <p class="control-label-help" id="square_lable_info">(+911236547895)</p></label>
                       <div class="col-md-6">
-                        <input type="text" name="app_contact" id="app_contact" value="<?php echo $settings_row['app_contact']; ?>" class="form-control">
+                        <input type="text" name="app_contact" id="app_contact" value="<?php /*echo $settings_row['app_contact']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Email :-</label>
                       <div class="col-md-6">
-                        <input type="text" name="app_email" id="app_email" value="<?php echo $settings_row['app_email']; ?>" class="form-control">
+                        <input type="text" name="app_email" id="app_email" value="<?php /*echo $settings_row['app_email']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Website :-</label>
                       <div class="col-md-6">
-                        <input type="text" name="app_website" id="app_website" value="<?php echo $settings_row['app_website']; ?>" class="form-control">
+                        <input type="text" name="app_website" id="app_website" value="<?php /*echo $settings_row['app_website']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Developed By :-</label>
                       <div class="col-md-6">
-                        <input type="text" name="app_developed_by" id="app_developed_by" value="<?php echo $settings_row['app_developed_by']; ?>" class="form-control">
+                        <input type="text" name="app_developed_by" id="app_developed_by" value="<?php /*echo $settings_row['app_developed_by']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -276,7 +276,7 @@ if (isset($_POST['app_pri_poly'])) {
                   </div>
                 </div>
               </form>
-            </div>
+            </div>-->
 
              <!-- admob settings -->
 <!--          <div role="tabpanel" class="tab-pane" id="admob_settings">
@@ -505,7 +505,7 @@ if (isset($_POST['app_pri_poly'])) {
 	            </form>
 	          </div>-->
 
-            <div role="tabpanel" class="tab-pane" id="app_update">   
+            <div role="tabpanel" class="tab-pane " id="app_update">
               <form action="" name="app_update" method="post" class="form form-horizontal" enctype="multipart/form-data">
 
                 <div class="section">
@@ -630,7 +630,7 @@ if (isset($_POST['app_pri_poly'])) {
                 </div>
               </form>
             </div>
-            <div role="tabpanel" class="tab-pane" id="api_privacy_policy">
+            <div role="tabpanel" class="tab-pane active" id="api_privacy_policy">
               <form action="" name="api_privacy_policy" method="post" class="form form-horizontal" enctype="multipart/form-data">
                 <div class="section">
                   <div class="section-body">

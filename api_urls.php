@@ -22,10 +22,9 @@ $ios_file_path = getBaseUrl().'ios_api.php';
 
                 if(file_exists('ios_api.php'))
                 {
-                   // echo '<br><b>iOS API URL</b>&nbsp; '.$ios_file_path;
+                    // echo '<br><b>iOS API URL</b>&nbsp; '.$ios_file_path;
                 }
                 ?>
-                	
 				     <br><b>Home</b>(Method: get_home)(Parameter: user_id)
                      <br><b>Latest Job</b>(Method: get_latest_job)(Parameter: page,user_id)
                      <br><b>Recent Job</b>(Method: get_recent_job)(Parameter: user_id,page)
@@ -56,13 +55,16 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>User Saved List</b>(Method: user_saved_list)(Parameter: user_id,page)
                      <br><b>App Update</b>(Method: get_app_update)
                      <br><b>App Details</b>(Method: get_app_details)(Parameter: user_id)
-                     <br><b>Resend OTP</b>(Method: resend_otp)(Parameter: phone)
-                     <br><b>Initiate Add Money To Wallet </b>(Method: add_to_wallet_init)(Parameter: user_id, amount, mode)
-                     <br><b>Update Add Money To Wallet </b>(Method: add_to_wallet_update)(Parameter: transaction_id, user_id, status, bank_trans_id, bank_trans_response)
-                     <br><b>Submit Account Details </b>(Method: submit_account_details)(Parameter: user_id, account_number, account_holder_name, linked_mobile, ifsc_code)
-                     <br><b>Withdrawal From Wallet Init </b>(Method: withdrawal_from_wallet_init)(Parameter: user_id, amount)
-                     <br><b>Withdrawal From Wallet Update </b>(Method: withdrawal_from_wallet_update)(Parameter: transaction_id, status, bank_trans_id, bank_trans_response)
-
+                     <br><b>Resend OTP*</b>(Method: resend_otp)(Parameter: phone)
+                     <br><b>Submit Account Details* </b>(Method: submit_account_details)(Parameter: user_id, account_number, account_holder_name, linked_mobile, ifsc_code)
+                     <br><b>Initiate Add Money To Wallet* </b>(Method: add_to_wallet_init)(Parameter: user_id, amount, mode)
+                     <br><b>Update Add Money To Wallet* </b>(Method: add_to_wallet_update)(Parameter: transaction_id, user_id, status, bank_trans_id, bank_trans_response)
+                     <br><b>Withdrawal From Wallet Init*</b>(Method: withdrawal_from_wallet_init)(Parameter: user_id, amount)
+                     <br><b>Withdrawal From Wallet Update* </b>(Method: withdrawal_from_wallet_update)(Parameter: transaction_id, status, bank_trans_id, bank_trans_response)
+                     <br><b>Wallet Transaction List* </b>(Method: wallet_transaction_list)(Parameter: user_id)(Response: type //1-credit, 2-debit, amount, status //0-null, 1-approved, 2-rejected, 3-failed, 4-init/pending, mode//diffrent payment methods.. stripe,hyperpay, bank_trans_id, bank_trans_response, trans_type //1-bank, 2- wallet)
+                     <br><b>Subscription Plan List* </b>(Method: subscription_plan_list)(Parameter: -)
+                     <br><b>Subscription Payment Initialize* </b>(Method: subscription_payment_init)(Parameter: user_id, plan_id, mode)
+                     <br><b>Subscription Payment Update* </b>(Method: subscription_payment_update)(Parameter: transaction_id, user_id, plan_id, mode, status, bank_trans_id, bank_trans_response)
 			 </code>
              </pre>
             </div>

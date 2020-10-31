@@ -39,7 +39,7 @@ if (isset($_GET['filter'])) {
     $targetpage = "manage_transactions.php?$filter";
     $limit = 20;
 
-    $query = "SELECT COUNT(*) as num FROM tbl_transaction_details WHERE `status`='$transaction_type'";
+    $query = "SELECT COUNT(*) as num FROM tbl_transaction_details WHERE 1 $filterSql";
 
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
     $total_pages = $total_pages['num'];
@@ -100,12 +100,21 @@ while ($row = mysqli_fetch_array($transaction_result)) {
     $user_name = $row["user_name"];
     $amount = $row["amount"];
     $status = $row["status"];
+    $trans_for = $row["trans_for"];
     $mode = $row["mode"];
     $bank_trans_id = $row["bank_trans_id"];
     $bank_trans_response = $row["bank_trans_response"];
     $trans_type = $row["trans_type"] == 1 ? "Bank" : "Wallet";
     $user_updated = $row["user_updated"];
     $created_at = $row["created_at"];
+    $transForText = "";
+    if($trans_for == 1)
+    {
+        $transForText = "";
+    }else if($trans_for == 2)
+    {
+        $transForText = "(Subscription)";
+    }
 
     switch ($status) {
         case 1:
@@ -133,10 +142,10 @@ while ($row = mysqli_fetch_array($transaction_result)) {
     $transDataDisp .= <<<AAA
                         <tr>
                             <td class="$typeColor text-center">$type</td>
-                            <td class="text-center">$amount</td>
+                            <td class="text-center">$$amount</td>
                             <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                             <td class="text-center text-capitalize">$user_name</td>
-                            <td class="text-center">$trans_type <br> </td>
+                            <td class="text-center">$trans_type <br> $transForText</td>
                             <td class="text-center">$created_at</td>
                         </tr>
 AAA;

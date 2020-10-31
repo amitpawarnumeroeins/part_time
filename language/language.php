@@ -52,4 +52,10 @@
 	  $client_lang['23'] = "email is not a valid URL";
 
 	  $client_lang['24'] = "Phone No 10 digit";
+
+	  $client_lang['25'] = "Withdrawal Request Approved";
+
+	  $client_lang['26'] = "Withdrawal Request Failed";
+
+	  $client_lang['27'] = "Failed !!  Invalid Amount";
 ?>

@@ -27,6 +27,66 @@ switch ($_POST['action']) {
                 $edit_status=Update($table_nm, $data, "WHERE $tbl_id = '$id'");
                 $_SESSION['msg']="14";
             }
+        }elseif($table_nm == "tbl_transaction_details")
+        {
+            if($for_action=='active')
+            {
+
+                $status = 1;
+                $bank_trans_id = "From Admin";
+                $bank_trans_response = "From Admin";
+                $updated_at = strtotime(date('d-m-Y h:i A'));
+
+                $query1 = "SELECT * FROM tbl_transaction_details WHERE id = $id AND trans_type = 1 AND  type = 2 AND status = 4 AND `user_updated` = 0 AND `trans_for`=1";
+                $sql1 = mysqli_query($mysqli, $query1) or die(mysqli_error($mysqli));
+                if(mysqli_num_rows($sql1))
+                {
+                    $row = mysqli_fetch_assoc($sql1);
+                    $amount = $row["amount"];
+                    $user_id = $row["user_id"];
+                    $query2 = "SELECT * FROM tbl_users WHERE id = $user_id";
+                    $sql2 = mysqli_query($mysqli, $query2) or die(mysqli_error($mysqli));
+                    $row2 = mysqli_fetch_assoc($sql2);
+                    $current_wallet_amount = $row2["current_wallet_amount"];
+
+                    if($amount<=$current_wallet_amount)
+                    {
+                        $data = array(
+                            'status' => $status,
+                            'bank_trans_id' => $bank_trans_id,
+                            'bank_trans_response' => $bank_trans_response,
+                            'updated_at' => $updated_at
+                        );
+
+                        $user_edit = Update('tbl_transaction_details', $data, "WHERE `id` = '" . $id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
+
+                        $qry = "SELECT * FROM tbl_transaction_details WHERE `id` = '" . $id . "' AND `user_id` = $user_id AND `status` = 1 AND `user_updated` = 0 AND `trans_for`=1";
+                        $result = mysqli_query($mysqli, $qry) or die('Error in fetch data ->' . mysqli_error($mysqli));
+
+                        if (mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);
+                            $thisAmount = $row["amount"];
+                            mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` -$thisAmount WHERE `id` = '$user_id'");
+
+                            $dataUpdate = array(
+                                'user_updated' => 1 //0- not updated, 1-updated
+                            );
+
+                            Update('tbl_transaction_details', $dataUpdate, "WHERE `id` = '" . $id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
+
+                            $_SESSION['msg']="25";
+                        } else {
+                            $_SESSION['msg']="26";
+                        }
+                    }else{
+                        $_SESSION['msg']="27";
+                    }
+                }
+            }else{
+                $data = array($column  =>  '2');
+                $edit_status=Update($table_nm, $data, "WHERE $tbl_id = '$id'");
+                $_SESSION['msg']="14";
+            }
         }else{
             if($for_action=='active'){
                 $data = array($column  =>  '1');
