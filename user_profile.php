@@ -5,6 +5,11 @@ include('includes/function.php');
 
 require_once("library/HTMLPurifier.auto.php");
 
+function convertDateTime($unixTime) {
+    $seconds = $unixTime / 1000;
+    return date("d-M-y", $seconds);
+}
+
 $config1 = HTMLPurifier_Config::createDefault();
 $purifier = new HTMLPurifier($config1);
 
@@ -20,13 +25,38 @@ if(!isset($_GET['user_id']) OR $user_id==''){
 }
 
 $user_qry="SELECT * FROM tbl_users WHERE id='$user_id'";
+
 $user_result=mysqli_query($mysqli,$user_qry);
+
+
+
 
 if(mysqli_num_rows($user_result)==0){
     header("Location: manage_users.php");
 }
 
 $user_row=mysqli_fetch_assoc($user_result);
+
+
+//print_r($user_row);
+$planName= "";
+if($user_row["subscription_plan_id"])
+{
+    $plan_qry="SELECT * FROM tbl_subscription_plan WHERE id='".$user_row["subscription_plan_id"]."'";
+    $row_result = mysqli_fetch_assoc(mysqli_query($mysqli,$plan_qry));
+    $planName = $row_result["name"];
+    $planCredits = $row_result["credits"];
+    $credits_remaining = $user_row["credits_remaining"];
+    $planDetails = <<<AAA
+                <span class="badge badge-success badge-icon">
+				    Subscription:
+				    
+				    <span style="font-size: 14px;text-transform: capitalize;">$planName </span>($credits_remaining/$planCredits)
+				</span>
+AAA;
+
+}
+
 
 $user_img='';
 
@@ -321,16 +351,17 @@ function get_user_name($user_id)
 				  <div class="user_profile_img">
 					<img type="image" src="<?php echo $user_img;?>" alt="image" style=""/>
 				  </div>
-				  <span style="font-size: 14px;"><?php echo $user_row['name'];?>				
+				  <span style="font-size: 14px;"><?php echo $user_row['name'];?>
 				  </span>
 				</span>
+                    <?=$planDetails?>
                     <span class="badge badge-success badge-icon">
 				<i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
 				<span style="font-size: 14px;text-transform: lowercase;"><?php echo $user_row['email'];?></span>
 				</span>
                     <span class="badge badge-success badge-icon">
 				  <strong style="font-size: 14px;">Registered At:</strong>
-				  <span style="font-size: 14px;"><?php echo (date('d-m-Y',$user_row['register_date']));?>  
+				  <span style="font-size: 14px;"><?php echo (date('d-m-Y',$user_row['register_date']));?>
 				</span>
 				</span>
                 </div>
@@ -345,10 +376,17 @@ function get_user_name($user_id)
                         <?php if($user_row['user_type']!='2'){?>
                             <li role="applied_user"><a href="#applied_user" aria-controls="applied_user" role="tab" data-toggle="tab">Applied jobs</a></li>
                         <?php }?>
-                        <li role="favourite_news"><a href="#favourite_news" aria-controls="favourite_news" role="tab" data-toggle="tab">Users Favourite Jobs</a></li>
-                        <?php if(($user_row['id']==$company_row['user_id'])==2){?>
-                            <li role="users_job"><a href="#users_job" aria-controls="users_job" role="tab" data-toggle="tab">Users Manage Jobs</a></li>
+                        <?php if($user_row['user_type']!='2'){?>
+                            <li role="active_jobs"><a href="#active_jobs" aria-controls="active_jobs" role="tab" data-toggle="tab">Active jobs</a></li>
                         <?php }?>
+                        <li role="favourite_news"><a href="#favourite_news" aria-controls="favourite_news" role="tab" data-toggle="tab">User Favourite Jobs</a></li>
+                        <?php if(($user_row['id']==$company_row['user_id'])==2){?>
+                            <li role="users_job"><a href="#users_job" aria-controls="users_job" role="tab" data-toggle="tab">User Manage Jobs</a></li>
+                        <?php }?>
+                        <?php if(($user_row['id']==$company_row['user_id'])==2){?>
+                            <li role="users_subscriptions"><a href="#users_subscriptions" aria-controls="users_subscriptions" role="tab" data-toggle="tab">User Subscriptions</a></li>
+                        <?php }?>
+                        <li role="users_transactions"><a href="#users_transactions" aria-controls="users_transactions" role="tab" data-toggle="tab">User Transactions</a></li>
                     <?php }?>
                 </ul>
             </div>
@@ -580,7 +618,6 @@ function get_user_name($user_id)
                         </div>
                     </div>
                 </div>
-
                 <div role="tabpanel" class="tab-pane" id="favourite_news">
 
                     <div class="row">
@@ -744,6 +781,268 @@ function get_user_name($user_id)
                                         </td>
                                     </tr>
                                     <?php $i++; }?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="active_jobs">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Job Title</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Applied On</th>
+                                    <th class="text-center">Start Date</th>
+                                    <th class="text-center">End Date</th>
+                                    <th class="text-center">Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                //echo $user_id;
+                                $sql="SELECT * FROM tbl_apply
+                                     LEFT JOIN tbl_jobs ON tbl_jobs.`id`= tbl_apply.`job_id`
+                                     LEFT JOIN tbl_users ON tbl_users.`id`= tbl_apply.`user_id`
+                                     WHERE tbl_apply.`seen` = 1 AND tbl_apply.`user_id`='$user_id'
+									 ORDER BY tbl_apply.`ap_id` DESC";
+
+                                $res=mysqli_query($mysqli, $sql);
+                                $i=1;
+                                while ($users_row = mysqli_fetch_array($res)) { ?>
+                                    <tr>
+                                        <td class="text-center"><?=$users_row['job_name']; ?></td>
+                                        <td class="text-center">
+                                            <b><?=$users_row['name']; ?></b><br>
+                                            <small><?=$users_row['email']; ?></small><br>
+                                            <small> <?=$users_row['phone']; ?></small><br>
+                                            <?php if (isset($users_row['user_resume'])) { ?><a href="<?php echo 'uploads/' . $users_row['user_resume']; ?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php } ?>
+                                        </td>
+                                        <td class="text-center"><?php echo $users_row['apply_date']; ?></td>
+                                        <td class="text-center"><?php echo convertDateTime($users_row['job_start_time']); ?></td>
+                                        <td class="text-center"><?php if($users_row['job_end_time']) echo convertDateTime($users_row['job_end_time']); else echo "-" ?></td>
+                                        <td class="text-center">
+                                            <?php
+                                            switch ($users_row['job_status'])
+                                            {
+                                                case 1:
+                                                    $status = "Completed";
+                                                    $statusColor = "success";
+                                                    break;
+                                                case 2:
+                                                    $status = "Rejected";
+                                                    $statusColor = "danger";
+                                                    break;
+                                                case 3:
+                                                    $status = "Failed";
+                                                    $statusColor = "danger";
+                                                    break;
+                                                case 4:
+                                                    $status = "Alloted/Working";
+                                                    $statusColor = "warning";
+                                                    break;
+                                                default:
+                                                    $status = "pending";
+                                                    $statusColor = "primary";
+
+                                            }
+
+                                            echo "<b class='text-$statusColor'>$status</b>"
+                                            ?>
+
+
+                                        </td>
+                                    </tr>
+                                    <?php
+
+                                    $i++;
+                                }?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="users_transactions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Transaction Id</th>
+                                    <th>User</th>
+                                    <th>Transaction Type</th>
+                                    <th>Created At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <?php
+
+                                $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name FROM tbl_transaction_details
+                                LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id`
+                                WHERE tbl_users.id = $user_id
+                                ORDER BY tbl_transaction_details.`id` DESC ";
+
+                                $transaction_result = mysqli_query($mysqli, $transaction_qry);
+
+
+                                while ($row = mysqli_fetch_array($transaction_result)) {
+
+                                $transaction_id = $row["transaction_id"];
+                                $type = $row["type"] == 1 ? "+Credit" : "-Debit";
+                                $typeColor = $row["type"] == 1 ? "text-success" : "text-danger";
+                                $user_id = $row["user_id"];
+                                $user_name = $row["user_name"];
+                                $amount = $row["amount"];
+                                $status = $row["status"];
+                                $trans_for = $row["trans_for"];
+                                $mode = $row["mode"];
+                                $bank_trans_id = $row["bank_trans_id"];
+                                $bank_trans_response = $row["bank_trans_response"];
+                                $trans_type = $row["trans_type"] == 1 ? "Bank" : "Wallet";
+                                $user_updated = $row["user_updated"];
+                                $created_at = $row["created_at"];
+                                $transForText = "";
+                                if($trans_for == 1)
+                                {
+                                $transForText = "";
+                                }else if($trans_for == 2)
+                                {
+                                $transForText = "(Subscription)";
+                                }
+
+                                switch ($status) {
+                                case 1:
+                                $statusText = "Approved";
+                                $statusColor = "text-success";
+                                break;
+                                case 2:
+                                $statusText = "Rejected";
+                                $statusColor = "text-danger";
+                                break;
+                                case 3:
+                                $statusText = "Failed";
+                                $statusColor = "text-danger";
+                                break;
+                                case 4:
+                                $statusText = "Pending";
+                                $statusColor = "text-warning";
+                                break;
+                                default:
+                                "Pending";
+                                $statusColor = "text-warning";
+
+                                }
+
+                                $transDataDisp .= <<<AAA
+                                <tr>
+                                    <td class="$typeColor text-center">$type</td>
+                                    <td class="text-center">$$amount</td>
+                                    <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
+                                    <td class="text-center text-capitalize">$user_name</td>
+                                    <td class="text-center">$trans_type <br> $transForText</td>
+                                    <td class="text-center">$created_at</td>
+                                </tr>
+AAA;
+
+                                }
+                                ?>
+
+
+
+                                <?= $transDataDisp ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="users_subscriptions">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="datatable table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Amount</th>
+                                    <th>Transaction Id</th>
+                                    <th>Subscription Plan (Credits)</th>
+                                    <th>Created At</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <?php
+
+                                $traon_qry = "SELECT tbl_subscription_plan.name as plan_name, tbl_subscription_plan.credits as plan_credits, tbl_user_subscription_details.`timestamp`,tbl_transaction_details.*,tbl_users.name as user_name FROM tbl_transaction_details
+                                LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id`
+                                LEFT JOIN tbl_user_subscription_details ON tbl_transaction_details.`transaction_id`= tbl_user_subscription_details.`transaction_id`
+                                LEFT JOIN tbl_subscription_plan ON tbl_transaction_details.`plan_id`= tbl_subscription_plan.`id`
+                                WHERE tbl_users.id = $user_id AND trans_for =2
+                                ORDER BY tbl_transaction_details.`id` DESC";
+
+                                $tranon_result = mysqli_query($mysqli, $traon_qry);
+
+
+                                while ($rowRttf = mysqli_fetch_array($tranon_result)) {
+
+                                $transaction_id = $rowRttf["transaction_id"];
+                                $typeColor = $rowRttf["type"] == 1 ? "text-success" : "text-danger";
+                                $user_id = $rowRttf["user_id"];
+                                $user_name = $rowRttf["user_name"];
+                                $amount = $rowRttf["amount"];
+                                $status = $rowRttf["status"];
+                                $trans_for = $rowRttf["trans_for"];
+                                $mode = $rowRttf["mode"];
+                                $bank_trans_id = $rowRttf["bank_trans_id"];
+                                $bank_trans_response = $rowRttf["bank_trans_response"];
+                                $trans_type = $rowRttf["trans_type"] == 1 ? "Bank" : "Wallet";
+                                $user_updated = $rowRttf["user_updated"];
+                                $created_at = $rowRttf["created_at"];
+                                $timestamp = $rowRttf["timestamp"];
+                                    $planName = $rowRttf["plan_name"];
+                                    $planCredits = $rowRttf["plan_credits"];
+
+                                switch ($status) {
+                                case 1:
+                                $statusText = "Approved";
+                                $statusColor = "text-success";
+                                break;
+                                case 2:
+                                $statusText = "Rejected";
+                                $statusColor = "text-danger";
+                                break;
+                                case 3:
+                                $statusText = "Failed";
+                                $statusColor = "text-danger";
+                                break;
+                                case 4:
+                                $statusText = "Pending";
+                                $statusColor = "text-warning";
+                                break;
+                                default:
+                                "Pending";
+                                $statusColor = "text-warning";
+
+                                }
+
+                                $transsdDataDisp .= <<<AAA
+                                <tr>
+                                    <td class="text-center">$$amount</td>
+                                    <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
+                                    <td class="text-center">$planName (Credits:$planCredits)</td>
+                                    <td class="text-center">$timestamp</td>
+                                </tr>
+AAA;
+
+                                }
+                                ?>
+
+
+
+                                <?= $transsdDataDisp ?>
                                 </tbody>
                             </table>
                         </div>

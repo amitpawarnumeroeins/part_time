@@ -5,7 +5,6 @@ include('includes/header.php');
 include('includes/function.php');
 include('language/language.php');
 
-
 if (isset($_POST['user_search'])) {
 
   $keyword = filter_var($_POST['search_value'], FILTER_SANITIZE_STRING);
@@ -44,7 +43,7 @@ if (isset($_POST['user_search'])) {
   $users_result = mysqli_query($mysqli, $users_qry);
 }
 if (isset($_GET['apply_id'])) {
-	
+
   Delete('tbl_apply', 'ap_id=' . $_GET['apply_id'] . '');
 
   $_SESSION['msg'] = "12";
@@ -87,7 +86,7 @@ function get_job_info($job_id)
         </div>
       </div>
       <div class="clearfix"></div>
-      
+
       <div class="col-md-12 mrg-top">
         <button class="btn btn-danger btn_cust btn_delete_all" style="margin-bottom:20px;"><i class="fa fa-trash"></i> Delete All</button>
         <table class="table table-striped table-bordered table-hover">
@@ -127,15 +126,24 @@ function get_job_info($job_id)
                 <td><?php if (isset($users_row['user_resume'])) { ?><a href="<?php echo 'uploads/' . $users_row['user_resume']; ?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php } ?></td>
                 <td><?php echo $users_row['apply_date']; ?></td>
                 <td>
-                  <?php if ($users_row['seen'] != "0") { ?>
-                    <a title="Change Status" class="toggle_btn_a" href="javascript:void(0)" data-id="<?= $users_row['ap_id'] ?>" data-action="deactive" data-column="seen"><span class="badge badge-success badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Seen</span></span></a>
+                  <?php /*if ($users_row['seen'] != "0") { */?><!--
+                    <a title="Change Status" class="toggle_btn_a" href="javascript:void(0)" data-id="<?/*= $users_row['ap_id'] */?>" data-action="deactive" data-column="seen"><span class="badge badge-success badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Seen</span></span></a>
+
+                  <?php /*} else { */?>
+                    <a title="Change Status" class="toggle_btn_a" href="javascript:void(0)" data-id="<?/*= $users_row['ap_id'] */?>" data-action="active" data-column="seen"><span class="badge badge-danger badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Not Seen </span></span></a>
+                  --><?php /*}*/ ?>
+                    <?php echo ($users_row['seen'] != "0") ? "Awarded": "Not Awarded" ?>
+                </td>
+                <td>
+                    <?php if ($users_row['seen'] != "0") { ?>
+
+                        <!--<a href="javascript:void(0)" data-id="<?php /*echo $users_row['ap_id']; */?>" class="btn btn_deletebtn-primary" data-toggle="tooltip" data-tooltip="View"><i class="fa fa-eye"></i></a>-->
 
                   <?php } else { ?>
-                    <a title="Change Status" class="toggle_btn_a" href="javascript:void(0)" data-id="<?= $users_row['ap_id'] ?>" data-action="active" data-column="seen"><span class="badge badge-danger badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Not Seen </span></span></a>
+                        <a href="javascript:void(0)" data-id="<?php echo $users_row['ap_id']; ?>" class="btn btn-danger btn_delete" data-toggle="tooltip" data-tooltip="Delete"><i class="fa fa-trash"></i></a>
                   <?php } ?>
+
                 </td>
-                </td>
-                <td><a href="javascript:void(0)" data-id="<?php echo $users_row['ap_id']; ?>" class="btn btn-danger btn_delete" data-toggle="tooltip" data-tooltip="Delete"><i class="fa fa-trash"></i></a></td>
               </tr>
             <?php
 

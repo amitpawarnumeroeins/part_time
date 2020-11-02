@@ -113,7 +113,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
         $transForText = "";
     }else if($trans_for == 2)
     {
-        $transForText = "(Subscription)";
+        $transForText = '<a href="user_profile.php?user_id='.$user_id.'#users_subscriptions">(Subscription)</a>';
     }
 
     switch ($status) {
@@ -144,7 +144,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
                             <td class="$typeColor text-center">$type</td>
                             <td class="text-center">$$amount</td>
                             <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
-                            <td class="text-center text-capitalize">$user_name</td>
+                            <td class="text-center text-capitalize"><a href="user_profile.php?user_id=$user_id#users_transactions">$user_name</a></td>
                             <td class="text-center">$trans_type <br> $transForText</td>
                             <td class="text-center">$created_at</td>
                         </tr>

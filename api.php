@@ -207,7 +207,7 @@ function getAndSendOtp($mobileNumber)
         );
 
     } catch (Exception $e) {
-        echo $e->getCode() . ' : ' . $e->getMessage() . "<br>";
+        //echo $e->getCode() . ' : ' . $e->getMessage() . "<br>";
         $thisOTP = 0;
     }
     //print_r($client);
@@ -223,7 +223,7 @@ if ($get_method['method_name'] == "get_home") {
 
     $query3 = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`status`= 1 AND tbl_category.`status`= 1
+		WHERE tbl_jobs.`status`= 1 AND tbl_jobs.`job_status`= 0 AND tbl_category.`status`= 1
 		ORDER BY tbl_jobs.`id` DESC LIMIT " . HOME_LIMIT;
 
     $sql3 = mysqli_query($mysqli, $query3) or die(mysqli_error($mysqli));
@@ -269,7 +269,7 @@ if ($get_method['method_name'] == "get_home") {
 
     $query1 = "SELECT * FROM tbl_jobs 
       			 LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` WHERE
-	       		 FIND_IN_SET(tbl_jobs.`id`,(SELECT `job_id` FROM tbl_recent WHERE tbl_recent.`user_id` = '" . $user_id . "')) AND tbl_jobs.`status`= 1 AND tbl_category.`status`= 1 ORDER BY tbl_jobs.`id` DESC LIMIT " . HOME_LIMIT;
+	       		 FIND_IN_SET(tbl_jobs.`id`,(SELECT `job_id` FROM tbl_recent WHERE tbl_recent.`user_id` = '" . $user_id . "')) AND tbl_jobs.`status`= 1 AND tbl_jobs.`job_status`= 0 AND tbl_category.`status`= 1 ORDER BY tbl_jobs.`id` DESC LIMIT " . HOME_LIMIT;
     $sql1 = mysqli_query($mysqli, $query1) or die(mysqli_error($mysqli));
 
     while ($data1 = mysqli_fetch_assoc($sql1)) {
@@ -424,7 +424,7 @@ else if ($get_method['method_name'] == "get_list") {
 
     $jsonObj1 = array();
 
-    $query1 = "SELECT * FROM tbl_jobs WHERE tbl_jobs.`status`=1
+    $query1 = "SELECT * FROM tbl_jobs WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0
 		        ORDER BY tbl_jobs.`id` DESC ";
 
     $sql1 = mysqli_query($mysqli, $query1) or die(mysql_error($mysqli));
@@ -470,7 +470,7 @@ else if ($get_method['method_name'] == "get_job_by_cat_id") {
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`cat_id`='" . $cat_id . "' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`cat_id`='" . $cat_id . "' AND tbl_jobs.`status`=1  AND tbl_jobs.`job_status`= 0";
 
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
@@ -482,7 +482,7 @@ else if ($get_method['method_name'] == "get_job_by_cat_id") {
 
     $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid`
-		WHERE tbl_jobs.`cat_id`='" . $cat_id . "' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`id` " . $post_order_by . " LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`cat_id`='" . $cat_id . "' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`id` " . $post_order_by . " LIMIT $limit, $page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
@@ -552,7 +552,7 @@ else if ($get_method['method_name'] == "get_latest_job") {
     }
     $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`status`= 1 ORDER BY tbl_jobs.`id` DESC LIMIT $limit,$page_limit";
+		WHERE tbl_jobs.`status`= 1  AND tbl_jobs.`job_status`= 0ORDER BY tbl_jobs.`id` DESC LIMIT $limit,$page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
@@ -607,7 +607,7 @@ else if ($get_method['method_name'] == "get_recent_job") {
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
       			 LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` WHERE
-	       		 FIND_IN_SET(tbl_jobs.`id`,(SELECT `job_id` FROM tbl_recent WHERE tbl_recent.`user_id` = '" . $user_id . "')) AND tbl_jobs.`status`= 1 AND tbl_category.`status`= 1 ORDER BY tbl_jobs.`id`";
+	       		 FIND_IN_SET(tbl_jobs.`id`,(SELECT `job_id` FROM tbl_recent WHERE tbl_recent.`user_id` = '" . $user_id . "')) AND tbl_jobs.`status`= 1  AND tbl_jobs.`job_status`= 0 AND tbl_category.`status`= 1 ORDER BY tbl_jobs.`id`";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
     $page_limit = API_PAGE_LIMIT;
@@ -618,7 +618,7 @@ else if ($get_method['method_name'] == "get_recent_job") {
 
     $query = "SELECT * FROM tbl_jobs 
       			 LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` WHERE
-	       		 FIND_IN_SET(tbl_jobs.`id`,(SELECT `job_id` FROM tbl_recent WHERE tbl_recent.`user_id` = '" . $user_id . "')) AND tbl_jobs.`status`= 1 AND tbl_category.`status`= 1 ORDER BY tbl_jobs.`id` DESC LIMIT $limit ,$page_limit";
+	       		 FIND_IN_SET(tbl_jobs.`id`,(SELECT `job_id` FROM tbl_recent WHERE tbl_recent.`user_id` = '" . $user_id . "')) AND tbl_jobs.`status`= 1 AND tbl_jobs.`job_status`= 0 AND tbl_category.`status`= 1 ORDER BY tbl_jobs.`id` DESC LIMIT $limit ,$page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
@@ -686,7 +686,7 @@ else if ($get_method['method_name'] == "get_search_job") {
         $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
 		LEFT JOIN tbl_city ON tbl_jobs.`city_id`= tbl_city.`c_id`
-		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%' AND tbl_jobs.`city_id`LIKE '%" . $city_id . "%' AND tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%' AND tbl_jobs.`city_id`LIKE '%" . $city_id . "%' AND tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
         $page_limit = API_PAGE_LIMIT;
@@ -696,13 +696,13 @@ else if ($get_method['method_name'] == "get_search_job") {
         $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid`
 		LEFT JOIN tbl_city ON tbl_jobs.`city_id`= tbl_city.`c_id`
-		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%' AND tbl_jobs.`city_id` LIKE '%" . $city_id . "%' AND tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%' AND tbl_jobs.`city_id` LIKE '%" . $city_id . "%' AND tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     } else if ($cat_id) {
 
         $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%'  AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%'  AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
         $page_limit = API_PAGE_LIMIT;
@@ -711,13 +711,13 @@ else if ($get_method['method_name'] == "get_search_job") {
 
         $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`cat_id` LIKE '%" . $cat_id . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     } else if ($job_company_name) {
 
         $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%'  AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%'  AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
         $page_limit = API_PAGE_LIMIT;
@@ -726,13 +726,13 @@ else if ($get_method['method_name'] == "get_search_job") {
 
         $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`job_company_name` LIKE '%" . $job_company_name . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     } else if ($job_type) {
 
         $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
         $page_limit = API_PAGE_LIMIT;
@@ -741,14 +741,14 @@ else if ($get_method['method_name'] == "get_search_job") {
 
         $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid`
-		WHERE tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`job_type` LIKE '%" . $job_type . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     } else if ($city_id) {
 
         $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
 		LEFT JOIN tbl_city ON tbl_jobs.`city_id`= tbl_city.`c_id`
-		WHERE tbl_jobs.`city_id` LIKE '%" . $city_id . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`city_id` LIKE '%" . $city_id . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
         $page_limit = API_PAGE_LIMIT;
@@ -758,14 +758,14 @@ else if ($get_method['method_name'] == "get_search_job") {
         $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
 		LEFT JOIN tbl_city ON tbl_jobs.`city_id`= tbl_city.`c_id`
-		WHERE tbl_jobs.`city_id` LIKE '%" . $city_id . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`city_id` LIKE '%" . $city_id . "%' AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     } else {
 
         $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid`
 		LEFT JOIN tbl_city ON tbl_jobs.`city_id`= tbl_city.`c_id`
-		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%'";
+		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%'";
         $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
         $page_limit = API_PAGE_LIMIT;
@@ -775,7 +775,7 @@ else if ($get_method['method_name'] == "get_search_job") {
         $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
 		LEFT JOIN tbl_city ON tbl_jobs.`city_id`= tbl_city.`c_id`
-		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     }
 
@@ -834,7 +834,7 @@ else if ($get_method['method_name'] == "search_by_keyword") {
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%'";
+		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%'";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
     $page_limit = API_PAGE_LIMIT;
@@ -845,7 +845,7 @@ else if ($get_method['method_name'] == "search_by_keyword") {
 
     $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 AND tbl_jobs.`job_name` LIKE '%" . $job_search . "%' ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
@@ -1005,14 +1005,14 @@ else if ($get_method['method_name'] == "get_similar_jobs") {
     //Get cat id using job id
     $query_job = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid`
-		WHERE tbl_jobs.`id`='" . $get_method['job_id'] . "' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`id`='" . $get_method['job_id'] . "' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
     $sql_job = mysqli_query($mysqli, $query_job) or die(mysqli_error($mysqli));
     $row_job = mysqli_fetch_assoc($sql_job);
 
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`cat_id`='" . $row_job['cat_id'] . "' AND tbl_jobs.`id` !='" . $get_method['job_id'] . "' AND tbl_jobs.`status`=1";
+		WHERE tbl_jobs.`cat_id`='" . $row_job['cat_id'] . "' AND tbl_jobs.`id` !='" . $get_method['job_id'] . "' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query_rec));
 
     $page_limit = API_PAGE_LIMIT;
@@ -1023,7 +1023,7 @@ else if ($get_method['method_name'] == "get_similar_jobs") {
 
     $query = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-		WHERE tbl_jobs.`cat_id`='" . $row_job['cat_id'] . "' AND tbl_jobs.`id` !='" . $get_method['job_id'] . "' AND tbl_jobs.`status`=1 ORDER BY tbl_jobs.`id` DESC LIMIT $limit, $page_limit";
+		WHERE tbl_jobs.`cat_id`='" . $row_job['cat_id'] . "' AND tbl_jobs.`id` !='" . $get_method['job_id'] . "' AND tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 ORDER BY tbl_jobs.`id` DESC LIMIT $limit, $page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
@@ -1333,6 +1333,10 @@ else if ($get_method['method_name'] == "job_list") {
         $row['job_map_latitude'] = $data['job_map_latitude'];
         $row['job_map_longitude'] = $data['job_map_longitude'];
         $row['job_image'] = $data['job_image'];
+        $row['job_status'] = $data['job_status'];
+        $row['user_alloted'] = $data['user_alloted'];
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('d-m-Y', $data['job_date']);
@@ -1466,11 +1470,29 @@ else if ($get_method['method_name'] == "user_apply_list") {
 }
 else if ($get_method['method_name'] == "user_apply_job_seen") {
 
-    $data = array('seen' => '1');
-    $edit_status = Update('tbl_apply', $data, "WHERE user_id = '" . $get_method['apply_user_id'] . "' AND job_id = '" . $get_method['job_id'] . "'");
+    $queryJobs = "SELECT *  FROM tbl_jobs  
+ 	 			  WHERE  tbl_jobs.`job_status` = 0 AND `status` = 1";
+    $queryJobs = mysqli_query($mysqli, $queryJobs);
+    if(mysqli_num_rows($queryJobs))
+    {
+        $data = array(
+                    'job_status' => '4',
+                    'job_start_time' => time(),
+                    'user_alloted' => $get_method['apply_user_id']
+        );
+        $edit_status = Update('tbl_jobs', $data, "WHERE tbl_jobs.`job_status` = 0 AND `status` = 1 AND job_id = '" . $get_method['job_id'] . "'");
 
-    $set['JOBS_APP'][] = array('msg' => $app_lang['job_seen'], 'success' => '1');
+        $data = array(
+                        'seen' => '1',
+                        'job_start_time' => time()
+        );
+        $edit_status = Update('tbl_apply', $data, "WHERE user_id = '" . $get_method['apply_user_id'] . "' AND job_id = '" . $get_method['job_id'] . "'");
 
+        $set['JOBS_APP'][] = array('msg' => $app_lang['job_seen'], 'success' => '1');
+
+    }else{
+        $set['JOBS_APP'][] = array('msg' => "Failed!! Invalid Data Provided", 'success' => '0');
+    }
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
@@ -2145,6 +2167,7 @@ else if ($get_method['method_name'] == "subscription_plan_list") {
             $row['name'] = $data["name"];
             $row['price'] = $data['price'];
             $row['credits'] = $data['credits'];
+            $row['plan_id'] = $data['id'];
             array_push($jsonObj, $row);
         }
         $set['JOBS_APP'] = $jsonObj;
@@ -2254,6 +2277,14 @@ else if ($get_method['method_name'] == "subscription_payment_update") {
                     'credits_remaining' => $credits_remaining
                 );
                 Update('tbl_users', $dataUpdate, "WHERE `id` = '" . $user_id . "'");
+
+                $data = array(
+                    'transaction_id' => $transaction_id,
+                    'user_id' => $user_id,
+                    'plan_id' => $plan_id
+                );
+
+                $qryisd = Insert('tbl_user_subscription_details', $data);
 
                 $dataUpdate = array(
                     'user_updated' => 1 //0- not updated, 1-updated

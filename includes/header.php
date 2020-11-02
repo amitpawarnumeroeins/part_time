@@ -186,15 +186,7 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
 
           </li>
 
-          <li <?php if ($currentFile == "manage_jobs.php" or $currentFile == "add_job.php" or $currentFile == "edit_job.php") { ?>class="active" <?php } ?>> <a href="manage_jobs.php">
 
-              <div class="icon"> <i class="fa fa-black-tie" aria-hidden="true"></i> </div>
-
-              <div class="title">Jobs</div>
-
-            </a>
-
-          </li>
 
           <li <?php if ($currentFile == "manage_users.php" or $currentFile == "add_user.php" or $currentFile == "user_profile.php") { ?>class="active" <?php } ?>> <a href="manage_users.php">
 
@@ -230,7 +222,15 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
+            <li <?php if ($currentFile == "manage_jobs.php" or $currentFile == "add_job.php" or $currentFile == "edit_job.php") { ?>class="active" <?php } ?>> <a href="manage_jobs.php">
 
+                    <div class="icon"> <i class="fa fa-black-tie" aria-hidden="true"></i> </div>
+
+                    <div class="title">Jobs</div>
+
+                </a>
+
+            </li>
           <li <?php if ($currentFile == "manage_applied_users.php") { ?>class="active" <?php } ?>> <a href="manage_applied_users.php">
 
               <div class="icon"> <i class="fa fa-users" aria-hidden="true"></i> </div>
@@ -240,6 +240,15 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
+            <li <?php if ($currentFile == "manage_active_jobs.php" ) { ?>class="active" <?php } ?>> <a href="manage_active_jobs.php">
+
+                    <div class="icon"> <i class="fa fa-black-tie" aria-hidden="true"></i> </div>
+
+                    <div class="title">Active Jobs</div>
+
+                </a>
+
+            </li>
 
             <!--        <li <?php /*if ($currentFile == "smtp_settings.php") { */?>class="active" <?php /*} */?>> <a href="smtp_settings.php">
 
