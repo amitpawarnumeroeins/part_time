@@ -217,7 +217,7 @@ $purifier = new HTMLPurifier($config1);
                   </div>
                   <div class="form-group">&nbsp;</div>
                   <div class="form-group">
-               		<label class="col-md-3 control-label">Salary :- <p class="control-label-help" id="square_lable_info">(10,0000)</p></label>
+               		<label class="col-md-3 control-label">Hire Price :- <p class="control-label-help" id="square_lable_info">(10,0000)</p></label>
                     <div class="col-md-6">
                       <input type="text" name="job_salary" id="job_salary" value="<?php echo $row['job_salary'];?>" class="form-control" required>
                     </div>
@@ -258,7 +258,7 @@ $purifier = new HTMLPurifier($config1);
                 <input type="text" name="job_work_time" id="job_work_time" value="<?php echo $row['job_work_time'];?>" class="form-control">
               </div>
             </div>
-             <div class="form-group">
+             <div class="form-group hidden">
                 <label class="col-md-3 control-label">Vacancy :-</label>
                 <div class="col-md-6">                 
                   <textarea name="job_vacancy" id="job_vacancy" class="form-control"><?php echo $row['job_vacancy'];?></textarea> 

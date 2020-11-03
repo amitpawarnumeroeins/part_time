@@ -170,7 +170,7 @@ if (isset($_POST['submit'])) {
               <div class="form-group">&nbsp;</div>
 
               <div class="form-group">
-                <label class="col-md-3 control-label">Salary :- <p class="control-label-help" id="square_lable_info">(10,0000)</p></label>
+                <label class="col-md-3 control-label">Hire Price :- <p class="control-label-help" id="square_lable_info">(10,0000)</p></label>
                 <div class="col-md-6">
                   <input type="text" name="job_salary" id="job_salary" value="" class="form-control" required>
                 </div>

@@ -23,11 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="wallet to wallet remaining, subscription add init update done, sub credit ded remains">
-      <change afterPath="$PROJECT_DIR$/manage_active_jobs.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add_job.php" beforeDir="false" afterPath="$PROJECT_DIR$/add_job.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage_applied_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_applied_users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api_urls.php" beforeDir="false" afterPath="$PROJECT_DIR$/api_urls.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edit_job.php" beforeDir="false" afterPath="$PROJECT_DIR$/edit_job.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/home.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/manage_transaction.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_transaction.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile.php" afterDir="false" />
     </list>
@@ -104,6 +105,7 @@
       <workItem from="1604121477747" duration="24300000" />
       <workItem from="1604151153422" duration="164000" />
       <workItem from="1604293398327" duration="23143000" />
+      <workItem from="1604380459129" duration="22039000" />
     </task>
     <task id="LOCAL-00001" summary="2nd">
       <created>1603964930301</created>
@@ -226,22 +228,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="500" y="278" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603967546986" />
-    <state x="390" y="96" width="585" height="534" key="find.popup" timestamp="1604323955004">
+    <state x="390" y="96" width="585" height="534" key="find.popup" timestamp="1604399677826">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="390" y="96" width="585" height="534" key="find.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604323955004" />
+    <state x="390" y="96" width="585" height="534" key="find.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604399677826" />
     <state x="472" y="94" key="ftp.server.browser" timestamp="1603891321765">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="472" y="94" key="ftp.server.browser/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603891321765" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1604315846908">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1604386452432">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604315846908" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604312291846">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604386452432" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604385794231">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604312291846" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604385794231" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -915,6 +915,15 @@ function get_user_name($user_id)
                                 $transForText = "(Subscription)";
                                 }
 
+                                    $wallet_details = "";
+                                    if($row["trans_type"] == 2 AND $trans_for == 1 AND $row["type"]==1)
+                                    {
+                                        $wallet_details = "From- ".$row["bank_trans_id"];
+                                    }elseif($row["trans_type"] == 2 AND $trans_for == 1 AND $row["type"]==2){
+                                        $wallet_details = "To- ".$row["bank_trans_id"];
+                                    }
+
+
                                 switch ($status) {
                                 case 1:
                                 $statusText = "Approved";
@@ -944,7 +953,7 @@ function get_user_name($user_id)
                                     <td class="text-center">$$amount</td>
                                     <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                                     <td class="text-center text-capitalize">$user_name</td>
-                                    <td class="text-center">$trans_type <br> $transForText</td>
+                                    <td class="text-center">$trans_type <br> $transForText <br>$wallet_details</td>
                                     <td class="text-center">$created_at</td>
                                 </tr>
 AAA;

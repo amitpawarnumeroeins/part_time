@@ -105,6 +105,14 @@ while ($row = mysqli_fetch_array($transaction_result)) {
     $bank_trans_id = $row["bank_trans_id"];
     $bank_trans_response = $row["bank_trans_response"];
     $trans_type = $row["trans_type"] == 1 ? "Bank" : "Wallet";
+    $wallet_details = "";
+    if($row["trans_type"] == 2 AND $trans_for == 1 AND $row["type"]==1)
+    {
+        $wallet_details = "From- ".$row["bank_trans_id"];
+    }elseif($row["trans_type"] == 2 AND $trans_for == 1 AND $row["type"]==2){
+        $wallet_details = "To- ".$row["bank_trans_id"];
+    }
+
     $user_updated = $row["user_updated"];
     $created_at = $row["created_at"];
     $transForText = "";
@@ -145,7 +153,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
                             <td class="text-center">$$amount</td>
                             <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                             <td class="text-center text-capitalize"><a href="user_profile.php?user_id=$user_id#users_transactions">$user_name</a></td>
-                            <td class="text-center">$trans_type <br> $transForText</td>
+                            <td class="text-center">$trans_type <br> $transForText<br>$wallet_details</td>
                             <td class="text-center">$created_at</td>
                         </tr>
 AAA;

@@ -185,26 +185,28 @@ function getAndSendOtp($mobileNumber)
 
 // Your Account SID and Auth Token from twilio.com/console
     $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = 'd5a9a77889c39db2f309b635c50e6704';
+    $auth_token = '385a9a617c364862bff1481d361ad3c9';
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
 // A Twilio number you own with SMS capabilities
     $twilio_number = "+15597154186";
     try {
         $thistpGen = "";
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= 4; $i++)
+        {
             $thistpGen .= substr($generator, (rand() % (strlen($generator))), 1);
         }
+
         $thisOTP = $thistpGen;
-        $client = new Client($account_sid, $auth_token);
-        $client->messages->create(
-// Where to send a text message (your cell phone?)
-            "+" . $mobileNumber,
-            array(
-                'from' => $twilio_number,
-                'body' => 'Your PART TIME Verification Code is ' . $thisOTP
-            )
-        );
+        /*        $client = new Client($account_sid, $auth_token);
+                $client->messages->create(
+        // Where to send a text message (your cell phone?)
+                    "+" . $mobileNumber,
+                    array(
+                        'from' => $twilio_number,
+                        'body' => 'Your PART TIME Verification Code is ' . $thisOTP
+                    )
+                );*/
 
     } catch (Exception $e) {
         //echo $e->getCode() . ' : ' . $e->getMessage() . "<br>";
@@ -217,9 +219,20 @@ function getAndSendOtp($mobileNumber)
 $get_method = checkSignSalt($_POST['data']);
 
 if ($get_method['method_name'] == "get_home") {
-    $user_id = $get_method['user_id'];
 
+    $user_id = $get_method['user_id'];
+    //getAndSendOtp("919584092141");
     $jsonObj3 = array();
+
+    $queryUser = "SELECT * FROM tbl_users WHERE `id`= $user_id";
+    $sqlUser = mysqli_query($mysqli, $queryUser) or die(mysqli_error($mysqli));
+     $resultUser = mysqli_fetch_assoc($sqlUser);
+
+    $row['current_wallet_amount'] = $resultUser["current_wallet_amount"];
+    $row['credits_remaining']= $resultUser["credits_remaining"];
+    $row['subscription_plan_id']= $resultUser["subscription_plan_id"];
+
+
 
     $query3 = "SELECT * FROM tbl_jobs
 		LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
@@ -1301,17 +1314,48 @@ else if ($get_method['method_name'] == "job_list") {
 
     $user_id = $get_method['user_id'];
 
+
+    $queryUser = "SELECT * FROM tbl_users WHERE `id`= $user_id";
+    $sqlUser = mysqli_query($mysqli, $queryUser) or die(mysqli_error($mysqli));
+    $resultUser = mysqli_fetch_assoc($sqlUser);
+
+    $row['current_wallet_amount'] = $resultUser["current_wallet_amount"];
+    $row['credits_remaining']= $resultUser["credits_remaining"];
+    $row['subscription_plan_id']= $resultUser["subscription_plan_id"];
+
+    $job_status = $get_method['job_status'];
+    $job_status_query = "";
+    if($job_status AND  $job_status!="")
+    {
+        $job_status_query = " AND `job_status`='$job_status' ";
+    }
+
     $jsonObj = array();
+
+    $queryCount = "SELECT COUNT(*) AS all_jobs,SUM(if(tbl_jobs.job_status = 4, 1, 0)) AS active_jobs, SUM(if(tbl_jobs.job_status = 1, 1, 0)) AS completed_jobs, SUM(if(tbl_jobs.job_status = 3, 1, 0)) AS failed_jobs FROM tbl_jobs 
+           WHERE tbl_jobs.`user_id`='" . $user_id . "' AND tbl_jobs.`status`= 1";
+    $resultCount = mysqli_query($mysqli, $queryCount) or die(mysqli_error($mysqli));
+    $rowCount = mysqli_fetch_assoc($resultCount);
+    //print_r($rowCount);
+
+    $all_jobs = $rowCount["all_jobs"];
+    $active_jobs = $rowCount["active_jobs"];
+    $completed_jobs = $rowCount["completed_jobs"];
+    $failed_jobs = $rowCount["failed_jobs"];
 
     $query = "SELECT * FROM tbl_jobs
            LEFT JOIN tbl_category ON tbl_jobs.`cat_id`= tbl_category.`cid` 
-           WHERE tbl_jobs.`user_id`='" . $user_id . "' AND tbl_jobs.`status`= 1
+           WHERE tbl_jobs.`user_id`='" . $user_id . "' AND tbl_jobs.`status`= 1 $job_status_query 
            ORDER BY tbl_jobs.`id` DESC LIMIT $limit, $page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
     while ($data = mysqli_fetch_assoc($sql)) {
         $row['id'] = $data['id'];
+        $row['all_jobs'] = $all_jobs;
+        $row['active_jobs'] = $active_jobs;
+        $row['completed_jobs'] = $completed_jobs;
+        $row['failed_jobs'] = $failed_jobs;
         $row['cat_id'] = $data['cat_id'];
         $row['city_id'] = $data['city_id'];
         $row['job_type'] = $data['job_type'];
@@ -1476,15 +1520,15 @@ else if ($get_method['method_name'] == "user_apply_job_seen") {
     if(mysqli_num_rows($queryJobs))
     {
         $data = array(
-                    'job_status' => '4',
-                    'job_start_time' => time(),
-                    'user_alloted' => $get_method['apply_user_id']
+            'job_status' => '4',
+            'job_start_time' => time(),
+            'user_alloted' => $get_method['apply_user_id']
         );
         $edit_status = Update('tbl_jobs', $data, "WHERE tbl_jobs.`job_status` = 0 AND `status` = 1 AND job_id = '" . $get_method['job_id'] . "'");
 
         $data = array(
-                        'seen' => '1',
-                        'job_start_time' => time()
+            'seen' => '1',
+            'job_start_time' => time()
         );
         $edit_status = Update('tbl_apply', $data, "WHERE user_id = '" . $get_method['apply_user_id'] . "' AND job_id = '" . $get_method['job_id'] . "'");
 
@@ -1556,52 +1600,65 @@ else if ($get_method['method_name'] == "user_saved_list") {
 }
 else if ($get_method['method_name'] == "job_add") {
 
-    $job_image = rand(0, 99999) . "_" . $_FILES['job_image']['name'];
+    $subCheckQuery = "SELECT credits_remaining FROM tbl_users WHERE id = ".$get_method['user_id']." AND user_type=2";
+    $subCheckResult = mysqli_query($mysqli,$subCheckQuery);
+    $subCheckRow = mysqli_fetch_assoc($subCheckResult);
 
-    $ext = pathinfo($_FILES['job_image']['name'], PATHINFO_EXTENSION);
+    if($subCheckRow["credits_remaining"]>0)
+    {
 
-    $job_image = rand(0, 99999) . "." . $ext;
-    //Main Image
-    $tpath1 = 'images/' . $job_image;
 
-    $tmp = $_FILES['job_image']['tmp_name'];
-    move_uploaded_file($tmp, $tpath1);
+        $job_image = rand(0, 99999) . "_" . $_FILES['job_image']['name'];
 
-    //Thumb Image
-    $thumbpath = 'images/thumbs/' . $job_image;
-    $thumb_pic1 = create_thumb_image($tpath1, $thumbpath, '200', '200');
+        $ext = pathinfo($_FILES['job_image']['name'], PATHINFO_EXTENSION);
 
-    $data = array(
-        'user_id' => $get_method['user_id'],
-        'cat_id' => $get_method['cat_id'],
-        'city_id' => $get_method['city_id'],
-        'job_type' => $get_method['job_type'],
-        'job_name' => addslashes($get_method['job_name']),
-        'job_designation' => addslashes($get_method['job_designation']),
-        'job_desc' => addslashes($get_method['job_desc']),
-        'job_salary' => $get_method['job_salary'],
-        'job_company_name' => $get_method['job_company_name'],
-        'job_company_website' => $get_method['job_company_website'],
-        'job_phone_number' => $get_method['job_phone_number'],
-        'job_mail' => $get_method['job_mail'],
-        'job_vacancy' => $get_method['job_vacancy'],
-        'job_address' => addslashes($get_method['job_address']),
-        'job_qualification' => addslashes($get_method['job_qualification']),
-        'job_skill' => addslashes($get_method['job_skill']),
-        'job_experince' => addslashes($get_method['job_experince']),
-        'job_work_day' => addslashes($get_method['job_work_day']),
-        'job_work_time' => addslashes($get_method['job_work_time']),
-        'job_map_latitude' => addslashes($get_method['job_map_latitude']),
-        'job_map_longitude' => addslashes($get_method['job_map_longitude']),
-        'job_image' => $job_image,
-        'job_date' => strtotime($get_method['job_date']),
-        'status' => 0
+        $job_image = rand(0, 99999) . "." . $ext;
+        //Main Image
+        $tpath1 = 'images/' . $job_image;
 
-    );
+        $tmp = $_FILES['job_image']['tmp_name'];
+        move_uploaded_file($tmp, $tpath1);
 
-    $qry = Insert('tbl_jobs', $data);
+        //Thumb Image
+        $thumbpath = 'images/thumbs/' . $job_image;
+        $thumb_pic1 = create_thumb_image($tpath1, $thumbpath, '200', '200');
 
-    $set['JOBS_APP'][] = array('msg' => $app_lang['add_job'], 'success' => '1');
+        $data = array(
+            'user_id' => $get_method['user_id'],
+            'cat_id' => $get_method['cat_id'],
+            'city_id' => $get_method['city_id'],
+            'job_type' => $get_method['job_type'],
+            'job_name' => addslashes($get_method['job_name']),
+            'job_designation' => addslashes($get_method['job_designation']),
+            'job_desc' => addslashes($get_method['job_desc']),
+            'job_salary' => $get_method['job_salary'],
+            'job_company_name' => $get_method['job_company_name'],
+            'job_company_website' => $get_method['job_company_website'],
+            'job_phone_number' => $get_method['job_phone_number'],
+            'job_mail' => $get_method['job_mail'],
+            'job_vacancy' => $get_method['job_vacancy'],
+            'job_address' => addslashes($get_method['job_address']),
+            'job_qualification' => addslashes($get_method['job_qualification']),
+            'job_skill' => addslashes($get_method['job_skill']),
+            'job_experince' => addslashes($get_method['job_experince']),
+            'job_work_day' => addslashes($get_method['job_work_day']),
+            'job_work_time' => addslashes($get_method['job_work_time']),
+            'job_map_latitude' => addslashes($get_method['job_map_latitude']),
+            'job_map_longitude' => addslashes($get_method['job_map_longitude']),
+            'job_image' => $job_image,
+            'job_date' => strtotime($get_method['job_date']),
+            'status' => 1
+        );
+        $qry = Insert('tbl_jobs', $data);
+
+        mysqli_query($mysqli, "UPDATE tbl_users SET `credits_remaining` = `credits_remaining`-1 WHERE `id` = '".$get_method['user_id']."'");
+
+        $set['JOBS_APP'][] = array('msg' => $app_lang['add_job'], 'success' => '1');
+
+    }else{
+        $set['JOBS_APP'][] = array('msg' => "Failed !!!, Insufficient Credits please subscribe again", 'success' => '0');
+
+    }
 
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
@@ -1726,6 +1783,7 @@ else if ($get_method['method_name'] == "user_register") {
     $register_date = strtotime(date('d-m-Y h:i A'));
 
     $user_type = $get_method['user_type'];
+    $working_type = $get_method['working_type'];
 
     $name = filter_var($get_method['name'], FILTER_SANITIZE_STRING);
     $email = filter_var($get_method['email'], FILTER_SANITIZE_STRING);
@@ -1753,6 +1811,7 @@ else if ($get_method['method_name'] == "user_register") {
                     'phone' => $phone,
                     'country_code' => $country_code,
                     'register_date' => $register_date,
+                    'working_type' => $working_type,
                     'status' => '0'
                 );
 
@@ -1834,7 +1893,7 @@ else if ($get_method['method_name'] == "user_register") {
                 send_email($to, $recipient_name, $subject, $message);
 
                 //$set['JOBS_APP'][]=array('msg' => $app_lang['register_success'],'success'=>'1');
-                $set['JOBS_APP'][] = array('user_type' => $user_type, 'country_code' => $country_code, 'user_id' => $user_id, 'name' => $name, 'email' => $email, 'phone' => $phone, 'otp' => $thisOtp, 'success' => '1');
+                $set['JOBS_APP'][] = array('thisOtp' => $thisOtp,'working_type' => $working_type, 'user_type' => $user_type, 'country_code' => $country_code, 'user_id' => $user_id, 'name' => $name, 'email' => $email, 'phone' => $phone, 'otp' => $thisOtp, 'success' => '1');
             } else {
                 $set['JOBS_APP'][] = array('msg' => $app_lang['invalid_mobile_number'], 'success' => '0');
             }
@@ -2307,44 +2366,132 @@ else if ($get_method['method_name'] == "subscription_payment_update") {
     die();
 }
 else if ($get_method['method_name'] == "job_completed") {
-    $transaction_id = $get_method['transaction_id'];
-    $user_id = $get_method['user_id'];
-    $status = $get_method['status']; //0-null, 1-approved, 2-rejected, 3-failed, 4-init/pending
-    $bank_trans_id = $get_method['bank_trans_id'];//to be filled at update only
-    $bank_trans_response = $get_method['bank_trans_response'];//to be filled at update only
-    $updated_at = $date;//to be filled at update only 	1-bank, 2- wallet
 
-    if ($get_method['transaction_id'] != "" && $get_method['user_id'] != "" && $get_method['bank_trans_id'] != "") {
-
-        $data = array(
-            'status' => $status,
-            'bank_trans_id' => $bank_trans_id,
-            'bank_trans_response' => $bank_trans_response,
-            'updated_at' => $updated_at
-        );
-        $user_edit = Update('tbl_transaction_details', $data, "WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
+    $date = strtotime(date('d-m-Y h:i A'));
+    $transaction_id = getGUIDnoHash();
+    $job_id = $get_method['job_id'];
+    $updated_at = $date;
 
 
-        $qry = "SELECT * FROM tbl_transaction_details WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = $user_id AND `status` = 1 AND `user_updated` = 0 AND `trans_for`=1";
+    if ($get_method['job_id'] != "") {
+
+        $qry = "SELECT user_id,job_salary,user_alloted FROM tbl_jobs WHERE `id` = '" . $job_id . "' AND `job_status` = 4 AND `status` = 1";
         $result = mysqli_query($mysqli, $qry) or die('Error in fetch data ->' . mysqli_error($mysqli));
+        if(mysqli_num_rows($result))
+        {
+            $rowResult = mysqli_fetch_assoc($result);
+            $job_salary = $rowResult["job_salary"];
+            $user_id = $rowResult["user_id"];
+            $user_alloted = $rowResult["user_alloted"];
 
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            $current_wallet_amount = $row["amount"];
-            mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` +$current_wallet_amount WHERE `id` = '$user_id'");
-            //$user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
 
-            $dataUpdate = array(
-                'user_updated' => 1 //0- not updated, 1-updated
+            $qry1 = "SELECT `name`,current_wallet_amount FROM tbl_users WHERE `id` = '" . $user_id . "'";
+            $result1 = mysqli_query($mysqli, $qry1) or die('Error in fetch data ->' . mysqli_error($mysqli));
+            if(mysqli_num_rows($result1)) {
+                $rowResult1 = mysqli_fetch_assoc($result1);
+                $current_wallet_amount = $rowResult1["current_wallet_amount"];
+                $provider_name = $rowResult1["name"];
+
+
+                $qry2 = "SELECT `name` FROM tbl_users WHERE `id` = '" . $user_alloted . "'";
+                $result2 = mysqli_query($mysqli, $qry2) or die('Error in fetch data ->' . mysqli_error($mysqli));
+                $row2 = mysqli_fetch_assoc($result2);
+                $seeker_name = $row2["name"];
+
+
+                if($current_wallet_amount>=$job_salary)
+                {
+                    $data = array(
+                        'job_status' => 1,
+                        'job_end_time' => time()
+                    );
+                    Update('tbl_jobs', $data, "WHERE `id` = '" . $job_id . "' AND `user_alloted` = '" . $user_alloted . "'");
+
+                    $data = array(
+                        'job_end_time' => time()
+                    );
+                    Update('tbl_apply', $data, "WHERE `job_id` = '" . $job_id . "' AND `user_id` = '" . $user_id . "'");
+
+                    mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` -$job_salary WHERE `id` = '$user_id'");
+                    mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` +$job_salary WHERE `id` = '$user_alloted'");
+
+                    $data1 = array(
+                        'transaction_id' => $transaction_id,
+                        'type' => 2,
+                        'user_id' => $user_id,
+                        'amount' => $job_salary,
+                        'status' => 1,
+                        'user_updated' => 1,
+                        'mode' => "",
+                        'bank_trans_id' => $seeker_name,
+                        'bank_trans_response' => $user_alloted,
+                        'trans_type' => 2,
+                        'trans_for' => 1,
+                        'updated_at' => $updated_at
+                    );
+
+                    $qry1 = Insert('tbl_transaction_details', $data1);
+                    $trans_id1 = mysqli_insert_id($mysqli);
+
+                    $data2 = array(
+                        'transaction_id' => $transaction_id,
+                        'type' => 1,
+                        'user_id' => $user_alloted,
+                        'amount' => $job_salary,
+                        'user_updated' => 1,
+                        'status' => 1,
+                        'mode' => "",
+                        'bank_trans_id' => $provider_name,
+                        'bank_trans_response' => $user_id,
+                        'trans_type' => 2,
+                        'trans_for' => 1,
+                        'updated_at' => $updated_at
+                    );
+
+                    $qry2 = Insert('tbl_transaction_details', $data2);
+                    $trans_id2 = mysqli_insert_id($mysqli);
+                    $set['JOBS_APP'][] = array('msg' => "Job updated Successfully", 'success' => '1');
+
+                }else{
+                    $set['JOBS_APP'][] = array('msg' => "Failed!! Insufficient Wallet Amount", 'success' => '0');
+                }
+            }else{
+                $set['JOBS_APP'][] = array('msg' => "Failed!! Invalid user", 'success' => '0');
+            }
+            /*$data = array(
+                'status' => $status,
+                'bank_trans_id' => $bank_trans_id,
+                'bank_trans_response' => $bank_trans_response,
+                'updated_at' => $updated_at
             );
-            Update('tbl_transaction_details', $dataUpdate, "WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
+            $user_edit = Update('tbl_transaction_details', $data, "WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
 
-            $set['JOBS_APP'][] = array('transaction_id' => $transaction_id, 'current_wallet_amount' => $current_wallet_amount, 'success' => '1');
+
+
+
+            $qry = "SELECT * FROM tbl_transaction_details WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = $user_id AND `status` = 1 AND `user_updated` = 0 AND `trans_for`=1";
+            $result = mysqli_query($mysqli, $qry) or die('Error in fetch data ->' . mysqli_error($mysqli));
+
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $current_wallet_amount = $row["amount"];
+                mysqli_query($mysqli, "UPDATE tbl_users SET `current_wallet_amount` = `current_wallet_amount` +$current_wallet_amount WHERE `id` = '$user_id'");
+                //$user_edit = Update('tbl_users', $data, "WHERE `id` = '" . $user_id . "'");
+
+                $dataUpdate = array(
+                    'user_updated' => 1 //0- not updated, 1-updated
+                );
+                Update('tbl_transaction_details', $dataUpdate, "WHERE `transaction_id` = '" . $transaction_id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
+
+                $set['JOBS_APP'][] = array('transaction_id' => $transaction_id, 'current_wallet_amount' => $current_wallet_amount, 'success' => '1');
+            } else {
+                $set['JOBS_APP'][] = array('msg' => "Transaction update Failed!!", 'success' => '0');
+            }*/
         } else {
-            $set['JOBS_APP'][] = array('msg' => "Transaction update Failed!!", 'success' => '0');
+            $set['JOBS_APP'][] = array('msg' => "Failed!! Job Not Found", 'success' => '0');
         }
     } else {
-        $set['JOBS_APP'][] = array('msg' => "Transaction update Failed!!", 'success' => '0');
+        $set['JOBS_APP'][] = array('msg' => "Failed!! Invalid Job Details", 'success' => '0');
     }
 
     header('Content-Type: application/json; charset=utf-8');
@@ -2423,7 +2570,7 @@ else if ($get_method['method_name'] == "user_login") {
 
             if ($row['password'] == md5($password)) {
 
-                $set['JOBS_APP'][] = array('current_wallet_amount' => $row['current_wallet_amount'], 'credits_remaining' => $row['credits_remaining'], 'subscription_plan_id' => $row['subscription_plan_id'], 'account_number' => $row['account_number'], 'ifsc_code' => $row['ifsc_code'], 'account_holder_name' => $row['account_holder_name'], 'account_holder_name' => $row['account_holder_name'], 'linked_mobile' => $row['linked_mobile'], 'user_type' => $row['user_type'], 'user_id' => $row['id'], 'name' => $row['name'], 'user_image' => $user_image, 'success' => '1');
+                $set['JOBS_APP'][] = array('working_type' => $row['working_type'], 'current_wallet_amount' => $row['current_wallet_amount'], 'credits_remaining' => $row['credits_remaining'], 'subscription_plan_id' => $row['subscription_plan_id'], 'account_number' => $row['account_number'], 'ifsc_code' => $row['ifsc_code'], 'account_holder_name' => $row['account_holder_name'], 'account_holder_name' => $row['account_holder_name'], 'linked_mobile' => $row['linked_mobile'], 'user_type' => $row['user_type'], 'user_id' => $row['id'], 'name' => $row['name'], 'user_image' => $user_image, 'success' => '1');
             } else {
                 $set['JOBS_APP'][] = array('msg' => $app_lang['invalid_password'], 'success' => '0');
             }
@@ -2498,7 +2645,7 @@ else if ($get_method['method_name'] == "user_profile") {
     $company_work_time = $row_company['company_work_time'] ? $row_company['company_work_time'] : '';
     $company_desc = $row_company['company_desc'] ? $row_company['company_desc'] : '';
 
-    $set['JOBS_APP'][] = array('user_id' => $row['id'], 'user_type' => $row['user_type'], 'name' => $row['name'], 'email' => $row['email'], 'phone' => $row['phone'], 'date_of_birth' => $date_of_birth, 'gender' => $gender, 'city' => $row['city'], 'address' => stripslashes($row['address']), 'current_company_name' => stripslashes($row['current_company_name']), 'experiences' => stripslashes($row['experiences']), 'skills' => $skills, 'user_image' => $user_image, 'user_resume' => $user_resume, 'total_apply_job' => apply_job_count($row['id']), 'total_saved_job' => saved_job_count($row['id']), 'register_as' => $register_as, 'company_name' => $company_name, 'company_email' => $company_email, 'mobile_no' => $mobile_no, 'company_address' => $company_address, 'company_desc' => $company_desc, 'company_website' => $company_website, 'company_work_day' => $company_work_day, 'company_work_time' => $company_work_time, 'company_logo' => $company_logo, 'success' => '1');
+    $set['JOBS_APP'][] = array('user_id' => $row['id'], 'working_type' => $row['working_type'], 'user_type' => $row['user_type'], 'name' => $row['name'], 'email' => $row['email'], 'phone' => $row['phone'], 'date_of_birth' => $date_of_birth, 'gender' => $gender, 'city' => $row['city'], 'address' => stripslashes($row['address']), 'current_company_name' => stripslashes($row['current_company_name']), 'experiences' => stripslashes($row['experiences']), 'skills' => $skills, 'user_image' => $user_image, 'user_resume' => $user_resume, 'total_apply_job' => apply_job_count($row['id']), 'total_saved_job' => saved_job_count($row['id']), 'register_as' => $register_as, 'company_name' => $company_name, 'company_email' => $company_email, 'mobile_no' => $mobile_no, 'company_address' => $company_address, 'company_desc' => $company_desc, 'company_website' => $company_website, 'company_work_day' => $company_work_day, 'company_work_time' => $company_work_time, 'company_logo' => $company_logo, 'success' => '1');
 
 
     header('Content-Type: application/json; charset=utf-8');
@@ -2513,6 +2660,7 @@ else if ($get_method['method_name'] == "user_profile_update") {
     $row = mysqli_fetch_assoc($result);
 
     $user_id = $get_method['user_id'];
+    $working_type = $get_method['working_type'];
 
     if ($_FILES['user_image']['name'] != '') {
 
@@ -2567,6 +2715,7 @@ else if ($get_method['method_name'] == "user_profile_update") {
         $data = array(
             'name' => $get_method['name'],
             'email' => $get_method['email'],
+            'working_type' => $working_type,
             'phone' => $get_method['phone'],
             'city' => $get_method['city'],
             'address' => addslashes($get_method['address']),
@@ -2583,6 +2732,7 @@ else if ($get_method['method_name'] == "user_profile_update") {
             'name' => $get_method['name'],
             'email' => $get_method['email'],
             'phone' => $get_method['phone'],
+            'working_type' => $working_type,
             'city' => $get_method['city'],
             'address' => addslashes($get_method['address']),
             'user_image' => $user_image,

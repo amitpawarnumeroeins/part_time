@@ -65,6 +65,7 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>Subscription Plan List* </b>(Method: subscription_plan_list)(Parameter: -)
                      <br><b>Subscription Payment Initialize* </b>(Method: subscription_payment_init)(Parameter: user_id, plan_id, mode)
                      <br><b>Subscription Payment Update* </b>(Method: subscription_payment_update)(Parameter: transaction_id, user_id, plan_id, mode, status, bank_trans_id, bank_trans_response)
+                     <br><b>Job Completed* </b>(Method: job_completed)(Parameter: job_id)
 			 </code>
              </pre>
             </div>
