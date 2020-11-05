@@ -108,7 +108,7 @@ if (isset($_GET['apply_id'])) {
                             <td class="text-center">
                                 <b><?=$users_row['name']; ?></b><br>
                                 <small><?=$users_row['email']; ?></small><br>
-                                <small> <?=$users_row['phone']; ?></small><br>
+                                <small> <?=$users_row['country_code'].$users_row['phone']; ?></small><br>
                                 <?php if (isset($users_row['user_resume'])) { ?><a href="<?php echo 'uploads/' . $users_row['user_resume']; ?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php } ?>
                             </td>
                             <td class="text-center"><?php echo $users_row['apply_date']; ?></td>

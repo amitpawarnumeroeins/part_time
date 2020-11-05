@@ -38,8 +38,8 @@
     $setting_result=mysqli_query($mysqli,$setting_qry);
     $settings_details=mysqli_fetch_assoc($setting_result);
 
-    define("ONESIGNAL_APP_ID",$settings_details['onesignal_app_id']);
-    define("ONESIGNAL_REST_KEY",$settings_details['onesignal_rest_key']);
+    define("FCM_SERVER_KEY",$settings_details['fcm_server_key']);
+    define("FCM_SENDER_ID",$settings_details['fcm_sender_id']);
     
     define("APP_NAME",$settings_details['app_name']);
     define("APP_LOGO",$settings_details['app_logo']);

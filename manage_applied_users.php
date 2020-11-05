@@ -52,14 +52,14 @@ if (isset($_GET['apply_id'])) {
 }
 
 
-function get_job_info($job_id)
+function get_job_info($job_id,$field)
 {
   global $mysqli;
 
   $qry_job = "SELECT * FROM tbl_jobs WHERE `id` ='" . $job_id . "'";
   $res_job = mysqli_fetch_array(mysqli_query($mysqli, $qry_job));
 
-  return  $res_job['job_name'];
+  return  $res_job[$field];
 }
 
 
@@ -119,10 +119,10 @@ function get_job_info($job_id)
                     <label for="checkbox<?php echo $i; ?>"></label>
                   </div>
                 </td>
-                <td><?php echo get_job_info($users_row['job_id']); ?></td>
+                <td><?php echo get_job_info($users_row['job_id'],'job_name'); ?></td>
                 <td><?php echo $users_row['name']; ?></td>
                 <td><?php echo $users_row['email']; ?></td>
-                <td><?php echo $users_row['phone']; ?></td>
+                <td><?php echo $users_row['country_code'].$users_row['phone']; ?></td>
                 <td><?php if (isset($users_row['user_resume'])) { ?><a href="<?php echo 'uploads/' . $users_row['user_resume']; ?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php } ?></td>
                 <td><?php echo $users_row['apply_date']; ?></td>
                 <td>
@@ -132,7 +132,32 @@ function get_job_info($job_id)
                   <?php /*} else { */?>
                     <a title="Change Status" class="toggle_btn_a" href="javascript:void(0)" data-id="<?/*= $users_row['ap_id'] */?>" data-action="active" data-column="seen"><span class="badge badge-danger badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Not Seen </span></span></a>
                   --><?php /*}*/ ?>
-                    <?php echo ($users_row['seen'] != "0") ? "Awarded": "Not Awarded" ?>
+
+                    <?php
+                    $jobStatus = get_job_info($users_row['job_id'],'job_status');
+                    switch ($jobStatus)
+                    {
+                        case 0:
+                            $statusName = "Pending";
+                            break;
+                        case 1:
+                            $statusName = "Completed";
+                            break;
+                        case 2:
+                            $statusName = "Rejected";
+                            break;
+                        case 3:
+                            $statusName = "Failed";
+                            break;
+                        case 0:
+                            $statusName = "Active/Working";
+                            break;
+                        default:
+                            $statusName = "Pending";
+                    }
+
+                    echo $statusName ?>
+
                 </td>
                 <td>
                     <?php if ($users_row['seen'] != "0") { ?>

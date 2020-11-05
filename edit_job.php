@@ -46,7 +46,7 @@ $purifier = new HTMLPurifier($config1);
 	$job_phone_number = filter_var($_POST['job_phone_number'], FILTER_SANITIZE_NUMBER_INT);
 	$phone_to_check = str_replace("-", "", $job_phone_number);
 
-	if (strlen($phone_to_check) > 10 || strlen($phone_to_check) > 14) {
+	if (strlen($_POST["job_country_code"].$phone_to_check) > 10 || strlen($_POST["job_country_code"].$phone_to_check) > 14) {
 		
 	} else {
 		$_SESSION['msg'] = "24";
@@ -87,6 +87,7 @@ $purifier = new HTMLPurifier($config1);
 			'job_company_name'  => filter_var($_POST['job_company_name'], FILTER_SANITIZE_STRING),
 			'job_company_website' => filter_var($_POST['job_company_website'], FILTER_SANITIZE_STRING),
 			'job_phone_number'  =>  $job_phone_number,
+			'job_country_code'  =>  $_POST["job_country_code"],
 			'job_mail'  => $job_mail,
 			'job_vacancy'  =>  filter_var($_POST['job_vacancy'],FILTER_SANITIZE_STRING),
 			'job_address'  =>  filter_var($_POST['job_address'], FILTER_SANITIZE_STRING),
@@ -114,6 +115,7 @@ $purifier = new HTMLPurifier($config1);
 			'job_company_name'  => filter_var($_POST['job_company_name'], FILTER_SANITIZE_STRING),
 			'job_company_website' => filter_var($_POST['job_company_website'], FILTER_SANITIZE_STRING),
 			'job_phone_number'  =>  $job_phone_number,
+			'job_country_code'  =>  $_POST["job_country_code"],
 			'job_mail'  => $job_mail,
 			'job_vacancy'  =>  filter_var($_POST['job_vacancy'],FILTER_SANITIZE_STRING),
 			'job_address'  =>  filter_var($_POST['job_address'], FILTER_SANITIZE_STRING),
@@ -237,6 +239,7 @@ $purifier = new HTMLPurifier($config1);
                   <div class="form-group">
                     <label class="col-md-3 control-label">Phone :- <p class="control-label-help" id="square_lable_info">(+91 1234569874)</p></label>
                     <div class="col-md-6">
+                      <input type="text" name="job_country_code" id="job_country_code" value="<?php echo $row['job_country_code'];?>" class="form-control" required>
                       <input type="text" name="job_phone_number" id="job_phone_number" value="<?php echo $row['job_phone_number'];?>" class="form-control" required>
                     </div>
                   </div>

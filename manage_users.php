@@ -4,6 +4,25 @@ include('includes/header.php');
 include('includes/function.php');
 include('language/language.php');
 
+function get_job_info($userId)
+{
+    global $mysqli;
+
+    $qry_job_status = "SELECT SUM(if(job_status = 4, 1, 0)) AS active, SUM(if(job_status = 3, 1, 0)) AS failed, SUM(if(job_status = 1, 1, 0)) AS completed FROM tbl_jobs WHERE `user_alloted` ='" . $userId . "'";
+    $res_job_status = mysqli_fetch_array(mysqli_query($mysqli, $qry_job_status));
+
+    $qry_job_apply = "SELECT SUM(if(seen = 0, 1, 0)) AS applied, SUM(if(seen = 1, 1, 0)) AS awarded FROM tbl_apply WHERE `user_id` ='" . $userId . "'";
+    $res_job_apply = mysqli_fetch_array(mysqli_query($mysqli, $qry_job_apply));
+
+    $dataUserJob = array(
+        "applied"=>$res_job_apply["applied"],
+        "awarded"=>$res_job_apply["awarded"],
+        "active"=>$res_job_status["active"],
+        "failed"=>$res_job_status["failed"],
+        "completed"=>$res_job_status["completed"]
+    );
+    return  $dataUserJob;
+}
 
 if(isset($_GET['user_type'])){
 
@@ -13,7 +32,7 @@ if(isset($_GET['user_type'])){
     $targetpage = "manage_users.php?user_type=".$user_type;
     $limit = 12;
 
-    $query = "SELECT COUNT(*) as num FROM $tableName WHERE tbl_users.`id` <> 0 AND `user_type`='$user_type'";
+    $query = "SELECT COUNT(*) as num FROM $tableName WHERE tbl_users.`id` <> 0 AND `user_type`='$user_type' AND status!=0";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli,$query));
     $total_pages = $total_pages['num'];
 
@@ -28,7 +47,7 @@ if(isset($_GET['user_type'])){
         $start = 0;
     }
 
-    $users_qry = "SELECT * FROM tbl_users WHERE tbl_users.`id` <> 0 AND `user_type`=$user_type
+    $users_qry = "SELECT * FROM tbl_users WHERE tbl_users.`id` <> 0 AND `user_type`=$user_type  AND status!=0
        		ORDER BY tbl_users.`id` DESC LIMIT $start, $limit";
 
     $users_result = mysqli_query($mysqli, $users_qry);
@@ -39,7 +58,7 @@ else if (isset($_POST['user_search'])) {
 
     $keyword = filter_var($_POST['search_value'], FILTER_SANITIZE_STRING);
 
-    $user_qry = "SELECT * FROM tbl_users WHERE tbl_users.`name` LIKE '%$keyword' or tbl_users.`email` LIKE '%$keyword' AND tbl_users.`id` <> 0 ORDER BY tbl_users.`id` DESC";
+    $user_qry = "SELECT * FROM tbl_users WHERE tbl_users.`name` LIKE '%$keyword' or tbl_users.`email` LIKE '%$keyword' AND status!=0 AND tbl_users.`id` <> 0 ORDER BY tbl_users.`id` DESC";
 
     $users_result = mysqli_query($mysqli, $user_qry);
 
@@ -49,7 +68,7 @@ else if (isset($_POST['user_search'])) {
     $targetpage = "manage_users.php";
     $limit = 15;
 
-    $query = "SELECT COUNT(*) as num FROM $tableName WHERE tbl_users.`id` <> 0";
+    $query = "SELECT COUNT(*) as num FROM $tableName WHERE tbl_users.`id` <> 0  AND status!=0";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
     $total_pages = $total_pages['num'];
 
@@ -64,8 +83,7 @@ else if (isset($_POST['user_search'])) {
         $start = 0;
     }
 
-
-    $users_qry = "SELECT * FROM tbl_users WHERE tbl_users.`id` <> 0
+    $users_qry = "SELECT * FROM tbl_users WHERE tbl_users.`id` <> 0  AND status!=0
        ORDER BY tbl_users.`id` DESC LIMIT $start, $limit";
 
     $users_result = mysqli_query($mysqli, $users_qry);
@@ -73,7 +91,14 @@ else if (isset($_POST['user_search'])) {
 
 ?>
 
-
+<style>
+    .btn.btn-success {
+        border-color: #18aa4a;
+        border-bottom-color: #18aa4a;
+        background-color: #18aa4a;
+        box-shadow: 0 2px 3px rgba(41, 199, 95, 0.3);
+    }
+</style>
 <div class="row">
     <div class="col-xs-12">
         <div class="card mrg_bottom">
@@ -108,19 +133,17 @@ else if (isset($_POST['user_search'])) {
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th nowrap="">
+                        <th nowrap=""  class="text-center">
                             <div class="checkbox" style="margin-top: 0px;margin-bottom: 0px;">
                                 <input type="checkbox" name="checkall" id="checkall" value="">
                                 <label for="checkall"></label>
                             </div>
                         </th>
-                        <th>User Type</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                        <th>Extra</th>
-                        <th class="cat_action_list">Action</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Jobs</th>
+                        <th class="text-center">Extra</th>
+                        <th class="cat_action_list text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -128,14 +151,20 @@ else if (isset($_POST['user_search'])) {
                     $i = 0;
                     while ($users_row = mysqli_fetch_array($users_result)) { ?>
                         <tr>
-                            <td nowrap="">
+                            <td nowrap=""  class="text-center">
                                 <div class="checkbox" style="margin: 0px;float: left;">
                                     <input type="checkbox" name="post_ids[]" id="checkbox<?php echo $i; ?>" value="<?php echo $users_row['id']; ?>" class="post_ids">
                                     <label for="checkbox<?php echo $i; ?>">
                                     </label>
                                 </div>
                             </td>
-                            <td>
+                            <td class="text-center">
+                                <a href="user_profile.php?user_id=<?= $users_row['id'] ?>">
+                                    <?php echo $users_row['name']; ?>
+                                </a><br>
+                                    <?php echo $users_row['email']; ?><br>
+                                    <?php echo $users_row['country_code'].$users_row['phone']; ?>
+                                <br>
                                 <?php
                                 if ($users_row['user_type'] == 1) {
                                     echo $user_type = 'Seeker';
@@ -144,30 +173,34 @@ else if (isset($_POST['user_search'])) {
                                 }
                                 ?>
                             </td>
-                            <td>
-                                <a href="user_profile.php?user_id=<?= $users_row['id'] ?>">
-                                    <?php echo $users_row['name']; ?>
-                                </a>
-                            </td>
-                            <td><?php echo $users_row['email']; ?></td>
-                            <td><?php echo $users_row['phone']; ?></td>
-                            <td style="text-align: center">
+                            <td  class="text-center" style="text-align: center">
                                 <?php
                                 if ($users_row['status'] == "2") { ?>
-                                    Active <br>
-                                    <a onclick="$(this).hide();$('#btn1').show();" style="cursor: pointer;font-size: 10px">change</a>
-                                    <a id="btn1" title="Change Status" class="toggle_btn_a" style="display: none" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="deactive" data-column="status"><span class="badge badge-danger badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Disable </span></span></a>
-                                <?php } elseif ($users_row['status'] == "1") { ?>
+                                    Active
+                                <?php } else{ ?>
                                     Disable <br>
-                                    <a onclick="$(this).hide();$('#btn2').show();" style="cursor: pointer;font-size: 10px">change</a>
-                                    <a  id="btn2" title="Change Status" class="toggle_btn_a" style="display: none" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="active" data-column="status"><span class="badge badge-success badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Enable</span></span></a>
-                                <?php } else { ?>
-                                    Not Verified <br>
-                                    <a onclick="$(this).hide();$('#btn3').show();" style="cursor: pointer;font-size: 10px">change</a>
-                                    <a id="btn3"  title="Change Status" class="toggle_btn_a" style="display: none" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="verify" data-column="status"><span class="badge badge-warning badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Verify </span></span></a>
                                 <?php } ?>
                             </td>
-                            <td>
+                            <td class="text-center">
+                                <?php
+                                if ($users_row['user_type'] == 1) {
+                                $dataUserJob = get_job_info($users_row["id"]);
+
+                                echo $dataUserJob["applied"]?"Applied: ".$dataUserJob["applied"]: "Applied: "."0";
+                                echo "<br>";
+                                echo $dataUserJob["active"]?"Active: ".$dataUserJob["active"]: "Active: "."0";
+                                echo "<br>";
+                                echo $dataUserJob["completed"]?"Completed: ".$dataUserJob["completed"]: "Completed: "."0";
+                                ?>
+                                <br>
+                                <a href="user_job_details.php?user_id=<?= $users_row['id'] ?>&user_name=<?= $users_row['name'] ?>">
+                                    details
+                                </a>
+                                <?php }else{
+                                    echo "-";
+                                }?>
+                            </td>
+                            <td class="text-center">
                                 Wallet :<?=$users_row['current_wallet_amount'];?>
 
                                 <?php
@@ -185,13 +218,19 @@ else if (isset($_POST['user_search'])) {
                                 ?>
 
                             </td>
-                            <td>
-                                <a href="user_profile.php?user_id=<?php echo $users_row['id']; ?>" class="btn btn-success btn_cust" data-toggle="tooltip" data-tooltip="User Profile"><i class="fa fa-eye"></i></a>
-
+                            <td class="text-center">
+                                <!--<a href="user_profile.php?user_id=<?php /*echo $users_row['id']; */?>" class="btn btn-success btn_cust" data-toggle="tooltip" data-tooltip="User Profile"><i class="fa fa-eye"></i></a>
+-->
                                 <a href="add_user.php?user_id=<?php echo $users_row['id']; ?>" class="btn btn-primary btn_cust" data-toggle="tooltip" data-tooltip="Edit"><i class="fa fa-edit"></i></a>
 
                                 <a href="javascript:void(0)" data-id="<?php echo $users_row['id']; ?>" class="btn btn-danger btn_delete_a btn_cust" data-toggle="tooltip" data-tooltip="Delete !"><i class=" fa fa-trash"></i></a>
 
+                                <?php
+                                if ($users_row['status'] == "2") { ?>
+                                    <a id="btn1" title="Click To Disable" class="toggle_btn_a btn btn-danger btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="deactive" data-column="status"><span class=""><i class="fa fa-times" aria-hidden="true"></i><span></span></span></a>
+                                <?php } else{ ?>
+                                    <a  id="btn2" title="Click To Enable" class="toggle_btn_a btn btn-success btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="active" data-column="status"><span class=""><i class="fa fa-check" aria-hidden="true"></i><span></span></a>
+                                <?php } ?>
                             </td>
 
                         </tr>

@@ -13,7 +13,6 @@ $data_result = mysqli_query($mysqli, $data_qry);
 
  
  if (isset($_POST['submit'])) {
-
   if ($_POST['external_link'] != "") {
     $external_link = $_POST['external_link'];
   } else {
@@ -33,7 +32,7 @@ $data_result = mysqli_query($mysqli, $data_qry);
     );
 
     $fields = array(
-      'app_id' => ONESIGNAL_APP_ID,
+      'app_id' => FCM_SERVER_KEY,
       'included_segments' => array('All'),
       'data' => array("foo" => "bar", "job_id" => $_POST['job_id'], "external_link" => $external_link),
       'headings' => array("en" => $_POST['notification_title']),
@@ -52,7 +51,7 @@ $data_result = mysqli_query($mysqli, $data_qry);
     curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
       'Content-Type: application/json; charset=utf-8',
-      'Authorization: Basic ' . ONESIGNAL_REST_KEY
+      'Authorization: Basic ' . FCM_SENDER_ID
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -70,7 +69,7 @@ $data_result = mysqli_query($mysqli, $data_qry);
     );
 
     $fields = array(
-      'app_id' => ONESIGNAL_APP_ID,
+      'app_id' => FCM_SERVER_KEY,
       'included_segments' => array('All'),
       'data' => array("foo" => "bar", "job_id" => $_POST['job_id'], "external_link" => $external_link),
       'headings' => array("en" => $_POST['notification_title']),
@@ -85,7 +84,7 @@ $data_result = mysqli_query($mysqli, $data_qry);
     curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
       'Content-Type: application/json; charset=utf-8',
-      'Authorization: Basic ' . ONESIGNAL_REST_KEY
+      'Authorization: Basic ' . FCM_SENDER_ID
     ));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($ch, CURLOPT_HEADER, FALSE);
@@ -94,9 +93,6 @@ $data_result = mysqli_query($mysqli, $data_qry);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 
     $response = curl_exec($ch);
-
-
-
     curl_close($ch);
   }
 
@@ -110,8 +106,8 @@ $data_result = mysqli_query($mysqli, $data_qry);
   {
 
       $data = array(
-        'onesignal_app_id' => $_POST['onesignal_app_id'],
-        'onesignal_rest_key' => $_POST['onesignal_rest_key'],
+        'fcm_server_key' => $_POST['fcm_server_key'],
+        'fcm_sender_id' => $_POST['fcm_sender_id'],
       );
 
       $settings_edit=Update('tbl_settings', $data, "WHERE id = '1'");
@@ -151,15 +147,15 @@ $data_result = mysqli_query($mysqli, $data_qry);
                     <div class="section">
                       <div class="section-body">
                         <div class="form-group">
-                          <label class="col-md-3 control-label">OneSignal App ID :-</label>
+                          <label class="col-md-3 control-label">Server key :-</label>
                           <div class="col-md-6">
-                            <input type="text" name="onesignal_app_id" id="onesignal_app_id" value="<?php echo $settings_details['onesignal_app_id'];?>" class="form-control">
+                            <input type="text" name="fcm_server_key" id="fcm_server_key" value="<?php echo $settings_details['fcm_server_key'];?>" class="form-control">
                           </div>
                         </div>
                         <div class="form-group">
-                          <label class="col-md-3 control-label">OneSignal Rest Key :-</label>
+                          <label class="col-md-3 control-label">Sender ID :-</label>
                           <div class="col-md-6">
-                            <input type="text" name="onesignal_rest_key" id="onesignal_rest_key" value="<?php echo $settings_details['onesignal_rest_key'];?>" class="form-control">
+                            <input type="text" name="fcm_sender_id" id="fcm_sender_id" value="<?php echo $settings_details['fcm_sender_id'];?>" class="form-control">
                           </div>
                         </div>              
                         <div class="form-group">

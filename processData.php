@@ -74,6 +74,20 @@ switch ($_POST['action']) {
 
                             Update('tbl_transaction_details', $dataUpdate, "WHERE `id` = '" . $id . "' AND `user_id` = '" . $user_id . "' AND `trans_for`=1");
 
+
+                            $fcmMessage = "Part Time: Withdrawal Approved";
+                            $fcmBody = "Your Wallet to Account Withdrawal Request Approved!!";
+                            if($row2["user_type"]==1)
+                            {
+                                $fcmClickIntent = "seeker_wallet_withdrawal";
+
+                            }else{
+                                $fcmClickIntent = "provider_wallet_withdrawal";
+
+                            }
+                            sendFcmNotification($user_id,$fcmMessage,$fcmBody,$fcmClickIntent);
+
+
                             $_SESSION['msg']="25";
                         } else {
                             $_SESSION['msg']="26";

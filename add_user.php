@@ -27,7 +27,7 @@ if (isset($_POST['submit']) and isset($_GET['add'])) {
 	$phone = filter_var($_POST['phone'], FILTER_SANITIZE_NUMBER_INT);
 	$phone_to_check = str_replace("-", "", $phone);
 
-	if (strlen($phone_to_check) > 10 || strlen($phone_to_check) > 14) {
+	if (strlen($_POST['country_code'].$phone_to_check) > 10 || strlen($_POST['country_code'].$phone_to_check) > 14) {
 		
 	} else {
 		$_SESSION['msg'] = "24";
@@ -75,6 +75,7 @@ if (isset($_POST['submit']) and isset($_GET['add'])) {
 				'email' => $email,
 				'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 				'phone' => $phone_to_check,
+				'country_code' => $_POST['country_code'],
 				'city'  =>  filter_var($_POST['city'], FILTER_SANITIZE_STRING),
 				'address'  =>  filter_var($_POST['address'], FILTER_SANITIZE_STRING),
 				'user_image' => $user_image,
@@ -95,6 +96,7 @@ if (isset($_POST['submit']) and isset($_GET['add'])) {
 				'email' => $email,
 				'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 				'phone' => $phone_to_check,
+				'country_code' => $_POST['country_code'],
 				'city'  =>  filter_var($_POST['city'], FILTER_SANITIZE_STRING),
 				'address'  =>  filter_var($_POST['address'], FILTER_SANITIZE_STRING),
 				'user_resume' => $user_resume,
@@ -201,7 +203,7 @@ if (isset($_POST['submit']) and isset($_POST['user_id'])) {
 	$phone = filter_var($_POST['phone'], FILTER_SANITIZE_NUMBER_INT);
 	$phone_to_check = str_replace("-", "", $phone);
 
-	if (strlen($phone_to_check) > 10 || strlen($phone_to_check) > 14) {
+	if (strlen($_POST['country_code'].$phone_to_check) > 10 || strlen($_POST['country_code'].$phone_to_check) > 14) {
 		
 	} else {
 		$_SESSION['msg'] = "24";
@@ -250,6 +252,7 @@ if (isset($_POST['submit']) and isset($_POST['user_id'])) {
 				'email' => $email,
 				'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
 				'phone' => $phone_to_check,
+				'country_code' => $_POST['country_code'],
 				'city'  =>  filter_var($_POST['city'], FILTER_SANITIZE_STRING),
 				'address'  =>  filter_var($_POST['address'], FILTER_SANITIZE_STRING),
 				'user_image' => $user_image,
@@ -530,6 +533,8 @@ if (isset($_POST['submit']) and isset($_POST['user_id'])) {
 								<div class="form-group">
 									<label class="col-md-3 control-label">Phone :-  <p class="control-label-help" id="square_lable_info">(+91 1234569874)</p></label>
 									<div class="col-md-6">
+										<input type="text" name="country_code" id="country_code" value="<?php if (isset($_GET['user_id'])) {echo $user_row['country_code'];
+										} ?>" class="form-control" required>
 										<input type="text" name="phone" id="phone" value="<?php if (isset($_GET['user_id'])) {echo $user_row['phone'];
 										} ?>" class="form-control" required>
 									</div>

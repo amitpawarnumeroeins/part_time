@@ -39,7 +39,7 @@ $user_row=mysqli_fetch_assoc($user_result);
 
 
 //print_r($user_row);
-$planName= "";
+/*$planName= "";
 if($user_row["subscription_plan_id"])
 {
     $plan_qry="SELECT * FROM tbl_subscription_plan WHERE id='".$user_row["subscription_plan_id"]."'";
@@ -55,7 +55,7 @@ if($user_row["subscription_plan_id"])
 				</span>
 AAA;
 
-}
+}*/
 
 
 $user_img='';
@@ -85,7 +85,7 @@ if(isset($_POST['btn_submit']))
     $phone = filter_var($_POST['phone'], FILTER_SANITIZE_NUMBER_INT);
     $phone_to_check = str_replace("-", "", $phone);
 
-    if (strlen($phone_to_check) > 10 || strlen($phone_to_check) > 14) {
+    if (strlen($_POST['country_code'].$phone_to_check) > 10 || strlen($_POST['country_code'].$phone_to_check) > 14) {
 
     } else {
         $_SESSION['msg'] = "24";
@@ -111,6 +111,7 @@ if(isset($_POST['btn_submit']))
                 'name'  =>  filter_var($_POST['name'], FILTER_SANITIZE_STRING),
                 'email'  =>  $email,
                 'phone'  =>  $phone_to_check,
+                'country_code'  =>  $_POST['country_code'],
                 'city'  => filter_var($_POST['city'], FILTER_SANITIZE_STRING),
                 'address'  => filter_var($_POST['address'], FILTER_SANITIZE_STRING),
                 'user_resume' => $user_resume,
@@ -192,6 +193,7 @@ if(isset($_POST['btn_submit']))
                     'company_name'  =>  filter_var($_POST['skills'], FILTER_SANITIZE_STRING),
                     'company_email'  =>  filter_var($_POST['company_email'], FILTER_SANITIZE_EMAIL),
                     'mobile_no'  =>  filter_var($_POST['mobile_no'], FILTER_SANITIZE_NUMBER_INT),
+                    'company_country_code'  =>  filter_var($_POST['company_country_code'], FILTER_SANITIZE_NUMBER_INT),
                     'company_address'  => filter_var($_POST['company_address'], FILTER_SANITIZE_STRING),
                     'company_desc'  =>  addslashes($clean_company_desc),
                     'company_website'  => filter_var($_POST['company_website'], FILTER_SANITIZE_STRING),
@@ -207,6 +209,7 @@ if(isset($_POST['btn_submit']))
                     'company_name'  =>  filter_var($_POST['skills'], FILTER_SANITIZE_STRING),
                     'company_email'  =>  filter_var($_POST['company_email'], FILTER_SANITIZE_EMAIL),
                     'mobile_no'  =>  filter_var($_POST['mobile_no'], FILTER_SANITIZE_NUMBER_INT),
+                    'company_country_code'  =>  filter_var($_POST['company_country_code'], FILTER_SANITIZE_NUMBER_INT),
                     'company_address'  => filter_var($_POST['company_address'], FILTER_SANITIZE_STRING),
                     'company_desc'  =>  addslashes($clean_company_desc),
                     'company_website'  => filter_var($_POST['company_website'], FILTER_SANITIZE_STRING),
@@ -383,9 +386,9 @@ function get_user_name($user_id)
                         <?php if(($user_row['id']==$company_row['user_id'])==2){?>
                             <li role="users_job"><a href="#users_job" aria-controls="users_job" role="tab" data-toggle="tab">User Manage Jobs</a></li>
                         <?php }?>
-                        <?php if(($user_row['id']==$company_row['user_id'])==2){?>
+                        <?php /*if(($user_row['id']==$company_row['user_id'])==2){*/?><!--
                             <li role="users_subscriptions"><a href="#users_subscriptions" aria-controls="users_subscriptions" role="tab" data-toggle="tab">User Subscriptions</a></li>
-                        <?php }?>
+                        --><?php /*}*/?>
                         <li role="users_transactions"><a href="#users_transactions" aria-controls="users_transactions" role="tab" data-toggle="tab">User Transactions</a></li>
                     <?php }?>
                 </ul>
@@ -418,6 +421,7 @@ function get_user_name($user_id)
                                         <div class="form-group">
                                             <label class="col-md-3 control-label">Phone :-</label>
                                             <div class="col-md-6">
+                                                <input type="text" name="country_code" id="country_code" value="<?php echo $user_row['country_code'];?>" class="form-control">
                                                 <input type="text" name="phone" id="phone" value="<?php echo $user_row['phone'];?>" class="form-control">
                                             </div>
                                         </div>
@@ -556,6 +560,7 @@ function get_user_name($user_id)
                                                 <div class="form-group">
                                                     <label class="col-md-3 control-label">Mobile No :-</label>
                                                     <div class="col-md-6">
+                                                        <input type="text" name="company_country_code" id="company_country_code" value="<?php if(isset($_GET['user_id'])){echo stripslashes($company_row['company_country_code']);}?>" class="form-control">
                                                         <input type="text" name="mobile_no" id="mobile_no" value="<?php if(isset($_GET['user_id'])){echo stripslashes($company_row['mobile_no']);}?>" class="form-control">
                                                     </div>
                                                 </div>
@@ -773,7 +778,7 @@ function get_user_name($user_id)
                                         <td><?php echo get_job_info($users_row['job_id']);?></td>
                                         <td><?php echo $users_row['name'];?></td>
                                         <td><?php echo $user_row['email']; ?></td>
-                                        <td><?php echo $user_row['phone']; ?></td>
+                                        <td><?php echo $user_row['country_code'].$user_row['phone']; ?></td>
                                         <td><?php if(isset($users_row['user_resume'])){?><a href="<?php echo 'uploads/'.$users_row['user_resume'];?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php }?></td>
                                         <td><?php echo $users_row['apply_date'];?></td>
                                         <td>
@@ -817,7 +822,7 @@ function get_user_name($user_id)
                                         <td class="text-center">
                                             <b><?=$users_row['name']; ?></b><br>
                                             <small><?=$users_row['email']; ?></small><br>
-                                            <small> <?=$users_row['phone']; ?></small><br>
+                                            <small> <?=$users_row['country_code'].$users_row['phone']; ?></small><br>
                                             <?php if (isset($users_row['user_resume'])) { ?><a href="<?php echo 'uploads/' . $users_row['user_resume']; ?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php } ?>
                                         </td>
                                         <td class="text-center"><?php echo $users_row['apply_date']; ?></td>
@@ -912,7 +917,7 @@ function get_user_name($user_id)
                                 $transForText = "";
                                 }else if($trans_for == 2)
                                 {
-                                $transForText = "(Subscription)";
+                                //$transForText = "(Subscription)";
                                 }
 
                                     $wallet_details = "";

@@ -1,4 +1,4 @@
-<?php $page_title = "Manage Transactions";
+<?php $page_title = "Transactions";
 
 include('includes/header.php');
 include('includes/function.php');
@@ -11,6 +11,7 @@ if (isset($_GET['filter'])) {
     $mode = filter_var($_GET['mode'], FILTER_SANITIZE_STRING);
     $status = filter_var($_GET['status'], FILTER_SANITIZE_STRING);
     $trans_type = filter_var($_GET['trans_type'], FILTER_SANITIZE_STRING);
+    $search_value = filter_var($_GET['search_value'], FILTER_SANITIZE_STRING);
 
     $tableName = "tbl_transaction_details";
 
@@ -25,6 +26,11 @@ if (isset($_GET['filter'])) {
         $filter .= "mode=$mode&";
         $filterSql .= " AND `mode`='$mode' ";
     }
+    $filterSearch = "";
+    if ($search_value) {
+        $filter .= "search_value=$search_value&";
+        $filterSearch = " AND tbl_users.`name` LIKE '%$search_value' or tbl_users.`email` LIKE '%$search_value' ";
+    }
 
     if ($status) {
         $filter .= "status=$status&";
@@ -37,7 +43,8 @@ if (isset($_GET['filter'])) {
     }
 
     $targetpage = "manage_transactions.php?$filter";
-    $limit = 20;
+    $limit = 10;
+
 
     $query = "SELECT COUNT(*) as num FROM tbl_transaction_details WHERE 1 $filterSql";
 
@@ -57,7 +64,7 @@ if (isset($_GET['filter'])) {
 
     $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name FROM tbl_transaction_details
 		LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id` 
-		WHERE 1 $filterSql
+		WHERE 1 $filterSql $filterSearch
 		ORDER BY tbl_transaction_details.`id` DESC LIMIT $start, $limit";
 
     $transaction_result = mysqli_query($mysqli, $transaction_qry);
@@ -66,7 +73,7 @@ if (isset($_GET['filter'])) {
 
     $tableName = "tbl_transaction_details";
     $targetpage = "manage_transactions.php";
-    $limit = 20;
+    $limit = 10;
 
     $query = "SELECT COUNT(*) as num FROM $tableName WHERE 1";
     $total_pages = mysqli_fetch_array(mysqli_query($mysqli, $query));
@@ -162,14 +169,17 @@ AAA;
     <div class="col-xs-12">
         <div class="card mrg_bottom">
             <div class="page_title_block">
-                <div class="col-md-5 col-xs-12">
+                <div class="col-md-2   col-xs-12">
                     <div class="page_title"><?= $page_title ?></div>
                 </div>
-                <div class="col-md-7 col-xs-12">
+                <div class="col-md-10 col-xs-12">
                     <div class="page_title">
                         <form class="form-inline" action="" method="get">
+                            <div class="form-group mr10 search_block">
+                                <input class="form-control input-sm" placeholder="Search..." type="search" name="search_value">
+                            </div>
                             <div class="form-group mr10">
-                                <label for="trans_type">Method</label>
+                                <label for="trans_type">Method
                                 <select name="trans_type" class="form-control">
                                     <option value="">All</option>
                                     <option value="1" <?php if (isset($_GET['trans_type']) && $_GET['trans_type'] == '1') {
@@ -294,9 +304,7 @@ AAA;
                 }
             }
         });
-
     });
-
 
     $(".btn_delete_a").click(function (e) {
         e.preventDefault();

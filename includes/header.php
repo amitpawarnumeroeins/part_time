@@ -206,7 +206,7 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
-          <li <?php if ($currentFile == "manage_transaction.php") { ?>class="active" <?php } ?>> <a href="manage_transaction.php">
+          <li <?php if ($currentFile == "manage_transactions.php") { ?>class="active" <?php } ?>> <a href="manage_transactions.php">
 
               <div class="icon"> <i class="fa fa-dollar" aria-hidden="true"></i> </div>
 
@@ -259,8 +259,8 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
            </li>
-
-           <li <?php /*if ($currentFile == "send_notification.php") { */?>class="active" <?php /*} */?>> <a href="send_notification.php">
+-->
+<!--           <li <?php /*if ($currentFile == "send_notification.php") { */?>class="active" <?php /*} */?>> <a href="send_notification.php">
 
                 <div class="icon"> <i class="fa fa-send" aria-hidden="true"></i> </div>
 
@@ -269,8 +269,8 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
               </a>
 
             </li>-->
-
-            <li <?php if ($currentFile == "manage_subscription_plan.php" or $currentFile == "add_subscription_plan.php") { ?>class="active" <?php } ?>> <a href="manage_subscription_plan.php">
+<!--
+            <li <?php /*if ($currentFile == "manage_subscription_plan.php" or $currentFile == "add_subscription_plan.php") { */?>class="active" <?php /*} */?>> <a href="manage_subscription_plan.php">
 
                     <div class="icon"> <i class="fa fa-briefcase" aria-hidden="true"></i> </div>
 
@@ -278,7 +278,7 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
 
                 </a>
 
-            </li>
+            </li>-->
 
          	<li <?php if ($currentFile == "settings.php") { ?>class="active" <?php } ?>> <a href="settings.php">
 

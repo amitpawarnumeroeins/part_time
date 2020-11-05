@@ -57,7 +57,7 @@
 
 	$app_lang['delete_job']="Job has been deleted";
 
-	$app_lang['job_seen']="Job seen successfully..";
+	$app_lang['job_seen']="Job Awarded successfully..";
 	
 	// for report failed
 	$app_lang['report_fail']="Report is failed";

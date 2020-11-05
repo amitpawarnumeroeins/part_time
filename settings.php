@@ -323,6 +323,7 @@ if (isset($_POST['app_pri_poly'])) {
                                     <input type="text" name="banner_facebook_id" id="banner_facebook_id" value="<?php /*echo $settings_row['banner_facebook_id'];*/?>" class="form-control">
                                   </div>
 
+
                                 </div>                    
                               </div>
                             </div>  
