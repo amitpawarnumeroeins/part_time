@@ -245,10 +245,10 @@ function getAndSendOtp($mobileNumber)
 
 
     $thisOTP = 0;
-
+    //AC58368fe26d4cd6ddade89ba79cb227e4
 // Your Account SID and Auth Token from twilio.com/console
     $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = '9c56807100af86dedab1a64c617077e5';
+    $auth_token = '1742d218a75227c2fd37c3e495f949e7';
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
 // A Twilio number you own with SMS capabilities

@@ -22,28 +22,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="wallet to wallet done, subscription have to remove">
-      <change afterPath="$PROJECT_DIR$/manage_transactions.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user_job_details.php" afterDir="false" />
+    <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="Done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_job.php" beforeDir="false" afterPath="$PROJECT_DIR$/add_job.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_user.php" beforeDir="false" afterPath="$PROJECT_DIR$/add_user.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api_urls.php" beforeDir="false" afterPath="$PROJECT_DIR$/api_urls.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edit_job.php" beforeDir="false" afterPath="$PROJECT_DIR$/edit_job.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/connection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/install/database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/language/app_language.php" beforeDir="false" afterPath="$PROJECT_DIR$/language/app_language.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage_active_jobs.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_active_jobs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage_applied_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_applied_users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage_jobs.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_jobs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage_transaction.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/manage_users.php" beforeDir="false" afterPath="$PROJECT_DIR$/manage_users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processData.php" beforeDir="false" afterPath="$PROJECT_DIR$/processData.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/send_notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/send_notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/user_profile.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +103,8 @@
       <workItem from="1604380459129" duration="22039000" />
       <workItem from="1604414534392" duration="83000" />
       <workItem from="1604465308006" duration="27905000" />
-      <workItem from="1604558330235" duration="16894000" />
+      <workItem from="1604558330235" duration="17233000" />
+      <workItem from="1604641749292" duration="4713000" />
     </task>
     <task id="LOCAL-00001" summary="2nd">
       <created>1603964930301</created>
@@ -186,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1604414587382</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Done">
+      <created>1604584005423</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1604584005423</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,13 +203,18 @@
     <MESSAGE value="wallet to wallet remaining, add account and chat done" />
     <MESSAGE value="wallet to wallet remaining, subscription add init update done, sub credit ded remains" />
     <MESSAGE value="wallet to wallet done, subscription have to remove" />
-    <option name="LAST_COMMIT_MESSAGE" value="wallet to wallet done, subscription have to remove" />
+    <MESSAGE value="Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="22" key="#Deployment" timestamp="1603965865307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Deployment/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1603965865307" />
+    <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1604645312105">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.728@0.0.1366.728" timestamp="1604645312105" />
     <state x="549" y="66" key="#com.jetbrains.php.refactoring.extractMethod.PhpExtractMethodDialog#function1" timestamp="1604469800122">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -245,10 +240,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="184" y="9" key="SettingsEditor/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604035107131" />
-    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1604414598667">
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2" timestamp="1604584073817">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604414598667" />
+    <state x="275" y="97" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604584073817" />
     <state x="528" y="98" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1603964960151">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -270,11 +266,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604386452432" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604582586612">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604643418649">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/-1366.0.1366.728@0.0.1366.728" timestamp="1604385794231" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1604582586612" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1604643418649" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

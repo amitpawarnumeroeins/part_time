@@ -227,9 +227,9 @@ else if (isset($_POST['user_search'])) {
 
                                 <?php
                                 if ($users_row['status'] == "2") { ?>
-                                    <a id="btn1" title="Click To Disable" class="toggle_btn_a btn btn-danger btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="deactive" data-column="status"><span class=""><i class="fa fa-times" aria-hidden="true"></i><span></span></span></a>
+                                    <a id="btn1" data-tooltip="Click To Disable" class="toggle_btn_a btn btn-danger btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="deactive" data-column="status"><span class=""><i class="fa fa-times" aria-hidden="true"></i><span></span></span></a>
                                 <?php } else{ ?>
-                                    <a  id="btn2" title="Click To Enable" class="toggle_btn_a btn btn-success btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="active" data-column="status"><span class=""><i class="fa fa-check" aria-hidden="true"></i><span></span></a>
+                                    <a  id="btn2" data-tooltip="Click To Enable" class="toggle_btn_a btn btn-success btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="active" data-column="status"><span class=""><i class="fa fa-check" aria-hidden="true"></i><span></span></a>
                                 <?php } ?>
                             </td>
 
