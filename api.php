@@ -216,7 +216,7 @@ function get_apply_count($job_id)
 {
     global $mysqli;
 
-    $qry_apply = "SELECT COUNT(*) as num FROM tbl_apply WHERE `job_id`='" . $job_id . "'";
+    $qry_apply = "SELECT COUNT(*) as num FROM tbl_apply,tbl_users WHERE user_id = tbl_users.id AND tbl_users.status = 2 AND `job_id`='" . $job_id . "'";
     $total_apply = mysqli_fetch_array(mysqli_query($mysqli, $qry_apply));
     $total_apply = $total_apply['num'];
 
@@ -248,7 +248,7 @@ function getAndSendOtp($mobileNumber)
     //AC58368fe26d4cd6ddade89ba79cb227e4
 // Your Account SID and Auth Token from twilio.com/console
     $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = '1742d218a75227c2fd37c3e495f949e7';
+    $auth_token = 'd81e7558a107c53e60676d853476b36a';
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
 // A Twilio number you own with SMS capabilities
@@ -1529,7 +1529,7 @@ else if ($get_method['method_name'] == "user_job_apply_list") {
 
     $query = "SELECT * FROM tbl_users
              LEFT JOIN tbl_apply ON tbl_users.`id`= tbl_apply.`user_id` 
-             WHERE tbl_apply.`job_id`=" . $get_method['apply_job_id'] . " ORDER BY tbl_users.`id` DESC";
+             WHERE tbl_users.status = 2 AND tbl_apply.`job_id`=" . $get_method['apply_job_id'] . " ORDER BY tbl_users.`id` DESC";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
