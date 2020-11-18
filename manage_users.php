@@ -174,12 +174,17 @@ else if (isset($_POST['user_search'])) {
                                 ?>
                             </td>
                             <td  class="text-center" style="text-align: center">
+
+
                                 <?php
+
                                 if ($users_row['status'] == "2") { ?>
                                     Active
                                 <?php } else{ ?>
                                     Disable <br>
                                 <?php } ?>
+                                <br>
+                                <?php if(isset($users_row['user_resume'])){?><a href="<?php echo 'uploads/'.$users_row['user_resume'];?>" class="btn btn-success btn-xs" target="_blank" style="padding: 5px 10px;">Resume</a><?php }?>
                             </td>
                             <td class="text-center">
                                 <?php
@@ -227,7 +232,7 @@ else if (isset($_POST['user_search'])) {
 
                                 <?php
                                 if ($users_row['status'] == "2") { ?>
-                                    <a id="btn1" data-tooltip="Click To Disable" class="toggle_btn_a btn btn-danger btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="deactive" data-column="status"><span class=""><i class="fa fa-times" aria-hidden="true"></i><span></span></span></a>
+                                    <a id="btn1" data-tooltip="Click To Disable" class="toggle_btn_a btn btn-warning btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="deactive" data-column="status"><span class=""><i class="fa fa-times" aria-hidden="true"></i><span></span></span></a>
                                 <?php } else{ ?>
                                     <a  id="btn2" data-tooltip="Click To Enable" class="toggle_btn_a btn btn-success btn_cust" style="" href="javascript:void(0)" data-id="<?= $users_row['id'] ?>" data-action="active" data-column="status"><span class=""><i class="fa fa-check" aria-hidden="true"></i><span></span></a>
                                 <?php } ?>
