@@ -176,7 +176,7 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
 
           </li>
 
-          <li <?php if ($currentFile == "manage_city.php" or $currentFile == "add_city.php") { ?>class="active" <?php } ?>> <a href="manage_city.php">
+          <li <?php if ($currentFile == "manage_country.php" or $currentFile == "add_country.php" OR $currentFile == "manage_city.php" or $currentFile == "add_city.php" or $currentFile == "manage_region.php" or $currentFile == "add_region.php") { ?>class="active" <?php } ?>> <a href="manage_city.php">
 
               <div class="icon"> <i class="fa fa-list" aria-hidden="true"></i> </div>
 
@@ -185,6 +185,24 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
+          <!--<li <?php /*if ($currentFile == "manage_region.php" or $currentFile == "add_region.php") { */?>class="active" <?php /*} */?>> <a href="manage_region.php">
+
+              <div class="icon"> <i class="fa fa-list" aria-hidden="true"></i> </div>
+
+              <div class="title">Region</div>
+
+            </a>
+
+          </li>
+          <li <?php /*if ($currentFile == "manage_country.php" or $currentFile == "add_country.php") { */?>class="active" <?php /*} */?>> <a href="manage_country.php">
+
+              <div class="icon"> <i class="fa fa-list" aria-hidden="true"></i> </div>
+
+              <div class="title">Country</div>
+
+            </a>
+
+          </li>-->
 
 
 
@@ -206,7 +224,7 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
-          <li <?php if ($currentFile == "manage_transactions.php") { ?>class="active" <?php } ?>> <a href="manage_transactions.php">
+          <li <?php if ($currentFile == "manage_transactions.php" OR $currentFile == "manage_withdrawals.php") { ?>class="active" <?php } ?>> <a href="manage_transactions.php">
 
               <div class="icon"> <i class="fa fa-dollar" aria-hidden="true"></i> </div>
 
@@ -215,13 +233,13 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
             </a>
 
           </li>
-          <li <?php if ($currentFile == "manage_withdrawals.php") { ?>class="active" <?php } ?>> <a href="manage_withdrawals.php" style="background: #c39043;color: #fff;">
+         <!-- <li <?php /*if ($currentFile == "manage_withdrawals.php") { */?>class="active" <?php /*} */?>> <a href="manage_withdrawals.php" style="background: #c39043;color: #fff;">
 
               <div class="title">Withdrawal Request</div>
 
             </a>
 
-          </li>
+          </li>-->
             <li <?php if ($currentFile == "manage_jobs.php" or $currentFile == "add_job.php" or $currentFile == "edit_job.php") { ?>class="active" <?php } ?>> <a href="manage_jobs.php">
 
                     <div class="icon"> <i class="fa fa-black-tie" aria-hidden="true"></i> </div>
@@ -231,7 +249,7 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
                 </a>
 
             </li>
-          <li <?php if ($currentFile == "manage_applied_users.php") { ?>class="active" <?php } ?>> <a href="manage_applied_users.php">
+<!--          <li <?php /*if ($currentFile == "manage_applied_users.php") { */?>class="active" <?php /*} */?>> <a href="manage_applied_users.php">
 
               <div class="icon"> <i class="fa fa-users" aria-hidden="true"></i> </div>
 
@@ -239,12 +257,21 @@ $redirectUrl = $urlparts[count($urlparts) - 1];
 
             </a>
 
-          </li>
-            <li <?php if ($currentFile == "manage_active_jobs.php" ) { ?>class="active" <?php } ?>> <a href="manage_active_jobs.php">
+          </li>-->
+<!--            <li <?php /*if ($currentFile == "manage_active_jobs.php" ) { */?>class="active" <?php /*} */?>> <a href="manage_active_jobs.php">
 
                     <div class="icon"> <i class="fa fa-black-tie" aria-hidden="true"></i> </div>
 
-                    <div class="title">Active Jobs</div>
+                    <div class="title">Jobs Status</div>
+
+                </a>
+
+            </li>-->
+            <li <?php if ($currentFile == "manage_reviews_ratings.php" ) { ?>class="active" <?php } ?>> <a href="manage_reviews_ratings.php">
+
+                    <div class="icon"> <i class="fa fa-star" aria-hidden="true"></i> </div>
+
+                    <div class="title">Reviews & Ratings</div>
 
                 </a>
 
