@@ -76,7 +76,7 @@ $purifier = new HTMLPurifier($config1);
 	       $thumbpath='images/thumbs/'.$job_image;    
 	       $thumb_pic1=create_thumb_image($tpath1,$thumbpath,'200','200');   
      
-       $data = array( 
+       $data = array(
             'cat_id'  => mysqli_real_escape_string($mysqli, $_POST['cat_id']),
 			'city_id'  => mysqli_real_escape_string($mysqli, $_POST['city_id']),
 			'job_name'  => filter_var($_POST['job_name'], FILTER_SANITIZE_STRING),
@@ -84,6 +84,7 @@ $purifier = new HTMLPurifier($config1);
 			'job_designation'  => filter_var($_POST['job_designation'], FILTER_SANITIZE_STRING),
 			'job_desc'  =>  addslashes($_POST['job_desc']),
 			'job_salary'  =>  filter_var($_POST['job_salary'],FILTER_SANITIZE_STRING),
+			'job_salary_mode'  =>  filter_var($_POST['job_salary_mode'],FILTER_SANITIZE_STRING),
 			'job_company_name'  => filter_var($_POST['job_company_name'], FILTER_SANITIZE_STRING),
 			'job_company_website' => filter_var($_POST['job_company_website'], FILTER_SANITIZE_STRING),
 			'job_phone_number'  =>  $job_phone_number,
@@ -112,6 +113,7 @@ $purifier = new HTMLPurifier($config1);
 			'job_designation'  => filter_var($_POST['job_designation'], FILTER_SANITIZE_STRING),
 			'job_desc'  =>  addslashes($clean_job_desc),
 			'job_salary'  =>  filter_var($_POST['job_salary'],FILTER_SANITIZE_STRING),
+			'job_salary_mode'  =>  filter_var($_POST['job_salary_mode'],FILTER_SANITIZE_STRING),
 			'job_company_name'  => filter_var($_POST['job_company_name'], FILTER_SANITIZE_STRING),
 			'job_company_website' => filter_var($_POST['job_company_website'], FILTER_SANITIZE_STRING),
 			'job_phone_number'  =>  $job_phone_number,
@@ -222,6 +224,18 @@ $purifier = new HTMLPurifier($config1);
                		<label class="col-md-3 control-label">Hire Price :- <p class="control-label-help" id="square_lable_info">(10,0000)</p></label>
                     <div class="col-md-6">
                       <input type="text" name="job_salary" id="job_salary" value="<?php echo $row['job_salary'];?>" class="form-control" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+               		<label class="col-md-3 control-label">Pay Mode :-</label>
+                    <div class="col-md-6">
+                      <select name="job_salary_mode" id="job_salary_mode" class="form-control" required>
+                          <option value="">Please Select Payment Mode</option>
+                          <option <?php if($row['job_salary_mode']==1){ echo "selected"; } ?> value="1">Hourly</option>
+                          <option <?php if($row['job_salary_mode']==2){ echo "selected"; } ?> value="1">Daily</option>
+                          <option <?php if($row['job_salary_mode']==3){ echo "selected"; } ?> value="1">Weekly</option>
+                          <option <?php if($row['job_salary_mode']==4){ echo "selected"; } ?> value="1">Monthly</option>
+                      </select>
                     </div>
                   </div>
                   <div class="form-group">

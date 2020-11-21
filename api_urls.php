@@ -36,14 +36,14 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>Single Job</b>(Method: get_single_job)(Parameter: job_id,user_id)
                      <br><b>Similar Jobs</b>(Method: get_similar_jobs)(Parameter: user_id,job_id,page)
 					 <br><b>User Register(Job Seeker)(Method: user_register)(Parameter: user_type [1],name,email,password,phone,register_as [individual])
-					 <br><b>User Register(Job Provider)(Method: user_register)(Parameter: user_type [2],name,email,password,phone,register_as [individual,company])(Parameter: (Company: company_name,company_email,mobile_no,company_address,company_desc,company_work_day,company_work_time,company_website))
+					 <br><b>User Register(Job Provider)(Method: user_register)(Parameter: user_type [2],name,email,password,phone,register_as [individual,company])(Parameter: (Company: company_name,company_email,mobile_no,company_address,company_desc,company_work_day,company_work_time,commercial_registration_number,company_website))
                      <br><b>User Login</b>(Method: user_login)(Parameter: email,password)
                      <br><b>User Profile</b>(Method: user_profile)(Parameter: id)
                      <br><b>User Profile Update(Job Seeker)</b>(Method: user_profile_update)(Parameter: user_id,name,email,password,phone,city,address,current_company_name,experiences,skills,gender[Male,Female],date_of_birth)(Optional: user_image,user_resume)
-                    <br><b>User Profile Update(Job Provider)</b>(Method: user_profile_update)(Parameter: user_id,name,email,password,phone,city,address,current_company_name,experiences,skills,gender[Male,Female],date_of_birth(Parameter:(User Company Details:company_name,company_email,mobile_no,company_address,company_desc,company_work_day,company_work_time,company_website,register_as [individual,company])(Optional: user_image,company_logo))
+                    <br><b>User Profile Update(Job Provider)</b>(Method: user_profile_update)(Parameter: user_id,name,email,password,phone,city,address,current_company_name,experiences,skills,gender[Male,Female],date_of_birth(Parameter:(User Company Details:company_name,company_email,mobile_no,company_address,company_desc,company_work_day,company_work_time,commercial_registration_number,company_website,register_as [individual,company])(Optional: user_image,company_logo))
                      <br><b>Forgot Password</b>(Method: forgot_pass)(Parameter: email)
-                     <br><b>Job Add</b>(Method: job_add)(Parameter: user_id,job_type,cat_id,city_id,job_name,job_designation,job_desc,job_salary,job_company_name,job_company_website,job_phone_number,job_mail,job_vacancy,job_address,job_qualification,job_skill,job_date,job_work_day,job_work_time,job_experince)(Send with data: job_image)
-                     <br><b>Job Edit</b>(Method: edit_job)(Parameter: job_id,user_id,job_type,cat_id,city_id,job_name,job_designation,job_desc,job_salary,job_company_name,job_company_website,job_phone_number,job_mail,job_vacancy,job_address,job_qualification,job_skill,job_date,job_work_day,job_work_time,job_experince)(Send with data: job_image)
+                     <br><b>Job Add</b>(Method: job_add)(Parameter: user_id,job_type,cat_id,city_id,job_name,job_designation,job_desc,job_salary,job_salary_mode,job_company_name,job_company_website,job_phone_number,job_mail,job_vacancy,job_address,job_qualification,job_skill,job_date,job_work_day,job_work_time,job_experince)(Send with data: job_image)
+                     <br><b>Job Edit</b>(Method: edit_job)(Parameter: job_id,user_id,job_type,cat_id,city_id,job_name,job_designation,job_desc,job_salary,job_salary_mode,job_company_name,job_company_website,job_phone_number,job_mail,job_vacancy,job_address,job_qualification,job_skill,job_date,job_work_day,job_work_time,job_experince)(Send with data: job_image)
                      <br><b>Company Details</b>(Method: get_company_details)(Parameter: user_id)
                      <br><b>Job Delete</b>(Method: delete_job)(Parameter: delete_job_id)
                      <br><b>Jobs List</b>(Method: job_list)(Parameter: user_id,page)
@@ -67,6 +67,8 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>Subscription Payment Update* </b>(Method: subscription_payment_update)(Parameter: transaction_id, user_id, plan_id, mode, status, bank_trans_id, bank_trans_response)
                      <br><b>Job Completed* </b>(Method: job_completed)(Parameter: job_id)
                      <br><b>Notification List* </b>(Method: get_notification)(Parameter: user_id)
+                     <br><b>Location List* </b>(Method: get_location_list)()
+                     <br><b>Set User Reviews and Ratings* </b>(Method: set_user_ratings)(Parameter: user_id, reviewer_id, rating, review)
 			 </code>
              </pre>
             </div>

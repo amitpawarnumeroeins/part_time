@@ -160,6 +160,7 @@ if (isset($_POST['submit']) and isset($_GET['add'])) {
 				'company_desc'  => filter_var($_POST['company_desc'], FILTER_SANITIZE_STRING),
 				'company_work_day'=>filter_var($_POST['company_work_day'], FILTER_SANITIZE_STRING),
 				'company_work_time'=>filter_var($_POST['company_work_time'], FILTER_SANITIZE_STRING),
+				'commercial_registration_number'=>filter_var($_POST['commercial_registration_number'], FILTER_SANITIZE_STRING),
 				'company_website'  => filter_var($_POST['company_website'], FILTER_SANITIZE_STRING),
 				'company_logo' => $company_logo
 			);
@@ -320,6 +321,7 @@ if (isset($_POST['submit']) and isset($_POST['user_id'])) {
 				'company_desc'  => filter_var($_POST['company_desc'], FILTER_SANITIZE_STRING),
 				'company_work_day'=>filter_var($_POST['company_work_day'], FILTER_SANITIZE_STRING),
 				'company_work_time'=>filter_var($_POST['company_work_time'], FILTER_SANITIZE_STRING),
+				'commercial_registration_number'=>filter_var($_POST['commercial_registration_number'], FILTER_SANITIZE_STRING),
 				'company_website'  => filter_var($_POST['company_website'], FILTER_SANITIZE_STRING),
 				'company_logo' => $company_logo
 
@@ -334,6 +336,7 @@ if (isset($_POST['submit']) and isset($_POST['user_id'])) {
 				'company_desc'  => filter_var($_POST['company_desc'], FILTER_SANITIZE_STRING),
 				'company_work_day'=>filter_var($_POST['company_work_day'], FILTER_SANITIZE_STRING),
 				'company_work_time'=>filter_var($_POST['company_work_time'], FILTER_SANITIZE_STRING),
+				'commercial_registration_number'=>filter_var($_POST['commercial_registration_number'], FILTER_SANITIZE_STRING),
 				'company_website'  => filter_var($_POST['company_website'], FILTER_SANITIZE_STRING)
 
 		);
@@ -699,6 +702,14 @@ if (isset($_POST['submit']) and isset($_POST['user_id'])) {
 										<div class="col-md-6">
 											<input type="text" name="company_work_time" id="company_work_time" value="<?php if (isset($_GET['user_id'])) {
 												echo stripslashes($company_row['company_work_time']);
+											} ?>" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Commercial Registration Number :-</label>
+										<div class="col-md-6">
+											<input type="text" name="commercial_registration_number" id="commercial_registration_number" value="<?php if (isset($_GET['user_id'])) {
+												echo stripslashes($company_row['commercial_registration_number']);
 											} ?>" class="form-control">
 										</div>
 									</div>

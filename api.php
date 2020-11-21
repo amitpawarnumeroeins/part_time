@@ -248,7 +248,7 @@ function getAndSendOtp($mobileNumber)
     //AC58368fe26d4cd6ddade89ba79cb227e4
 // Your Account SID and Auth Token from twilio.com/console
     $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = 'd81e7558a107c53e60676d853476b36a';
+    $auth_token = 'ac0957c25a316f6cf6072d959b65dad6';
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
 // A Twilio number you own with SMS capabilities
@@ -314,6 +314,7 @@ if ($get_method['method_name'] == "get_home") {
         $row3['job_designation'] = $data3['job_designation'];
         $row3['job_desc'] = $data3['job_desc'];
         $row3['job_salary'] = $data3['job_salary'];
+        $row3['job_salary_mode'] = $data3['job_salary_mode'];
         $row3['job_company_name'] = $data3['job_company_name'];
         $row3['job_company_website'] = $data3['job_company_website'];
         $row3['job_phone_number'] = $data3['job_phone_number'];
@@ -360,6 +361,7 @@ if ($get_method['method_name'] == "get_home") {
         $row1['job_designation'] = $data1['job_designation'];
         $row1['job_desc'] = $data1['job_desc'];
         $row1['job_salary'] = $data1['job_salary'];
+        $row1['job_salary_mode'] = $data1['job_salary_mode'];
         $row1['job_company_name'] = $data1['job_company_name'];
         $row1['job_company_website'] = $data1['job_company_website'];
         $row1['job_phone_number'] = $data1['job_phone_number'];
@@ -385,7 +387,7 @@ if ($get_method['method_name'] == "get_home") {
         $row1['category_image_thumb'] = $file_path . 'images/thumbs/' . $data1['category_image'];
 
         $row1['is_favourite'] = get_saved_info($user_id, $data1['id']);
-        $row1['is_applied'] = get_applied_info($user_id, $data3['id']);
+        $row1['is_applied'] = get_applied_info($user_id, $data1['id']);
 
         array_push($jsonObj1, $row1);
 
@@ -599,6 +601,7 @@ else if ($get_method['method_name'] == "get_job_by_cat_id") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -669,6 +672,7 @@ else if ($get_method['method_name'] == "get_latest_job") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -694,7 +698,7 @@ else if ($get_method['method_name'] == "get_latest_job") {
         $row['category_image_thumb'] = $file_path . 'images/thumbs/' . $data['category_image'];
 
         $row['is_favourite'] = get_saved_info($get_method['user_id'], $data['id']);
-
+        $row['is_applied'] = get_applied_info($get_method['user_id'], $data['id']);
         array_push($jsonObj, $row);
 
     }
@@ -736,6 +740,7 @@ else if ($get_method['method_name'] == "get_recent_job") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -761,7 +766,7 @@ else if ($get_method['method_name'] == "get_recent_job") {
         $row['category_image_thumb'] = $file_path . 'images/thumbs/' . $data['category_image'];
 
         $row['is_favourite'] = get_saved_info($user_id, $data['id']);
-
+        $row['is_applied'] = get_applied_info($user_id, $data['id']);
         array_push($jsonObj, $row);
 
     }
@@ -897,6 +902,7 @@ else if ($get_method['method_name'] == "get_search_job") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -966,6 +972,7 @@ else if ($get_method['method_name'] == "search_by_keyword") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -1031,6 +1038,7 @@ else if ($get_method['method_name'] == "get_single_job") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -1148,6 +1156,7 @@ else if ($get_method['method_name'] == "get_similar_jobs") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -1173,7 +1182,7 @@ else if ($get_method['method_name'] == "get_similar_jobs") {
         $row['category_image_thumb'] = $file_path . 'images/thumbs/' . $data['category_image'];
 
         $row['is_favourite'] = get_saved_info($get_method['user_id'], $data['id']);
-
+        $row['is_applied'] = get_applied_info($get_method['user_id'], $data['id']);
         array_push($jsonObj, $row);
 
     }
@@ -1482,6 +1491,7 @@ else if ($get_method['method_name'] == "job_list") {
         $row['job_designation'] = $data['job_designation'];
         $row['job_desc'] = $data['job_desc'];
         $row['job_salary'] = $data['job_salary'];
+        $row['job_salary_mode'] = $data['job_salary_mode'];
         $row['job_company_name'] = $data['job_company_name'];
         $row['job_company_website'] = $data['job_company_website'];
         $row['job_phone_number'] = $data['job_phone_number'];
@@ -1513,7 +1523,7 @@ else if ($get_method['method_name'] == "job_list") {
         $row['category_image_thumb'] = $file_path . 'images/thumbs/' . $data['category_image'];
 
         $row['is_favourite'] = get_saved_info($user_id, $data['id']);
-
+        $row['is_applied'] = get_applied_info($user_id, $data['id']);
         array_push($jsonObj, $row);
     }
 
@@ -1598,6 +1608,7 @@ else if ($get_method['method_name'] == "user_apply_list") {
         $row['job_designation'] = get_job_info($data['job_id'], 'job_designation');
         $row['job_desc'] = get_job_info($data['job_id'], 'job_desc');
         $row['job_salary'] = get_job_info($data['job_id'], 'job_salary');
+        $row['job_salary_mode'] = get_job_info($data['job_id'], 'job_salary_mode');
         $row['job_company_name'] = get_job_info($data['job_id'], 'job_company_name');
         $row['job_company_website'] = get_job_info($data['job_id'], 'job_company_website');
         $row['job_phone_number'] = get_job_info($data['job_id'], 'job_phone_number');
@@ -1636,7 +1647,7 @@ else if ($get_method['method_name'] == "user_apply_list") {
 }
 else if ($get_method['method_name'] == "user_apply_job_seen") {
 
-    $queryJobs = "SELECT user_id,job_salary  FROM tbl_jobs  
+    $queryJobs = "SELECT user_id,job_salary,job_salary_mode  FROM tbl_jobs  
  	 			  WHERE  tbl_jobs.`job_status` = 0 AND `status` = 1 AND id = ".$get_method['job_id'];
     $queryJobs = mysqli_query($mysqli, $queryJobs);
 
@@ -1645,6 +1656,7 @@ else if ($get_method['method_name'] == "user_apply_job_seen") {
         $rowJob = mysqli_fetch_assoc($queryJobs);
         $provider_id = $rowJob["user_id"];
         $job_salary = $rowJob["job_salary"];
+        $job_salary_mode = $rowJob["job_salary_mode"];//todo
 
 
         $qry1 = "SELECT `name`,current_wallet_amount FROM tbl_users WHERE `id` = '" . $provider_id . "'";
@@ -1713,6 +1725,7 @@ else if ($get_method['method_name'] == "user_saved_list") {
         $row['job_designation'] = get_job_info($data['job_id'], 'job_designation');
         $row['job_desc'] = get_job_info($data['job_id'], 'job_desc');
         $row['job_salary'] = get_job_info($data['job_id'], 'job_salary');
+        $row['job_salary_mode'] = get_job_info($data['job_id'], 'job_salary_mode');
         $row['job_company_name'] = get_job_info($data['job_id'], 'job_company_name');
         $row['job_company_website'] = get_job_info($data['job_id'], 'job_company_website');
         $row['job_phone_number'] = get_job_info($data['job_id'], 'job_phone_number');
@@ -1733,7 +1746,7 @@ else if ($get_method['method_name'] == "user_saved_list") {
         $row['job_date'] = date('m/d/Y', get_job_info($data['job_id'], 'job_date'));
 
         $row['is_favourite'] = get_saved_info($get_method['user_id'], $data['job_id']);
-
+        $row['is_applied'] = get_applied_info($get_method['user_id'], $data['id']);
         array_push($jsonObj, $row);
 
     }
@@ -1781,6 +1794,7 @@ else if ($get_method['method_name'] == "job_add") {
         'job_designation' => addslashes($get_method['job_designation']),
         'job_desc' => addslashes($get_method['job_desc']),
         'job_salary' => $get_method['job_salary'],
+        'job_salary_mode' => $get_method['job_salary_mode'],
         'job_company_name' => $get_method['job_company_name'],
         'job_company_website' => $get_method['job_company_website'],
         'job_phone_number' => $get_method['job_phone_number'],
@@ -1838,6 +1852,7 @@ else if ($get_method['method_name'] == "edit_job") {
             'job_designation' => addslashes($get_method['job_designation']),
             'job_desc' => addslashes($get_method['job_desc']),
             'job_salary' => $get_method['job_salary'],
+            'job_salary_mode' => $get_method['job_salary_mode'],
             'job_company_name' => $get_method['job_company_name'],
             'job_company_website' => $get_method['job_company_website'],
             'job_phone_number' => $get_method['job_phone_number'],
@@ -1866,6 +1881,7 @@ else if ($get_method['method_name'] == "edit_job") {
             'job_designation' => addslashes($get_method['job_designation']),
             'job_desc' => addslashes($get_method['job_desc']),
             'job_salary' => $get_method['job_salary'],
+            'job_salary_mode' => $get_method['job_salary_mode'],
             'job_company_name' => $get_method['job_company_name'],
             'job_company_website' => $get_method['job_company_website'],
             'job_phone_number' => $get_method['job_phone_number'],
@@ -1916,6 +1932,7 @@ else if ($get_method['method_name'] == "get_company_details") {
         $row['company_website'] = $data['company_website'];
         $row['company_work_day'] = $data['company_work_day'];
         $row['company_work_time'] = $data['company_work_time'];
+        $row['commercial_registration_number'] = $data['commercial_registration_number'];
         $row['company_logo'] = $file_path . 'images/' . $data['company_logo'];
 
         array_push($jsonObj, $row);
@@ -1986,6 +2003,7 @@ else if ($get_method['method_name'] == "user_register") {
                         'company_desc' => addslashes($get_method['company_desc']),
                         'company_work_day' => addslashes(trim($get_method['company_work_day'])),
                         'company_work_time' => (trim($get_method['company_work_time'])),
+                        'commercial_registration_number' => (trim($get_method['commercial_registration_number'])),
                         'company_website' => (trim($get_method['company_website']))
 
                     );
@@ -2391,6 +2409,102 @@ else if ($get_method['method_name'] == "subscription_plan_list") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 }
+else if ($get_method['method_name'] == "get_location_list") {
+
+    $jsonObj = array();
+
+    $country_qry = "SELECT `id`, `name`, `country_code` FROM tbl_country WHERE status= 1 ORDER BY `name` ASC";
+    $resultCountry = mysqli_query($mysqli, $country_qry);
+
+    $wholeData= array();
+    while ($dataCountry = mysqli_fetch_assoc($resultCountry))
+    {
+        $countryId = $dataCountry["id"];
+        $countryName = $dataCountry["name"];
+        $countryCode = $dataCountry["country_code"];
+
+        $region_qry = "SELECT `id`, `name` FROM tbl_region WHERE status= 1 AND country_id = $countryId ORDER BY `name` ASC";
+        $resultRegion = mysqli_query($mysqli, $region_qry);
+
+        $regionData= array();
+        while ($dataRegion = mysqli_fetch_assoc($resultRegion))
+        {
+            $regionId = $dataRegion["id"];
+            $regionName = $dataRegion["name"];
+
+
+
+            $city_qry = "SELECT `c_id`, `city_name`,`country_id`,`region_id` FROM tbl_city WHERE status= 1 AND country_id = $countryId AND region_id = $regionId ORDER BY `city_name` ASC";
+            $resultCity = mysqli_query($mysqli, $city_qry);
+
+            $cityData= array();
+            while ($dataCity = mysqli_fetch_assoc($resultCity))
+            {
+                $cityId = $dataCity["c_id"];
+                $cityName = $dataCity["city_name"];
+                $country_id = $dataCity["country_id"];
+                $region_id = $dataCity["region_id"];
+
+                $cityData[] = array("id"=>$cityId,"name"=>$cityName);
+            }
+
+            $regionData[] = array("id"=>$regionId,"name"=>$regionName,"cities"=>$cityData);
+        }
+
+        $wholeData["country"][] = array("id"=>$countryId,"name"=>$countryName,"country_code"=>$countryCode,"regions"=>$regionData);
+    }
+
+
+
+
+    if($wholeData)
+    {
+
+        $set['JOBS_APP'] = $wholeData;
+
+    }else{
+        $set['JOBS_APP'][] = array('msg' => "No Data Available", 'success' => '0');
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    die();
+}
+else if ($get_method['method_name'] == "set_user_ratings") {
+
+    if ($get_method['user_id'] && $get_method['reviewer_id'] && $get_method['rating'] && $get_method['review'])
+    {
+        $review = $get_method['review'];
+        $rating = $get_method['rating'];
+        $reviewer_id = $get_method['reviewer_id'];
+        $user_id = $get_method['user_id'];
+
+        $data = array(
+            'user_id' => $user_id,
+            'reviewer_id' => $reviewer_id,
+            'rating' => $rating,
+            'review' => $review
+        );
+        $qry = Insert('tbl_reviews_ratings', $data);
+        $entry_id = mysqli_insert_id($mysqli);
+
+        if ($entry_id) {
+            $set['JOBS_APP'][] = array('user_id' => $user_id, 'reviewer_id' => $reviewer_id, 'rating' => $rating, 'review' => $review, 'success' => '1');
+        } else {
+            $set['JOBS_APP'][] = array('msg' => "Failed!!!  Try Again", 'success' => '0');
+        }
+
+    } else {
+        $set['JOBS_APP'][] = array('msg' => "Failed!!! Invalid Data Provided", 'success' => '0');
+    }
+
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    die();
+
+
+}
 else if ($get_method['method_name'] == "subscription_payment_init") {
     $date = time()*1000;
     $transaction_id = getGUIDnoHash();
@@ -2527,12 +2641,13 @@ else if ($get_method['method_name'] == "job_completed") {
 
     if ($get_method['job_id'] != "") {
 
-        $qry = "SELECT user_id,job_salary,user_alloted FROM tbl_jobs WHERE `id` = '" . $job_id . "' AND `job_status` = 4 AND `status` = 1";
+        $qry = "SELECT user_id,job_salary,job_salary_mode,user_alloted FROM tbl_jobs WHERE `id` = '" . $job_id . "' AND `job_status` = 4 AND `status` = 1";
         $result = mysqli_query($mysqli, $qry) or die('Error in fetch data ->' . mysqli_error($mysqli));
         if(mysqli_num_rows($result))
         {
             $rowResult = mysqli_fetch_assoc($result);
             $job_salary = $rowResult["job_salary"];
+            $job_salary_mode = $rowResult["job_salary_mode"];
             $user_id = $rowResult["user_id"];
             $user_alloted = $rowResult["user_alloted"];
 
@@ -2805,6 +2920,7 @@ else if ($get_method['method_name'] == "user_profile") {
     $company_website = $row_company['company_website'] ? $row_company['company_website'] : '';
     $company_work_day = $row_company['company_work_day'] ? $row_company['company_work_day'] : '';
     $company_work_time = $row_company['company_work_time'] ? $row_company['company_work_time'] : '';
+    $commercial_registration_number = $row_company['commercial_registration_number'] ? $row_company['commercial_registration_number'] : '';
     $company_desc = $row_company['company_desc'] ? $row_company['company_desc'] : '';
     $previousJobs = array();
     if($get_method['job_profile'])
@@ -2822,7 +2938,7 @@ else if ($get_method['method_name'] == "user_profile") {
         }
     }
 
-    $set['JOBS_APP'][] = array('previous_jobs' => $previousJobs,'user_availability' => $row['user_availability'],'user_id' => $row['id'], 'working_type' => $row['working_type'], 'user_type' => $row['user_type'], 'name' => $row['name'], 'email' => $row['email'], 'country_code' => $row['country_code'], 'phone' => $row['phone'], 'date_of_birth' => $date_of_birth, 'gender' => $gender, 'city' => $row['city'], 'address' => stripslashes($row['address']), 'current_company_name' => stripslashes($row['current_company_name']), 'experiences' => stripslashes($row['experiences']), 'skills' => $skills, 'user_image' => $user_image, 'user_resume' => $user_resume, 'total_apply_job' => apply_job_count($row['id']), 'total_saved_job' => saved_job_count($row['id']), 'register_as' => $register_as, 'company_name' => $company_name, 'company_email' => $company_email, 'mobile_no' => $mobile_no, 'company_country_code' => $company_country_code, 'company_address' => $company_address, 'company_desc' => $company_desc, 'company_website' => $company_website, 'company_work_day' => $company_work_day, 'company_work_time' => $company_work_time, 'company_logo' => $company_logo, 'success' => '1');
+    $set['JOBS_APP'][] = array('previous_jobs' => $previousJobs,'user_availability' => $row['user_availability'],'user_id' => $row['id'], 'working_type' => $row['working_type'], 'user_type' => $row['user_type'], 'name' => $row['name'], 'email' => $row['email'], 'country_code' => $row['country_code'], 'phone' => $row['phone'], 'date_of_birth' => $date_of_birth, 'gender' => $gender, 'city' => $row['city'], 'address' => stripslashes($row['address']), 'current_company_name' => stripslashes($row['current_company_name']), 'experiences' => stripslashes($row['experiences']), 'skills' => $skills, 'user_image' => $user_image, 'user_resume' => $user_resume, 'total_apply_job' => apply_job_count($row['id']), 'total_saved_job' => saved_job_count($row['id']), 'register_as' => $register_as, 'company_name' => $company_name, 'company_email' => $company_email, 'mobile_no' => $mobile_no, 'company_country_code' => $company_country_code, 'company_address' => $company_address, 'company_desc' => $company_desc, 'company_website' => $company_website, 'company_work_day' => $company_work_day, 'company_work_time' => $company_work_time, 'commercial_registration_number' => $commercial_registration_number, 'company_logo' => $company_logo, 'success' => '1');
 
     header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
@@ -2964,6 +3080,7 @@ else if ($get_method['method_name'] == "user_profile_update") {
             'company_website' => $get_method['company_website'],
             'company_work_day' => addslashes(trim($get_method['company_work_day'])),
             'company_work_time' => $get_method['company_work_time'],
+            'commercial_registration_number' => $get_method['commercial_registration_number'],
             'company_logo' => $company_logo
 
         );
@@ -2979,6 +3096,7 @@ else if ($get_method['method_name'] == "user_profile_update") {
             'company_desc' => addslashes($get_method['company_desc']),
             'company_work_day' => addslashes(trim($get_method['company_work_day'])),
             'company_work_time' => $get_method['company_work_time'],
+            'commercial_registration_number' => $get_method['commercial_registration_number'],
             'company_website' => $get_method['company_website']
         );
     }

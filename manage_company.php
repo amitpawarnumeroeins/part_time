@@ -99,6 +99,7 @@ function get_user_name($user_id)
               <th>Phone</th>
               <th>Company Work Day</th>
               <th>Company Work Time</th>
+              <th>Commercial Registration Number</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -121,6 +122,7 @@ function get_user_name($user_id)
                 <td><?php echo 'Only Admin Can See';?></td>
                 <td><?php echo $company_row['company_work_day']; ?></td>
                 <td><?php echo $company_row['company_work_time']; ?></td>
+                <td><?php echo $company_row['commercial_registration_number']; ?></td>
                 <td>
                   <a href="javascript:void(0)" data-id="<?php echo $company_row['id']; ?>" class="btn btn-danger btn_delete" data-toggle="tooltip" data-tooltip="Delete"><i class="fa fa-trash"></i></a></td>
               </tr>

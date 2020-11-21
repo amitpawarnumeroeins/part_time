@@ -251,6 +251,39 @@ switch ($_POST['action']) {
             mysqli_query($mysqli, $deleteSql);
 
         }
+        else if($tbl_nm=='tbl_region'){
+
+            $sql="SELECT * FROM tbl_region WHERE `id` IN ($ids)";
+            $res=mysqli_query($mysqli, $sql);
+
+            $sql="DELETE FROM tbl_region WHERE `id` IN ($ids)";
+            mysqli_query($mysqli, $sql);
+
+            $deleteSql="DELETE FROM tbl_city WHERE `region_id` IN ($ids)";
+            mysqli_query($mysqli, $deleteSql);
+
+            $deleteSql1="DELETE FROM tbl_jobs WHERE `region_id` IN ($ids)";
+            mysqli_query($mysqli, $deleteSql1);
+
+        }
+        else if($tbl_nm=='tbl_country'){
+
+            $sql="SELECT * FROM tbl_country WHERE `id` IN ($ids)";
+            $res=mysqli_query($mysqli, $sql);
+
+            $sql="DELETE FROM tbl_country WHERE `id` IN ($ids)";
+            mysqli_query($mysqli, $sql);
+
+            $deleteSql="DELETE FROM tbl_city WHERE `region_id` IN ($ids)";
+            mysqli_query($mysqli, $deleteSql);
+
+            $deleteSql1="DELETE FROM tbl_region WHERE `country_id` IN ($ids)";
+            mysqli_query($mysqli, $deleteSql1);
+
+            $deleteSql2="DELETE FROM tbl_jobs WHERE `country_id` IN ($ids)";
+            mysqli_query($mysqli, $deleteSql2);
+
+        }
         else if($tbl_nm=='tbl_saved'){
 
             $sql="SELECT * FROM tbl_saved WHERE `sa_id` IN ($ids)";

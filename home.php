@@ -181,7 +181,7 @@ if($smtp_warning)
         <a href="manage_withdrawals.php" class="card card-banner card-aliceblue-light">
             <div class="card-body"> <i class="icon fa fa-black-tie fa-4x"></i>
                 <div class="content">
-                    <div class="title">Wallet Withdrawal</div>
+                    <div class="title">Withdrawal Requests</div>
                     <div class="value"><span class="sign"></span><?=$withdrawal_requests; ?></div>
                 </div>
             </div>

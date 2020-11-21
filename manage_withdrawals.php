@@ -24,12 +24,15 @@ if ($page) {
     $start = 0;
 }
 
-$transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name FROM tbl_transaction_details
+$transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name,tbl_users.account_number, tbl_users.ifsc_code FROM tbl_transaction_details
             LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id` 
             WHERE trans_for = 1 AND trans_type = 1 AND tbl_transaction_details.type = 2 AND tbl_transaction_details.status = 4  AND user_updated = 0
             ORDER BY tbl_transaction_details.`id` DESC LIMIT $start, $limit";
 
 $transaction_result = mysqli_query($mysqli, $transaction_qry);
+if(mysqli_num_rows($transaction_result))
+{
+
 
 while ($row = mysqli_fetch_array($transaction_result)) {
 
@@ -37,6 +40,8 @@ while ($row = mysqli_fetch_array($transaction_result)) {
     $transaction_id = $row["transaction_id"];
     $user_id = $row["user_id"];
     $user_name = $row["user_name"];
+    $account_number = $row["account_number"];
+    $ifsc_code = $row["ifsc_code"];
     $amount = $row["amount"];
     $created_at = $row["created_at"];
 
@@ -45,6 +50,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
                                 <td class="text-center">$$amount</td>
                                 <td class="text-center">$transaction_id</td>
                                 <td class="text-center text-capitalize">$user_name</td>
+                                <td class="text-center">A/C No.: $account_number <br>IFSC:  $ifsc_code</td>
                                 <td class="text-center">$created_at</td>
                                 <td class="text-center">                                 
                                 <a title="Approve" class="toggle_btn_a" href="javascript:void(0)" data-id="$id" data-action="active" data-column="status"><span class="badge badge-success badge-icon"><i class="fa fa-check" aria-hidden="true"></i><span>Approve</span></span></a>
@@ -53,7 +59,15 @@ while ($row = mysqli_fetch_array($transaction_result)) {
 </td>
                             </tr>
 AAA;
-} ?>
+}
+}else{
+    $transDataDisp = <<<AAA
+                            <tr>
+                                <td class="text-center" colspan="5">No Withdrawal Request Right Now</td>
+                            </tr>
+AAA;
+}
+?>
 <div class="row">
     <div class="col-xs-12">
         <div class="card mrg_bottom">

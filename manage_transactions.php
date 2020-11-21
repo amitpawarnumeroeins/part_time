@@ -62,7 +62,7 @@ if (isset($_GET['filter'])) {
         $start = 0;
     }
 
-    $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name FROM tbl_transaction_details
+    $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name, tbl_users.account_number,tbl_users.ifsc_code FROM tbl_transaction_details
 		LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id` 
 		WHERE 1 $filterSql $filterSearch
 		ORDER BY tbl_transaction_details.`id` DESC LIMIT $start, $limit";
@@ -90,7 +90,7 @@ if (isset($_GET['filter'])) {
         $start = 0;
     }
 
-    $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name FROM tbl_transaction_details
+    $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name, tbl_users.account_number,tbl_users.ifsc_code FROM tbl_transaction_details
 		LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id` 
 		WHERE 1 
 		ORDER BY tbl_transaction_details.`id` DESC LIMIT $start, $limit";
@@ -105,6 +105,8 @@ while ($row = mysqli_fetch_array($transaction_result)) {
     $typeColor = $row["type"] == 1 ? "text-success" : "text-danger";
     $user_id = $row["user_id"];
     $user_name = $row["user_name"];
+    $account_number = $row["account_number"];
+    $ifsc_code = $row["ifsc_code"];
     $amount = $row["amount"];
     $status = $row["status"];
     $trans_for = $row["trans_for"];
@@ -161,6 +163,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
                             <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                             <td class="text-center text-capitalize"><a href="user_profile.php?user_id=$user_id#users_transactions">$user_name</a></td>
                             <td class="text-center">$trans_type <br> $transForText<br>$wallet_details</td>
+                            <td class="text-center">A/C No.: $account_number <br>IFSC:  $ifsc_code</td>
                             <td class="text-center">$created_at</td>
                         </tr>
 AAA;
@@ -238,8 +241,27 @@ AAA;
                         </div>-->
                             <button type="submit" name="filter" class="btn-search bg-warning">Filter</button>
                         </form>
+
                     </div>
+
                 </div>
+                <?php
+                $transaction_qry = "SELECT tbl_transaction_details.*,tbl_users.name as user_name,tbl_users.account_number, tbl_users.ifsc_code FROM tbl_transaction_details
+            LEFT JOIN tbl_users ON tbl_users.`id`= tbl_transaction_details.`user_id` 
+            WHERE trans_for = 1 AND trans_type = 1 AND tbl_transaction_details.type = 2 AND tbl_transaction_details.status = 4  AND user_updated = 0
+            ORDER BY tbl_transaction_details.`id` DESC LIMIT $start, $limit";
+
+                $transaction_result = mysqli_query($mysqli, $transaction_qry);
+                $linkWith = "#";
+                $countWith = "0";
+
+                if(mysqli_num_rows($transaction_result))
+                {
+                    $linkWith = "manage_withdrawals.php";
+                    $countWith = mysqli_num_rows($transaction_result);
+                }
+                ?>
+                <div class="btn btn-success" > <a href="<?=$linkWith?>" style="color: #fff"><?=$countWith?> Withdrawal Requests</a> </div>
             </div>
             <div class="clearfix"></div>
             <div class="col-md-12 mrg-top">
@@ -251,6 +273,7 @@ AAA;
                         <th>Transaction Id</th>
                         <th>User</th>
                         <th>Transaction Type</th>
+                        <th>Account Details</th>
                         <th>Created At</th>
                     </tr>
                     </thead>

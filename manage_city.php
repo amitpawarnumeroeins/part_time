@@ -10,10 +10,10 @@ if (isset($_POST['search'])) {
 
   $keyword = filter_var($_POST['search_value'], FILTER_SANITIZE_STRING);
 
-  $city_qry = "SELECT * FROM tbl_city WHERE tbl_city.`city_name` LIKE '%$keyword%' ORDER BY tbl_city.`c_id` DESC";
+  $city_qry = "SELECT tbl_city.*, tbl_region.name as region_name, tbl_country.name as country_name FROM tbl_city,tbl_region,tbl_country WHERE tbl_city.region_id = tbl_region.id AND tbl_city.country_id = tbl_country.id AND tbl_city.`city_name` LIKE '%$keyword%' ORDER BY tbl_city.`c_id` DESC";
 
   $result = mysqli_query($mysqli, $city_qry);
-  
+
 } else {
 
   $tableName = "tbl_city";
@@ -36,7 +36,8 @@ if (isset($_POST['search'])) {
   }
 
 
-  $city_qry = "SELECT * FROM tbl_city
+  $city_qry = "SELECT tbl_city.*, tbl_region.name as region_name, tbl_country.name as country_name FROM tbl_city,tbl_region,tbl_country
+        WHERE tbl_city.region_id = tbl_region.id AND tbl_city.country_id = tbl_country.id
 		 ORDER BY tbl_city.`c_id` DESC LIMIT $start, $limit";
 
   $result = mysqli_query($mysqli, $city_qry);
@@ -61,6 +62,8 @@ if (isset($_POST['search'])) {
               </form>
             </div>
             <div class="add_btn_primary"> <a href="add_city.php?add">Add City</a> </div>
+            <div class="btn btn-success"> <a href="manage_country.php" style="color: #FFFFFF">Country</a> </div>
+            <div class="btn btn-warning"> <a href="manage_region.php" style="color: #FFFFFF">Region</a> </div>
           </div>
         </div>
       </div>
@@ -69,6 +72,8 @@ if (isset($_POST['search'])) {
         <table class="table table-striped table-bordered table-hover">
           <thead>
             <tr>
+              <th>Country Name</th>
+              <th>Region Name</th>
               <th>City Name</th>
               <th>Status</th>
               <th class="cat_action_list">Action</th>
@@ -81,7 +86,9 @@ if (isset($_POST['search'])) {
 
             ?>
               <tr>
-                <td><?php echo $row['city_name']; ?></td>
+                <td class="text-capitalize"><?php echo $row['country_name']; ?></td>
+                <td class="text-capitalize"><?php echo $row['region_name']; ?></td>
+                <td class="text-capitalize"><?php echo $row['city_name']; ?></td>
 
                 <td>
                   <?php if ($row['status'] != "0") { ?>

@@ -121,6 +121,7 @@ CREATE TABLE `tbl_company` (
   `company_desc` text NOT NULL,
   `company_logo` varchar(255) NOT NULL,
   `company_work_day` varchar(255) NOT NULL,
+  `company_work_day` varchar(255) NOT NULL,
   `company_work_time` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

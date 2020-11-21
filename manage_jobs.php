@@ -191,6 +191,8 @@ function get_user_info($user_id,$field_name)
                             </form>
                         </div>
                         <div class="add_btn_primary"> <a href="add_job.php">Add Job</a> </div>
+                        <div class="btn btn-success" > <a href="manage_active_jobs.php" style="color: #fff">Job Reports</a> </div>
+                        <div class="btn btn-warning"> <a href="manage_applied_users.php" style="color: #fff">user Applied</a> </div>
                     </div>
                 </div>
                 <form id="filterForm" accept="" method="GET">
