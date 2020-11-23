@@ -23,15 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="Changes">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/invoice.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/read_invoice.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.php" afterPath="$PROJECT_DIR$/api.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/flat-admin.css" afterPath="$PROJECT_DIR$/assets/css/flat-admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/includes/function.php" afterPath="$PROJECT_DIR$/includes/function.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage_active_jobs.php" afterPath="$PROJECT_DIR$/manage_active_jobs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.php" afterPath="$PROJECT_DIR$/settings.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.php" afterPath="$PROJECT_DIR$/test.php" />
     </list>
     <ignored path="$PROJECT_DIR$/ChatApplication/vendor/cboden/ratchet/" />
     <ignored path="$PROJECT_DIR$/ChatApplication/vendor/composer/" />
@@ -127,8 +119,8 @@
       <file leaf-file-name="api.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="713" column="1" lean-forward="true" selection-start-line="713" selection-start-column="1" selection-end-line="713" selection-end-column="1" />
+            <state relative-caret-position="22">
+              <caret line="792" column="0" lean-forward="true" selection-start-line="792" selection-start-column="0" selection-end-line="792" selection-end-column="0" />
               <folding>
                 <element signature="e#1024#1054#0#PHP" expanded="false" />
                 <element signature="n#sendFcmNotification#0;n#!!top" expanded="false" />
@@ -401,20 +393,6 @@
                 <marker date="1606139126126" expanded="false" signature="137952:137991" ph="SELECT * FRO... tbl_settings" />
                 <marker date="1606139126126" expanded="false" signature="138721:138790" ph="SELECT * FRO... tbl_users" />
                 <marker date="1606139126126" expanded="true" signature="139232:139273" ph="SELECT * FRO... tbl_settings" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="60" selection-end-column="5" />
-              <folding>
-                <marker date="1606139101753" expanded="true" signature="1600:1821" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1606139101753" expanded="true" signature="1988:2145" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1606139101753" expanded="true" signature="1988:2248" ph="SELECT * FRO... tbl_jobs" />
               </folding>
             </state>
           </provider>
@@ -715,7 +693,7 @@
       <workItem from="1605867504703" duration="1935000" />
       <workItem from="1605869807382" duration="8320000" />
       <workItem from="1605934547766" duration="17479000" />
-      <workItem from="1606107680444" duration="23249000" />
+      <workItem from="1606107680444" duration="23429000" />
     </task>
     <task id="LOCAL-00001" summary="2nd">
       <created>1603964930301</created>
@@ -822,11 +800,18 @@
       <option name="project" value="LOCAL" />
       <updated>1605965265166</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Changes">
+      <created>1606139240825</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1606139240825</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51606000" />
+    <option name="totallyTimeSpent" value="51786000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -1580,8 +1565,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="713" column="1" lean-forward="true" selection-start-line="713" selection-start-column="1" selection-end-line="713" selection-end-column="1" />
+        <state relative-caret-position="22">
+          <caret line="792" column="0" lean-forward="true" selection-start-line="792" selection-start-column="0" selection-end-line="792" selection-end-column="0" />
           <folding>
             <element signature="e#1024#1054#0#PHP" expanded="false" />
             <element signature="n#sendFcmNotification#0;n#!!top" expanded="false" />
