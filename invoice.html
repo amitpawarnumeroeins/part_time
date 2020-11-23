@@ -1,0 +1,110 @@
+<center>
+    <table width="600px;" cellpadding="0" cellspacing="0" style="border: 1px #ddd solid;font-family:Tahoma,Arial, Helvetica, sans-serif;font-size:11px;background:#fff;"><tbody><tr>
+        <td align="center">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td colspan="2" style="width:100%;padding:10px;font-size:11px;    text-align: center;">
+                        <img src="images/logo-part-time.png" width="100px">
+                        <div>{[##COMPANY_NAME##]}</div>
+                        <div>{[##COMPANY_WEBSITE##]}</div>
+                        <div>{[##COMPANY_PHONE##]}, {[##COMPANY_EMAIL##]}</div>
+                    </td>
+                </tr>
+            </table>
+            <h3 style="background: #e4e4e4;margin: 0;padding: 1em;">SERVICE INVOICE</h3>
+            <div style="padding: 0 0 60px 0;">
+                <table width="100%" cellpadding="5" cellspacing="0" style="text-align: left;font-size:11px;">
+                    <tbody>
+                    <tr>
+                        <td style="width:50%;font-size:11px;    text-align: left;">
+                            <strong>Provider</strong><br/>
+                             {[##CLIENT_NAME1##]}<br/>
+                             {[##CLIENT_ADDRESS1##]}<br/>
+                             {[##CLIENT_PHONE1##]}<br/>
+                             {[##CLIENT_EMAIL1##]}<br/>
+                        </td>
+                        <td style="width:0%;font-size:11px;    text-align: right;" ></td>
+                        <td style="width:50%;font-size:11px;    text-align: right;">
+                            <strong>Seeker</strong><br/>
+                            {[##CLIENT_NAME2##]}<br/>
+                            {[##CLIENT_ADDRESS2##]}<br/>
+                            {[##CLIENT_PHONE2##]}<br/>
+                            {[##CLIENT_EMAIL2##]}<br/>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td valign="top" style="border: 1px #ccc solid; width: 30%;">
+                            <strong>Invoice No.</strong>
+                            <br><br>
+                            {[##INVOICENUMBER##]}
+                        </td>
+                        <td valign="top" style="border: 1px #ccc solid; width:15%;">
+                            <strong>Service Mode</strong>
+                            <br><br><span id="tf3" style="text-transform: capitalize;">{[##SERVICEMODE##]}</span>
+                        </td>
+                        <td valign="top" style="border: 1px #ccc solid; width: 30%;">
+                            <strong>Payment Date</strong>
+                            <br><br>
+                            {[##DATE##]}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><br></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table width="600px" cellpadding="5" cellspacing="0" style="text-align: left;font-size:11px;">
+                    <thead>
+                    <tr>
+                        <th style="background-color: #eee; width: 25%; height: 18px;" bgcolor="#eee" colspan="3">Project</th>
+                        <th style="background-color: #eee; width: 45%; height: 18px;" bgcolor="#eee">Duration</th>
+                        <th style="background-color: #eee; width: 15%; height: 18px;" bgcolor="#eee">Amount</th>
+                        <th style="background-color: #eee; width: 15%; height: 18px;" bgcolor="#eee">Payment Mode</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="background-color: #fff; width: 25%; height: 18px;text-transform: capitalize" bgcolor="#fff" colspan="3">{[##PROJECT_NAME##]}</td>
+                        <td style="background-color: #fff; width: 45%; height: 18px;" bgcolor="#fff">{[##PROJECT_DURATION##]}</td>
+                        <td style="background-color: #fff; width: 15%; height: 18px;" bgcolor="#fff">{[##AMOUNT##]}</td>
+                        <td style="background-color: #fff; width: 15%; height: 18px;text-transform: capitalize" bgcolor="#fff">{[##PAYMENT_MODE##]}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #fff; width: 25%; height: 18px;" bgcolor="#fff" colspan="3"></td>
+                        <td style="background-color: #fff; width: 45%; height: 18px;" bgcolor="#fff"></td>
+                        <td style="background-color: #fff; width: 15%; height: 18px;" bgcolor="#fff"></td>
+                        <td style="background-color: #fff; width: 15%; height: 18px;" bgcolor="#fff"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #fff; width: 25%; height: 18px;" bgcolor="#fff" colspan="3"></td>
+                        <td style="background-color: #fff; width: 45%; height: 18px;" bgcolor="#fff"></td>
+                        <td style="background-color: #fff; width: 15%; height: 18px;" bgcolor="#fff"></td>
+                        <td style="background-color: #fff; width: 15%; height: 18px;" bgcolor="#fff"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="right" style="border: 1px #ccc solid;">Total</td>
+                        <td align="right" style="border: 1px #ccc solid;"><strong>{[##GRANDTOTAL##]}</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="border: 1px #ccc solid;" align="right"><em>E &amp; OE</em></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" style="border: 1px #ccc solid;" align="left"><em><strong>REMARK : </strong>{[##REMARK##]}</em></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="center">{[##FOOTNOTE##]}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #eee; width: 25%; height: 18px;" bgcolor="#eee" colspan="3">Note</td>
+                        <td style="background-color: #eee; height: 18px;" bgcolor="#eee" colspan="4">{[##COMISSION_PERCENTAGE##]}% of amount will be charged to both parties</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+</center>

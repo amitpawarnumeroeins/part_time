@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
   exit;
 }
 
-if (isset($_POST['admob_submit'])) {
+/*if (isset($_POST['admob_submit'])) {
 
   $data = array(
 
@@ -101,7 +101,7 @@ if (isset($_POST['admob_submit'])) {
   $_SESSION['msg'] = "11";
   header("Location:settings.php");
   exit;
-}
+}*/
 
 if (isset($_POST['api_submit'])) {
 	
@@ -127,6 +127,7 @@ if (isset($_POST['app_update'])) {
     'update_status' => $_POST['update_status'] ? 'true' : 'false',
     'app_update_desc'  =>  trim($_POST['app_update_desc']),
     'new_app_version'  =>  trim($_POST['new_app_version']),
+    'commission'  =>  trim($_POST['commission']),
     'app_link'  =>  trim($_POST['app_link'])
   );
 
@@ -512,6 +513,17 @@ if (isset($_POST['app_pri_poly'])) {
                 <div class="section">
                   <div class="section-body">
                     <div class="form-group">
+                      <label class="col-md-3 control-label">App Commission:-
+                        <p class="control-label-help" style="color:#F00">% you want to Charge</p>
+                      </label>
+                      <div class="col-md-6">
+                        <div class="row" style="margin-top: 15px">
+                          <input type="number" id="commission" name="commission" class="form-control" required="" value="<?php echo $settings_row['commission'];?>"/>
+
+                        </div>
+                      </div>                   
+                    </div>
+                    <div class="form-group">
                       <label class="col-md-3 control-label">App Update Popup Show/Hide:-
                         <p class="control-label-help" style="color:#F00">You can show/hide update popup from this option</p>
                       </label>
@@ -520,7 +532,7 @@ if (isset($_POST['app_pri_poly'])) {
                           <input type="checkbox" id="chk_update" name="update_status" value="true" class="cbx hidden" <?php if($settings_row['update_status']=='true'){ echo 'checked'; }?>/>
                           <label for="chk_update" class="lbl" style="left:13px;"></label>
                         </div>
-                      </div>                   
+                      </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">New App Version Code :-
@@ -565,11 +577,11 @@ if (isset($_POST['app_pri_poly'])) {
               </form>
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="api_settings">
+            <!--<div role="tabpanel" class="tab-pane" id="api_settings">
               <form action="" name="settings_api" method="post" class="form form-horizontal" enctype="multipart/form-data">
                 <div class="section">
                   <div class="section-body">
-                    <?php if($settings_details['ios_envato_purchased_status'] == '1'){?>
+                    <?php /*if($settings_details['ios_envato_purchased_status'] == '1'){*/?>
                       <div class="checkbox" style="margin-bottom :20px;">
                         <input type="checkbox" name="checkbox" id="checkbox_api_settings" class="btn_import_a" data-type="api_settings">
                         <label for="checkbox_api_settings">
@@ -577,25 +589,25 @@ if (isset($_POST['app_pri_poly'])) {
                         </label>
                       </div>
                       <br>
-                    <?php }?>
+                    <?php /*}*/?>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Home Limit:-</label>
                       <div class="col-md-6">
-                        <input type="number" name="api_home_limit" id="api_home_limit" value="<?php echo $settings_row['api_home_limit']; ?>" class="form-control">
+                        <input type="number" name="api_home_limit" id="api_home_limit" value="<?php /*echo $settings_row['api_home_limit']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Latest Limit:-</label>
                       <div class="col-md-6">
 
-                        <input type="number" name="api_latest_limit" id="api_latest_limit" value="<?php echo $settings_row['api_latest_limit']; ?>" class="form-control">
+                        <input type="number" name="api_latest_limit" id="api_latest_limit" value="<?php /*echo $settings_row['api_latest_limit']; */?>" class="form-control">
                       </div>
 
                     </div>
                     <div class="form-group">
                       <label class="col-md-3 control-label">Pagination Limit:-</label>
                       <div class="col-md-6">
-                        <input type="number" name="api_page_limit" id="api_page_limit" value="<?php echo $settings_row['api_page_limit']; ?>" class="form-control">
+                        <input type="number" name="api_page_limit" id="api_page_limit" value="<?php /*echo $settings_row['api_page_limit']; */?>" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -603,8 +615,8 @@ if (isset($_POST['app_pri_poly'])) {
                       <div class="col-md-6">
 
                         <select name="api_cat_order_by" id="api_cat_order_by" class="select2">
-                          <option value="cid" <?php if ($settings_row['api_cat_order_by'] == 'cid') { ?>selected<?php } ?>>ID</option>
-                          <option value="category_name" <?php if ($settings_row['api_cat_order_by'] == 'category_name') { ?>selected<?php } ?>>Name</option>
+                          <option value="cid" <?php /*if ($settings_row['api_cat_order_by'] == 'cid') { */?>selected<?php /*} */?>>ID</option>
+                          <option value="category_name" <?php /*if ($settings_row['api_cat_order_by'] == 'category_name') { */?>selected<?php /*} */?>>Name</option>
 
                         </select>
 
@@ -617,8 +629,8 @@ if (isset($_POST['app_pri_poly'])) {
 
 
                         <select name="api_cat_post_order_by" id="api_cat_post_order_by" class="select2">
-                          <option value="ASC" <?php if ($settings_row['api_cat_post_order_by'] == 'ASC') { ?>selected<?php } ?>>ASC</option>
-                          <option value="DESC" <?php if ($settings_row['api_cat_post_order_by'] == 'DESC') { ?>selected<?php } ?>>DESC</option>
+                          <option value="ASC" <?php /*if ($settings_row['api_cat_post_order_by'] == 'ASC') { */?>selected<?php /*} */?>>ASC</option>
+                          <option value="DESC" <?php /*if ($settings_row['api_cat_post_order_by'] == 'DESC') { */?>selected<?php /*} */?>>DESC</option>
                         </select>
                       </div>
                     </div>
@@ -630,7 +642,7 @@ if (isset($_POST['app_pri_poly'])) {
                   </div>
                 </div>
               </form>
-            </div>
+            </div>-->
             <div role="tabpanel" class="tab-pane active" id="api_privacy_policy">
               <form action="" name="api_privacy_policy" method="post" class="form form-horizontal" enctype="multipart/form-data">
                 <div class="section">

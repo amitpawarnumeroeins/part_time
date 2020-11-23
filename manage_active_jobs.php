@@ -97,6 +97,7 @@ if (isset($_GET['apply_id'])) {
                         <th class="text-center">Start Date</th>
                         <th class="text-center">End Date</th>
                         <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -145,6 +146,21 @@ if (isset($_GET['apply_id'])) {
 
 
                             </td>
+                        <td>
+                           <?php
+                                if($users_row["job_status"]==1)
+                                {
+                                    $job_id = $users_row["job_id"];
+                                    echo $invIce=<<<AAA
+                                        <a href="read_invoice.php?job_id=$job_id" target="loadToBePrintDoc">
+                                            Download
+                                        </a>
+AAA;
+
+                                }
+
+                           ?>
+                        </td>
                         </tr>
                         <?php
 
@@ -167,7 +183,7 @@ if (isset($_GET['apply_id'])) {
         </div>
     </div>
 </div>
-
+<iframe name="loadToBePrintDoc" style="width: 85%; display: none"/>
 <?php include('includes/footer.php'); ?>
 
 

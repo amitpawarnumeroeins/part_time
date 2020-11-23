@@ -160,6 +160,45 @@ function user_info($user_id,$field_name)
         return "";
     }
 }
+function get_user_full_data($user_id)
+{
+
+    global $mysqli;
+
+    $user_qry = "SELECT * FROM tbl_users where id='" . $user_id . "'";
+    $user_result = mysqli_query($mysqli, $user_qry);
+    $user_row = mysqli_fetch_assoc($user_result);
+
+    if (mysqli_num_rows($user_result) > 0)
+    {
+        return $user_row;
+    } else {
+        return 'false';
+    }
+}
+
+function getTransactionDetails($job_id)
+{
+
+    global $mysqli;
+
+    $user_qry = "SELECT * FROM tbl_transaction_details where id='" . $job_id . "'";
+    $user_result = mysqli_query($mysqli, $user_qry);
+
+
+    if (mysqli_num_rows($user_result) > 0)
+    {
+        $allData = array();
+        while ($user_row = mysqli_fetch_assoc($user_result))
+        {
+            $allData[] = $user_row;
+        }
+        return $allData;
+    } else {
+        return 'false';
+    }
+}
+
 function cleanInput($inputText){
 
     return htmlentities(addslashes(trim($inputText)));
