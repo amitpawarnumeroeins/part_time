@@ -231,10 +231,8 @@ $purifier = new HTMLPurifier($config1);
                     <div class="col-md-6">
                       <select name="job_salary_mode" id="job_salary_mode" class="form-control" required>
                           <option value="">Please Select Payment Mode</option>
-                          <option <?php if($row['job_salary_mode']==1){ echo "selected"; } ?> value="1">Hourly</option>
-                          <option <?php if($row['job_salary_mode']==2){ echo "selected"; } ?> value="1">Daily</option>
-                          <option <?php if($row['job_salary_mode']==3){ echo "selected"; } ?> value="1">Weekly</option>
-                          <option <?php if($row['job_salary_mode']==4){ echo "selected"; } ?> value="1">Monthly</option>
+                          <option <?php if($row['job_salary_mode']==2){ echo "selected"; } ?> value="2">Hourly</option>
+                          <option <?php if($row['job_salary_mode']==1){ echo "selected"; } ?> value="1">Fixed</option>
                       </select>
                     </div>
                   </div>

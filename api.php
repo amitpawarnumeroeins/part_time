@@ -42,52 +42,7 @@ function get_user_status($user_id)
 /**
  * @return bool|string
  */
-function sendFcmNotification($user_ids, $title, $body, $click_action)
-{
-    global $mysqli;
-    $sqlUserList = "SELECT `id`, `device_token` FROm `tbl_users` WHERE `id` IN(".$user_ids.")";
-    $resultUserList = mysqli_query($mysqli,$sqlUserList);
-    $registrationIds = [];
-    $insertSql = "";
-    while ($rowUserList = mysqli_fetch_assoc($resultUserList))
-    {
-        $registrationIds[] = $rowUserList["device_token"];
-        $user_id = $rowUserList["id"];
-        $insertSql .="('$user_id','$title','$body','$click_action'),";
-    }
-    $insertSql = rtrim($insertSql,",");
-    mysqli_query($mysqli,"INSERT INTO `tbl_notification` (`user_id`,`title`, `body`, `click_action`) VALUES ".$insertSql);
-    $data = array( 'title' => $title, 'body' => $body, 'click_action' => $click_action);
 
-    // prep the bundle
-
-    $fields = array
-    (
-        'registration_ids' => $registrationIds,
-        'data'          => $data,
-        'content_available' => true,
-        'priority' => 'high',
-        'notification' => $data
-    );
-
-    $headers = array
-    (
-        'Authorization: key=' . FCM_SERVER_KEY,
-        'Content-Type: application/json'
-    );
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
-    $result = curl_exec($ch);
-    curl_close($ch);
-
-    //echo $result;
-}
 
 
 
@@ -511,10 +466,16 @@ else if ($get_method['method_name'] == "get_notification") {
     die();
 }
 else if ($get_method['method_name'] == "get_list") {
+    $user_id = $get_method['user_id'];
 
     $jsonObj0 = array();
 
-    $query0 = "SELECT * FROM tbl_city WHERE tbl_city.`status`=1 ORDER BY tbl_city.`c_id` DESC";
+    $query12 = "SELECT region_id FROM tbl_users,tbl_city WHERE tbl_city.c_id =tbl_users.city AND tbl_users.`id`=$user_id ";
+    $sql12 = mysqli_query($mysqli, $query12) or die(mysqli_error($mysqli));
+    $row12 = mysqli_fetch_assoc($sql12);
+    $region_id = $row12["region_id"];
+
+    $query0 = "SELECT * FROM tbl_city WHERE tbl_city.`status`=1 AND region_id = $region_id ORDER BY tbl_city.`c_id` DESC";
     $sql0 = mysqli_query($mysqli, $query0) or die(mysqli_error($mysqli));
 
     while ($data0 = mysqli_fetch_assoc($sql0)) {
@@ -789,6 +750,22 @@ else if ($get_method['method_name'] == "get_search_job") {
     $time_range = $get_method['time_range'];
     $job_type = $get_method['job_type'];
 
+    switch ($budget_range)
+    {
+        case 1:
+            $budget_range="0-500";
+            break;
+        case 2:
+            $budget_range="500-5000";
+            break;
+        case 3:
+            $budget_range="5000-10000";
+            break;
+        case 4:
+            $budget_range="10000-1000000000";
+            break;
+    }
+
     $jsonObj = array();
 
     $sqlFilter = "";
@@ -832,7 +809,7 @@ else if ($get_method['method_name'] == "get_search_job") {
 
     if($job_type)
     {
-        $sqlFilter .= " AND tbl_jobs.`job_type` = '$job_type' ";
+        $sqlFilter .= " AND tbl_jobs.`job_type` LIKE '%" . $job_type . "%' ";
     }
 
     $query_rec = "SELECT COUNT(*) as num FROM tbl_jobs
@@ -1768,6 +1745,8 @@ else if ($get_method['method_name'] == "job_add") {
         'job_work_time' => addslashes($get_method['job_work_time']),
         'job_map_latitude' => addslashes($get_method['job_map_latitude']),
         'job_map_longitude' => addslashes($get_method['job_map_longitude']),
+        'job_end_time' => addslashes($get_method['job_end_time']),
+        'job_start_time' => addslashes($get_method['job_start_time']),
         'job_image' => $job_image,
         'job_date' => strtotime($get_method['job_date']),
         'status' => 1
@@ -2317,6 +2296,7 @@ else if ($get_method['method_name'] == "wallet_transaction_list") {
                     $row['bank_trans_response'] = $data['bank_trans_response'];//diffrent payment methods.. stripe,hyperpay
                     $row['trans_type'] = $data['trans_type'];//1-bank, 2- wallet
                     $row['timestamp'] = $data['updated_at'];
+                    $row['commission'] = $data['commission'];
 
                     if($data['type'] == 1)
                     {
@@ -2742,6 +2722,49 @@ else if ($get_method['method_name'] == "job_completed") {
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
 }
+else if ($get_method['method_name'] == "extend_job_date") {
+
+    if ($get_method['job_id'] != "") {
+
+        $job_id = $get_method['job_id'];
+        $job_end_time = $get_method['job_end_time'];
+
+        $qry = "SELECT * FROM tbl_jobs WHERE `id` = '" . $job_id . "'";
+        $result = mysqli_query($mysqli, $qry) or die('Error in fetch data ->' . mysqli_error($mysqli));
+        if(mysqli_num_rows($result))
+        {
+            $rowResult = mysqli_fetch_assoc($result);
+            $current_job_end_time = $rowResult["job_end_time"];
+            $user_alloted = $rowResult["user_alloted"];
+
+            if($job_end_time>$current_job_end_time)
+            {
+
+
+            $data = array(
+                'job_end_time' => $current_job_end_time
+            );
+            Update('tbl_jobs', $data, "WHERE `id` = '" . $job_id . "' AND `user_alloted` = '" . $user_alloted . "'");
+
+            $fcmMessage = "Part Time: Job Time Extended";
+            $fcmBody = "Your Job Time has been Extended!!";
+            $fcmClickIntent = "seeker_job_awarded";
+            sendFcmNotification($user_alloted,$fcmMessage,$fcmBody,$fcmClickIntent);
+                $set['JOBS_APP'][] = array('status' => "Job Time Sucessfully Extended", 'success' => '1');
+            }else{
+                $set['JOBS_APP'][] = array('msg' => "Failed!! Invalid Date Time Provided", 'success' => '0');
+            }
+        } else {
+            $set['JOBS_APP'][] = array('msg' => "Failed!! Job Not Found", 'success' => '0');
+        }
+    } else {
+        $set['JOBS_APP'][] = array('msg' => "Failed!! Invalid Job Details", 'success' => '0');
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+    die();
+}
 else if ($get_method['method_name'] == "resend_otp") {
 
     $phone = filter_var($get_method['phone'], FILTER_SANITIZE_STRING);
@@ -2911,7 +2934,7 @@ else if ($get_method['method_name'] == "user_profile") {
     }
 
 
-    $qryReviews = "SELECT * FROM tbl_reviews_ratings WHERE `user_id` = '" . $get_method['id'] . "'";
+    $qryReviews = "SELECT tbl_reviews_ratings.*,tbl_users.name as reviewer_name FROM tbl_reviews_ratings,tbl_users WHERE  tbl_users.id = tbl_reviews_ratings.reviewer_id AND `user_id` = '" . $get_method['id'] . "'";
     $resultReviews = mysqli_query($mysqli, $qryReviews);
     $rating_reviews = array();
     while($row_reviews = mysqli_fetch_assoc($resultReviews))

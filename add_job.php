@@ -65,6 +65,7 @@ if (isset($_POST['submit'])) {
         'job_designation'  => filter_var($_POST['job_designation'], FILTER_SANITIZE_STRING),
         'job_desc'  =>  addslashes($clean_job_desc),
         'job_salary'  =>  filter_var($_POST['job_salary'], FILTER_SANITIZE_STRING),
+        'job_salary_mode'  =>  filter_var($_POST['job_salary_mode'], FILTER_SANITIZE_STRING),
         'job_company_name'  => filter_var($_POST['job_company_name'], FILTER_SANITIZE_STRING),
         'job_company_website'  => filter_var($_POST['job_company_website'], FILTER_SANITIZE_STRING),
         'job_phone_number'  => $phone_to_check,
@@ -174,6 +175,16 @@ if (isset($_POST['submit'])) {
                                 <label class="col-md-3 control-label">Hire Price :- <p class="control-label-help" id="square_lable_info">(10,0000)</p></label>
                                 <div class="col-md-6">
                                     <input type="text" name="job_salary" id="job_salary" value="" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Salary Mode :- </label>
+                                <div class="col-md-6">
+                                    <select type="text" name="job_salary_mode" id="job_salary_mode" class="form-control" required>
+                                        <option value="">Please Select Salary Mode</option>
+                                        <option value="1">Fixed</option>
+                                        <option value="2">Hourly</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">

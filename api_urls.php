@@ -69,6 +69,7 @@ $ios_file_path = getBaseUrl().'ios_api.php';
                      <br><b>Notification List* </b>(Method: get_notification)(Parameter: user_id)
                      <br><b>Location List* </b>(Method: get_location_list)()
                      <br><b>Set User Reviews and Ratings* </b>(Method: set_user_ratings)(Parameter: user_id, reviewer_id, rating, review)
+                     <br><b>Extend Job Time* </b>(Method: extend_job_date)(Parameter: job_id, job_end_time)
 			 </code>
              </pre>
             </div>

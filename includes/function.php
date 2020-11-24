@@ -274,6 +274,52 @@ function Send_GCM_msg($registration_id,$data)
     //echo $result;exit;
 }
 
+function sendFcmNotification($user_ids, $title, $body, $click_action)
+{
+    global $mysqli;
+    $sqlUserList = "SELECT `id`, `device_token` FROm `tbl_users` WHERE `id` IN(".$user_ids.")";
+    $resultUserList = mysqli_query($mysqli,$sqlUserList);
+    $registrationIds = [];
+    $insertSql = "";
+    while ($rowUserList = mysqli_fetch_assoc($resultUserList))
+    {
+        $registrationIds[] = $rowUserList["device_token"];
+        $user_id = $rowUserList["id"];
+        $insertSql .="('$user_id','$title','$body','$click_action'),";
+    }
+    $insertSql = rtrim($insertSql,",");
+    mysqli_query($mysqli,"INSERT INTO `tbl_notification` (`user_id`,`title`, `body`, `click_action`) VALUES ".$insertSql);
+    $data = array( 'title' => $title, 'body' => $body, 'click_action' => $click_action);
+
+    // prep the bundle
+
+    $fields = array
+    (
+        'registration_ids' => $registrationIds,
+        'data'          => $data,
+        'content_available' => true,
+        'priority' => 'high',
+        'notification' => $data
+    );
+
+    $headers = array
+    (
+        'Authorization: key=' . FCM_SERVER_KEY,
+        'Content-Type: application/json'
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    //echo $result;
+}
 
 //Image compress
 function compress_image($source_url, $destination_url, $quality)
