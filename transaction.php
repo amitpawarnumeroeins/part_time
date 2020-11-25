@@ -56,7 +56,7 @@ if (mysqli_num_rows($result) > 0) {
         $transDataDisp .=<<<AAA
                         <tr>
                             <td class="$typeColor text-center">$type</td>
-                            <td class="text-center">$amount</td>
+                            <td class="text-center">$amount SAR</td>
                             <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                             <td class="text-center text-capitalize">$user_name</td>
                             <td class="text-center">$trans_type <br> $mode</td>

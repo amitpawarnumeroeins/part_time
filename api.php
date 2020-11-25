@@ -204,11 +204,11 @@ function getAndSendOtp($mobileNumber)
     //AC58368fe26d4cd6ddade89ba79cb227e4
 // Your Account SID and Auth Token from twilio.com/console
     $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = '1571f3150582d1111846f68a8c368bf8';
+    $auth_token = '682301500efb6ae2ffad44b7afab9cec';
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
 // A Twilio number you own with SMS capabilities
-    $twilio_number = "+15597154186";
+    $twilio_number = "+18652704189";
     try {
         $thistpGen = "";
         for ($i = 1; $i <= 4; $i++)
@@ -289,6 +289,8 @@ if ($get_method['method_name'] == "get_home") {
         $row3['job_image'] = $file_path . 'images/' . $data3['job_image'];
         $row3['job_image_thumb'] = $file_path . 'images/thumbs/' . $data3['job_image'];
         $row3['job_date'] = date('m/d/Y', $data3['job_date']);
+        $row3['job_start_time'] = $data3['job_start_time'];
+        $row3['job_end_time'] = $data3['job_end_time'];
         $row3['cid'] = $data3['cid'];
         $row3['category_name'] = $data3['category_name'];
         $row3['category_image'] = $file_path . 'images/' . $data3['category_image'];
@@ -336,7 +338,8 @@ if ($get_method['method_name'] == "get_home") {
         $row1['job_image'] = $file_path . 'images/' . $data1['job_image'];
         $row1['job_image_thumb'] = $file_path . 'images/thumbs/' . $data1['job_image'];
         $row1['job_date'] = date('m/d/Y', $data1['job_date']);
-
+        $row1['job_start_time'] = $data1['job_start_time'];
+        $row1['job_end_time'] = $data1['job_end_time'];
         $row1['cid'] = $data1['cid'];
         $row1['category_name'] = $data1['category_name'];
         $row1['category_image'] = $file_path . 'images/' . $data1['category_image'];
@@ -582,7 +585,8 @@ else if ($get_method['method_name'] == "get_job_by_cat_id") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('m/d/Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -653,7 +657,8 @@ else if ($get_method['method_name'] == "get_latest_job") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('d-m-Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -721,7 +726,8 @@ else if ($get_method['method_name'] == "get_recent_job") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('d-m-Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -858,7 +864,8 @@ else if ($get_method['method_name'] == "get_search_job") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('m/d/Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -927,7 +934,8 @@ else if ($get_method['method_name'] == "search_by_keyword") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('d-m-Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -995,7 +1003,6 @@ else if ($get_method['method_name'] == "get_single_job") {
         $row['job_date'] = date('d-m-Y', $data['job_date']);
         $row['job_start_time'] = $data['job_start_time'];
         $row['job_end_time'] = $data['job_end_time'];
-
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -1111,7 +1118,8 @@ else if ($get_method['method_name'] == "get_similar_jobs") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('d-m-Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['cid'] = $data['cid'];
         $row['category_name'] = $data['category_name'];
         $row['category_image'] = $file_path . 'images/' . $data['category_image'];
@@ -1450,7 +1458,8 @@ else if ($get_method['method_name'] == "job_list") {
         $row['job_image'] = $file_path . 'images/' . $data['job_image'];
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . $data['job_image'];
         $row['job_date'] = date('d-m-Y', $data['job_date']);
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['job_apply_total'] = get_apply_count($data['id']);
 
         $row['cid'] = $data['cid'];
@@ -1562,6 +1571,8 @@ else if ($get_method['method_name'] == "user_apply_list") {
         $row['job_image'] = $file_path . 'images/' . get_job_info($data['job_id'], 'job_image');
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . get_job_info($data['job_id'], 'job_image');
         $row['job_date'] = date('d-m-Y', get_job_info($data['job_id'], 'job_date'));
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['apply_date'] = date('Y-m-d', strtotime($data['apply_date']));
         $row['job_status'] = get_job_info($data['job_id'], 'job_status');
 
@@ -1680,7 +1691,8 @@ else if ($get_method['method_name'] == "user_saved_list") {
         $row['job_image'] = $file_path . 'images/' . get_job_info($data['job_id'], 'job_image');
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . get_job_info($data['job_id'], 'job_image');
         $row['job_date'] = date('m/d/Y', get_job_info($data['job_id'], 'job_date'));
-
+        $row['job_start_time'] = $data['job_start_time'];
+        $row['job_end_time'] = $data['job_end_time'];
         $row['is_favourite'] = get_saved_info($get_method['user_id'], $data['job_id']);
         $row['is_applied'] = get_applied_info($get_method['user_id'], $data['id']);
         array_push($jsonObj, $row);
@@ -1805,6 +1817,8 @@ else if ($get_method['method_name'] == "edit_job") {
             'job_work_time' => addslashes($get_method['job_work_time']),
             'job_map_latitude' => addslashes($get_method['job_map_latitude']),
             'job_map_longitude' => addslashes($get_method['job_map_longitude']),
+            'job_end_time' => addslashes($get_method['job_end_time']),
+            'job_start_time' => addslashes($get_method['job_start_time']),
             'job_image' => $job_image,
             'job_date' => strtotime($get_method['job_date'])
         );
@@ -1834,6 +1848,8 @@ else if ($get_method['method_name'] == "edit_job") {
             'job_work_time' => addslashes($get_method['job_work_time']),
             'job_map_latitude' => addslashes($get_method['job_map_latitude']),
             'job_map_longitude' => addslashes($get_method['job_map_longitude']),
+            'job_end_time' => addslashes($get_method['job_end_time']),
+            'job_start_time' => addslashes($get_method['job_start_time']),
             'job_date' => strtotime($get_method['job_date'])
         );
     }

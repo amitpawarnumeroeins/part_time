@@ -58,8 +58,7 @@ if(mysqli_num_rows($getJobs))
     $invno = $jobTransData[0]["transaction_id"];
 
 
-
-    $paymentMode = array(1=>"hourly", 2=>"daily", 3=>"weekly", 4=>"monthly");
+    $paymentMode = array(1=>"Fixed", 2=>"Hourly");
 
     $invoice = str_ireplace("{[##COMPANY_NAME##]}",$rowComp['app_name'],$invoice);
     $invoice = str_ireplace("{[##COMPANY_PHONE##]}",$rowComp['app_contact'],$invoice);
@@ -80,7 +79,7 @@ if(mysqli_num_rows($getJobs))
     $invoice = str_ireplace("{[##PROJECT_DURATION##]}",$job_work_day."<br>".$job_work_time,$invoice);
     $invoice = str_ireplace("{[##AMOUNT##]}",$job_salary,$invoice);
     $invoice = str_ireplace("{[##PAYMENT_MODE##]}",$paymentMode[$job_salary_mode],$invoice);
-    $invoice = str_ireplace("{[##GRANDTOTAL##]}",$job_salary."*".$job_salary_mode,$invoice);
+    $invoice = str_ireplace("{[##GRANDTOTAL##]}",$job_salary,$invoice);
     $invoice = str_ireplace("{[##REMARK##]}","No Remarks",$invoice);
     $invoice = str_ireplace("{[##COMISSION_PERCENTAGE##]}",$rowComp['commission'],$invoice);
     $invoice = str_ireplace("{[##FOOTNOTE##]}","*T&C applied",$invoice);

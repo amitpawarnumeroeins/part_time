@@ -47,7 +47,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
 
     $transDataDisp .= <<<AAA
                             <tr>
-                                <td class="text-center">$$amount</td>
+                                <td class="text-center">$amount SAR</td>
                                 <td class="text-center">$transaction_id</td>
                                 <td class="text-center text-capitalize">$user_name</td>
                                 <td class="text-center">A/C No.: $account_number <br>IFSC:  $ifsc_code</td>

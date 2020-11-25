@@ -159,7 +159,7 @@ while ($row = mysqli_fetch_array($transaction_result)) {
     $transDataDisp .= <<<AAA
                         <tr>
                             <td class="$typeColor text-center">$type</td>
-                            <td class="text-center">$$amount</td>
+                            <td class="text-center">$amount SAR</td>
                             <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                             <td class="text-center text-capitalize"><a href="user_profile.php?user_id=$user_id#users_transactions">$user_name</a></td>
                             <td class="text-center">$trans_type <br> $transForText<br>$wallet_details</td>

@@ -963,7 +963,7 @@ function get_user_name($user_id)
                                 $transDataDisp .= <<<AAA
                                 <tr>
                                     <td class="$typeColor text-center">$type</td>
-                                    <td class="text-center">$$amount</td>
+                                    <td class="text-center">$amount SAR</td>
                                     <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                                     <td class="text-center text-capitalize">$user_name</td>
                                     <td class="text-center">$trans_type <br> $transForText <br>$wallet_details</td>
@@ -1052,7 +1052,7 @@ AAA;
 
                                 $transsdDataDisp .= <<<AAA
                                 <tr>
-                                    <td class="text-center">$$amount</td>
+                                    <td class="text-center">$amount SAR</td>
                                     <td class="$statusColor text-center">$transaction_id <br> $statusText</td>
                                     <td class="text-center">$planName (Credits:$planCredits)</td>
                                     <td class="text-center">$timestamp</td>
