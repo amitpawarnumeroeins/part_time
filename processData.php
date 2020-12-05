@@ -196,6 +196,8 @@ switch ($_POST['action']) {
 
         else if($tbl_nm=='tbl_users'){
 
+            $sql="DELETE FROM tbl_users WHERE `id` IN ($ids)";
+            mysqli_query($mysqli, $sql);
             $sql="SELECT * FROM tbl_users WHERE `id` IN ($ids)";
             $res=mysqli_query($mysqli, $sql);
 

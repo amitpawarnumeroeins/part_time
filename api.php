@@ -202,7 +202,7 @@ function getAndSendOtp($mobileNumber)
     $thisOTP = 0;
 // Your Account SID and Auth Token from twilio.com/console
     $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = '9d82669e7b453b2795d338bb4598b012';
+    $auth_token = '3e3b6c7f714124ac4d5a2b3578bd21b1';
 
 // In production, these should be environment variables. E.g.:
 // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
@@ -267,6 +267,9 @@ if ($get_method['method_name'] == "get_home") {
         $row3['cat_id'] = $data3['cat_id'];
         $row3['region_id'] = $data3['region_id'];
         $row3['country_id'] = $data3['country_id'];
+        $row3['city_name'] = getCityName($data3['city_id']);
+        $row3['region_name'] = getRegionName($data3['region_id']);
+        $row3['country_name'] = getCountryName($data3['country_id']);
         $row3['city_id'] = $data3['city_id'];
         $row3['job_type'] = $data3['job_type'];
         $row3['job_name'] = $data3['job_name'];
@@ -319,6 +322,9 @@ if ($get_method['method_name'] == "get_home") {
         $row1['city_id'] = $data1['city_id'];
         $row1['region_id'] = $data1['region_id'];
         $row1['country_id'] = $data1['country_id'];
+        $row1['city_name'] = getCityName($data1['city_id']);
+        $row1['region_name'] = getRegionName($data1['region_id']);
+        $row1['country_name'] = getCountryName($data1['country_id']);
         $row1['job_type'] = $data1['job_type'];
         $row1['job_name'] = $data1['job_name'];
         $row1['job_designation'] = $data1['job_designation'];
@@ -573,6 +579,9 @@ else if ($get_method['method_name'] == "get_job_by_cat_id") {
         $row['city_id'] = $data['city_id'];
         $row['country_id'] = $data['country_id'];
         $row['region_id'] = $data['region_id'];
+        $row['city_name'] = getCityName($data['city_id']);
+        $row['region_name'] = getRegionName($data['region_id']);
+        $row['country_name'] = getCountryName($data['country_id']);
         $row['job_type'] = $data['job_type'];
         $row['job_name'] = $data['job_name'];
         $row['job_designation'] = $data['job_designation'];
@@ -647,6 +656,9 @@ else if ($get_method['method_name'] == "get_latest_job") {
         $row['city_id'] = $data['city_id'];
         $row['country_id'] = $data['country_id'];
         $row['region_id'] = $data['region_id'];
+        $row['city_name'] = getCityName($data['city_id']);
+        $row['region_name'] = getRegionName($data['region_id']);
+        $row['country_name'] = getCountryName($data['country_id']);
         $row['job_type'] = $data['job_type'];
         $row['job_name'] = $data['job_name'];
         $row['job_designation'] = $data['job_designation'];
@@ -718,6 +730,9 @@ else if ($get_method['method_name'] == "get_recent_job") {
         $row['city_id'] = $data['city_id'];
         $row['country_id'] = $data['country_id'];
         $row['region_id'] = $data['region_id'];
+        $row['city_name'] = getCityName($data['city_id']);
+        $row['region_name'] = getRegionName($data['region_id']);
+        $row['country_name'] = getCountryName($data['country_id']);
         $row['job_type'] = $data['job_type'];
         $row['job_name'] = $data['job_name'];
         $row['job_designation'] = $data['job_designation'];
@@ -868,6 +883,9 @@ else if ($get_method['method_name'] == "get_search_job") {
         $row['city_id'] = $data['city_id'];
         $row['region_id'] = $data['region_id'];
         $row['country_id'] = $data['country_id'];
+        $row['city_name'] = getCityName($data['city_id']);
+        $row['region_name'] = getRegionName($data['region_id']);
+        $row['country_name'] = getCountryName($data['country_id']);
         $row['job_type'] = $data['job_type'];
         $row['job_name'] = $data['job_name'];
         $row['job_designation'] = $data['job_designation'];
@@ -939,6 +957,9 @@ else if ($get_method['method_name'] == "search_by_keyword") {
         $row['city_id'] = $data['city_id'];
         $row['region_id'] = $data['region_id'];
         $row['country_id'] = $data['country_id'];
+        $row['city_name'] = getCityName($data['city_id']);
+        $row['region_name'] = getRegionName($data['region_id']);
+        $row['country_name'] = getCountryName($data['country_id']);
         $row['job_type'] = $data['job_type'];
         $row['job_name'] = $data['job_name'];
         $row['job_designation'] = $data['job_designation'];
@@ -1131,6 +1152,11 @@ else if ($get_method['method_name'] == "get_similar_jobs")
         $row['city_id'] = $data['city_id'];
         $row['region_id'] = $data['region_id'];
         $row['country_id'] = $data['country_id'];
+
+        $row['city_name'] = getCityName($data['city_id']);
+        $row['region_name'] = getRegionName($data['region_id']);
+        $row['country_name'] = getCountryName($data['country_id']);
+
         $row['job_type'] = $data['job_type'];
         $row['job_name'] = $data['job_name'];
         $row['job_designation'] = $data['job_designation'];
@@ -1210,7 +1236,6 @@ else if ($get_method['method_name'] == "apply_job_add") {
             $fcmBody = $user_row["name"]." has Applied to your job!!";
             $fcmClickIntent = "provider_job_applied";
             sendFcmNotification($user_id,$fcmMessage,$fcmBody,$fcmClickIntent);
-
 
             if (get_user_info($job_row['user_id'], 'email') != '') {
 
@@ -1536,6 +1561,11 @@ else if ($get_method['method_name'] == "user_job_apply_list") {
         $row['city'] = $data['city'];
         $row['region'] = $data['region'];
 
+        $row['city_name'] = getCityName($row['city']);
+        $row['region_name'] = getRegionName($row['region']);
+        $row['country_name'] = getCountryName($row['country']);
+
+
         if ($data['user_image']) {
             $user_image = $file_path . 'images/' . $data['user_image'];
         } else {
@@ -1589,6 +1619,11 @@ else if ($get_method['method_name'] == "user_apply_list") {
         $row['city_id'] = get_job_info($data['job_id'], 'city_id');
         $row['region_id'] = get_job_info($data['job_id'], 'region_id');
         $row['country_id'] = get_job_info($data['job_id'], 'country_id');
+
+        $row['city_name'] = getCityName($row['city_id']);
+        $row['region_name'] = getRegionName($row['region_id']);
+        $row['country_name'] = getCountryName($row['country_id']);
+
         $row['job_type'] = get_job_info($data['job_id'], 'job_type');
         $row['job_name'] = get_job_info($data['job_id'], 'job_name');
         $row['job_designation'] = get_job_info($data['job_id'], 'job_designation');
@@ -1710,6 +1745,12 @@ else if ($get_method['method_name'] == "user_saved_list") {
         $row['city_id'] = get_job_info($data['job_id'], 'city_id');
         $row['country_id'] = get_job_info($data['job_id'], 'country_id');
         $row['region_id'] = get_job_info($data['job_id'], 'region_id');
+
+        $row['city_name'] = getCityName($row['city_id']);
+        $row['region_name'] = getRegionName($row['region_id']);
+        $row['country_name'] = getCountryName($row['country_id']);
+
+
         $row['job_type'] = get_job_info($data['job_id'], 'job_type');
         $row['job_name'] = get_job_info($data['job_id'], 'job_name');
         $row['job_designation'] = get_job_info($data['job_id'], 'job_designation');
@@ -1842,9 +1883,6 @@ else if ($get_method['method_name'] == "edit_job") {
             'city_id' => $get_method['city_id'],
             'region_id' => $get_method['region_id'],
             'country_id' => $get_method['country_id'],
-            'city_name' => getCityName($get_method['city_id']),
-            'region_name' => getRegionName($get_method['region_id']),
-            'country_name' => getCountryName($get_method['country_id']),
             'job_type' => $get_method['job_type'],
             'job_name' => addslashes($get_method['job_name']),
             'job_designation' => addslashes($get_method['job_designation']),
@@ -1878,9 +1916,6 @@ else if ($get_method['method_name'] == "edit_job") {
             'city_id' => $get_method['city_id'],
             'region_id' => $get_method['region_id'],
             'country_id' => $get_method['country_id'],
-            'city_name' => getCityName($get_method['city_id']),
-            'region_name' => getRegionName($get_method['region_id']),
-            'country_name' => getCountryName($get_method['country_id']),
             'job_type' => $get_method['job_type'],
             'job_name' => addslashes($get_method['job_name']),
             'job_designation' => addslashes($get_method['job_designation']),
