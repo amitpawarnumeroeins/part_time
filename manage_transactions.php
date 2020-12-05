@@ -84,6 +84,7 @@ if (isset($_GET['filter'])) {
     if (isset($_GET['page'])) {
         $page = mysqli_real_escape_string($mysqli, $_GET['page']);
     }
+
     if ($page) {
         $start = ($page - 1) * $limit;
     } else {

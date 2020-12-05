@@ -31,12 +31,14 @@ function convertDateTime($unixTime) {
     $allnamesList = "No Data Available";
     $allmessagessList = "No Data Available";
     $allUserData = $database->getReference("users")->getValue();
+    $allJobsData = $database->getReference("jobs")->getValue();
     $allMessages = $database->getReference("messages")->getValue();//->orderByChild('timestamp')
 
-/*    print_r($allUserData);
-    print_r($allMessages);*/
+    /*print_r($allUserData);
+    print_r($allMessages);
+    print_r($allJobsData);*/
 
-    if(is_array($allMessages) AND is_array($allUserData) AND sizeof($allMessages)>0 AND sizeof($allUserData)>0)
+    if(is_array($allMessages) AND is_array($allUserData) AND is_array($allJobsData) AND sizeof($allMessages)>0 AND sizeof($allUserData)>0 AND sizeof($allJobsData)>0)
     {
         $allnamesList="";
         $allmessagessList="";
@@ -44,6 +46,14 @@ function convertDateTime($unixTime) {
         foreach ($allMessages as $allMessagesKey => $allMessagesVal)
         {
             $thisUserId = explode("-",$allMessagesKey);
+            $jobId=0;
+            $jobName="";
+            $jobImage="";
+
+            $jobId = $thisUserId[2];
+            $jobName = $allJobsData[$jobId]["name"];
+            $jobImage = $allJobsData[$jobId]["image"];
+
             $firstName = $allUserData[$thisUserId[0]]["name"];
             $secondName = $allUserData[$thisUserId[1]]["name"];
 
@@ -125,8 +135,11 @@ AAA;
                     <div class="chat_list $thisAct">
                         <a  href="messages.php?filter=$allMessagesKey">
                             <div class="chat_people">
-                                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                <div class="chat_img"> 
+                                    <img src="$jobImage"> 
+                                </div>
                                 <div class="chat_ib">
+                                    <h4 style="margin: 0">$jobName</h4>
                                     <h5>$firstName  & $secondName</h5>
                                     <span class="chat_date">Last Chat: $lastTimestamp</span>
                                 </div>

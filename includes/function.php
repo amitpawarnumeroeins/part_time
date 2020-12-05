@@ -36,8 +36,6 @@ function adminUser($username, $password){
 
 }
 
-
-# Insert Data 
 function Insert($table, $data){
 
     global $mysqli;
@@ -52,7 +50,6 @@ function Insert($table, $data){
 
 }
 
-// Update Data, Where clause is left optional
 function Update($table_name, $form_data, $where_clause='')
 {
     global $mysqli;
@@ -86,7 +83,6 @@ function Update($table_name, $form_data, $where_clause='')
     // run and return the query result
     return mysqli_query($mysqli,$sql);
 }
-
 
 function thousandsNumberFormat($num) {
 
@@ -160,6 +156,7 @@ function user_info($user_id,$field_name)
         return "";
     }
 }
+
 function get_user_full_data($user_id)
 {
 
@@ -527,6 +524,64 @@ function verify_data_on_server($product_id,$buyer_name,$purchase_code,$purchased
 }
 
 
+function getCityName($city_id)
+{
+    global $mysqli;
 
+    $qry="SELECT city_name FROM tbl_city WHERE c_id='".$city_id."'";
+    $result=mysqli_query($mysqli,$qry);
+    $row = mysqli_fetch_array($result);
+
+    $num_rows = mysqli_num_rows($result);
+
+    if ($num_rows > 0)
+    {
+        return $row["city_name"];
+    }
+    else
+    {
+        return "";
+    }
+}
+
+function getRegionName($id)
+{
+    global $mysqli;
+
+    $qry="SELECT `name` FROM tbl_region WHERE id='".$id."'";
+    $result=mysqli_query($mysqli,$qry);
+    $row = mysqli_fetch_array($result);
+
+    $num_rows = mysqli_num_rows($result);
+
+    if ($num_rows > 0)
+    {
+        return $row["name"];
+    }
+    else
+    {
+        return "";
+    }
+}
+
+function getCountryName($id)
+{
+    global $mysqli;
+
+    $qry="SELECT `name` FROM tbl_country WHERE id='".$id."'";
+    $result=mysqli_query($mysqli,$qry);
+    $row = mysqli_fetch_array($result);
+
+    $num_rows = mysqli_num_rows($result);
+
+    if ($num_rows > 0)
+    {
+        return $row["name"];
+    }
+    else
+    {
+        return "";
+    }
+}
 
 ?>

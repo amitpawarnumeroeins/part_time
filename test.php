@@ -5,7 +5,38 @@ include("includes/function.php");
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-$job_search = "flutter";
+
+
+$queryState = "SELECT `id`, `name`, `country_id` FROM `tbl_region` WHERE 1";
+
+$sqlState = mysqli_query($mysqli, $queryState) or die(mysqli_error($mysqli));
+while ($dataState = mysqli_fetch_assoc($sqlState)) {
+
+    $stateId = $dataState["id"];
+    $country_id = $dataState["country_id"];
+
+    $query = "SELECT `id`, `name`, `state_id` FROM `cities` WHERE state_id = $stateId";
+    $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+    while ($data = mysqli_fetch_assoc($sql)) {
+
+        $id = $data["id"];
+        $name = $data["name"];
+        $state_id = $data["state_id"];
+
+        $data = array(
+            'c_id'  =>  filter_var($id, FILTER_SANITIZE_STRING),
+            'city_name'  =>  filter_var($name, FILTER_SANITIZE_STRING),
+            'country_id'  =>  filter_var($country_id, FILTER_SANITIZE_STRING),
+            'region_id'  =>  filter_var($state_id, FILTER_SANITIZE_STRING),
+            'status'  =>  1
+        );
+
+        $qry = Insert('tbl_city', $data);
+
+    }
+}
+
+//$job_search = "flutter";
 /*$cat_id = $get_method['cat_id'];
 $city_id = $get_method['city_id'];
 $budget_range = $get_method['budget_range'];
@@ -13,7 +44,7 @@ $day_range = $get_method['day_range'];
 $time_range = $get_method['time_range'];
 $job_type = $get_method['job_type'];*/
 
-
+/*
 $jsonObj = array();
 
     $sqlFilter = "";
@@ -124,7 +155,7 @@ $jsonObj = array();
    // header('Content-Type: application/json; charset=utf-8');
     echo $val = str_replace('\\/', '/', json_encode($set, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
     die();
+*/
 
-
-    ?>
+?>
 
