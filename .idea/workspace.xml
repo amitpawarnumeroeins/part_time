@@ -25,8 +25,6 @@
     <list default="true" id="69110ff8-0f06-41b4-91c6-28df3d29c159" name="Default Changelist" comment="Changes">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api.php" afterPath="$PROJECT_DIR$/api.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/ckeditor/lang/da.js" afterPath="$PROJECT_DIR$/assets/ckeditor/lang/da.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/processData.php" afterPath="$PROJECT_DIR$/processData.php" />
     </list>
     <ignored path="$PROJECT_DIR$/ChatApplication/vendor/cboden/ratchet/" />
     <ignored path="$PROJECT_DIR$/ChatApplication/vendor/composer/" />
@@ -57,366 +55,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="api.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="2054" column="32" lean-forward="false" selection-start-line="2054" selection-start-column="25" selection-end-line="2054" selection-end-column="32" />
-              <folding>
-                <element signature="e#1024#1054#0#PHP" expanded="false" />
-                <element signature="n#generateRandomPassword#0;n#!!top" expanded="false" />
-                <element signature="e#1871#1981#0#PHP" expanded="false" />
-                <element signature="e#3643#3740#0#PHP" expanded="false" />
-                <element signature="e#3709#3740#0#PHP" expanded="false" />
-                <element signature="e#4026#4124#0#PHP" expanded="false" />
-                <element signature="e#4093#4124#0#PHP" expanded="false" />
-                <element signature="n#get_apply_count#0;n#!!top" expanded="false" />
-                <element signature="e#4457#4542#0#PHP" expanded="false" />
-                <element signature="e#4512#4542#0#PHP" expanded="false" />
-                <element signature="n#get_city_name#0;n#!!top" expanded="false" />
-                <element signature="n#getAndSendOtp#0;n#!!top" expanded="false" />
-                <element signature="e#5539#5818#0#PHP" expanded="false" />
-                <element signature="e#5670#5808#0#PHP" expanded="false" />
-                <element signature="e#6055#151699#0#PHP" expanded="false" />
-                <element signature="e#12973#13343#0#PHP" expanded="false" />
-                <element signature="e#13593#151699#0#PHP" expanded="false" />
-                <element signature="e#13649#14633#0#PHP" expanded="false" />
-                <element signature="e#14308#14633#0#PHP" expanded="false" />
-                <element signature="e#15257#151699#0#PHP" expanded="false" />
-                <element signature="e#15519#15692#0#PHP" expanded="false" />
-                <element signature="e#15911#151699#0#PHP" expanded="false" />
-                <element signature="e#15971#16518#0#PHP" expanded="false" />
-                <element signature="e#16236#16475#0#PHP" expanded="false" />
-                <element signature="e#16702#151699#0#PHP" expanded="false" />
-                <element signature="e#17298#17479#0#PHP" expanded="false" />
-                <element signature="e#18827#151699#0#PHP" expanded="false" />
-                <element signature="e#19732#22213#0#PHP" expanded="false" />
-                <element signature="e#22432#151699#0#PHP" expanded="false" />
-                <element signature="e#22755#22979#0#PHP" expanded="false" />
-                <element signature="e#22842#22979#0#PHP" expanded="false" />
-                <element signature="e#22942#22979#0#PHP" expanded="false" />
-                <element signature="e#25927#151699#0#PHP" expanded="false" />
-                <element signature="e#27030#29433#0#PHP" expanded="false" />
-                <element signature="e#29653#151699#0#PHP" expanded="false" />
-                <element signature="e#35167#151699#0#PHP" expanded="false" />
-                <element signature="e#36159#38641#0#PHP" expanded="false" />
-                <marker date="1607161226884" expanded="true" signature="652:703" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="2090:2162" ph="SELECT COUNT... tbl_apply" />
-                <marker date="1607161226884" expanded="false" signature="2399:2492" ph="SELECT * FRO... tbl_saved" />
-                <marker date="1607161226884" expanded="false" signature="2673:2766" ph="SELECT * FRO... tbl_apply" />
-                <marker date="1607161226884" expanded="false" signature="2942:3015" ph="SELECT COUNT... tbl_saved" />
-                <marker date="1607161226884" expanded="false" signature="3449:3500" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="3830:3881" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="4203:4335" ph="SELECT COUNT... tbl_apply" />
-                <marker date="1607161226884" expanded="false" signature="4621:4675" ph="SELECT * FRO... tbl_city" />
-                <marker date="1607161226884" expanded="false" signature="6276:6312" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="6705:6918" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="9581:9922" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="9723:9802" ph="SELECT `job_... tbl_recent" />
-                <marker date="1607161226884" expanded="false" signature="12781:12891" ph="SELECT `cid`... tbl_category" />
-                <marker date="1607161226884" expanded="false" signature="13705:13763" ph="SELECT COUNT... tbl_category" />
-                <marker date="1607161226884" expanded="false" signature="14030:14167" ph="SELECT cid,c... tbl_category" />
-                <marker date="1607161226884" expanded="false" signature="14402:14524" ph="SELECT `cid`... tbl_category" />
-                <marker date="1607161226884" expanded="false" signature="15344:15439" ph="SELECT `c_id... tbl_city" />
-                <marker date="1607161226884" expanded="false" signature="16054:16148" ph="SELECT * FRO... tbl_notification" />
-                <marker date="1607161226884" expanded="true" signature="16832:16928" ph="SELECT regio... tbl_users" />
-                <marker date="1607161226884" expanded="true" signature="16832:16937" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="true" signature="17111:17216" ph="SELECT * FRO... tbl_city" />
-                <marker date="1607161226884" expanded="false" signature="17558:17673" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="18059:18125" ph="SELECT * FRO... tbl_category" />
-                <marker date="1607161226884" expanded="false" signature="18985:19186" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="19394:19640" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="22994:23183" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="26039:26382" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="26194:26273" ph="SELECT `job_... tbl_recent" />
-                <marker date="1607161226884" expanded="false" signature="26589:26938" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="26731:26810" ph="SELECT `job_... tbl_recent" />
-                <marker date="1607161226884" expanded="true" signature="31822:31983" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="32175:32282" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="32175:32375" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="35290:35560" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="35767:36067" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="39031:39322" ph="SELECT tbl_j... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="42020:42112" ph="SELECT * FRO... tbl_saved" />
-                <marker date="1607161226884" expanded="false" signature="42412:42472" ph="SELECT * FRO... tbl_recent" />
-                <marker date="1607161226884" expanded="false" signature="43541:43736" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="43884:44147" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="44354:44646" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="47608:47713" ph="SELECT * FRO... tbl_apply" />
-                <marker date="1607161226884" expanded="false" signature="47859:47920" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="48043:48100" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="49560:49586" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="49602:52286" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="49633:49682" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="49771:52272" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="49790:52254" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="49807:49975" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="49993:52010" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50056:51991" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50093:50173" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50243:51970" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50270:51944" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50296:51916" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50337:51889" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50408:50485" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50486:51860" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50521:51826" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50555:51790" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50591:51755" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50634:50717" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50718:50754" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50840:50904" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="50905:50980" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51025:51073" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51178:51242" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51243:51315" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51360:51424" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51425:51499" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51544:51608" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="51609:51683" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52028:52234" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52056:52135" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52628:52654" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52670:55296" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52701:52750" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52839:55282" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52858:55264" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="52876:53044" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53062:55020" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53125:55001" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53162:53242" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53312:54980" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53339:54954" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53365:54926" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53406:54899" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53477:53554" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53555:54870" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53590:54836" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53624:54800" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53660:54765" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53703:53786" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53787:53823" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53909:53973" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="53974:54049" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54095:54159" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54160:54229" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54274:54338" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54339:54410" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54455:54519" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54520:54600" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="54647:54695" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="55038:55244" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="55066:55145" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="56092:56181" ph="SELECT * FRO... tbl_saved" />
-                <marker date="1607161226884" expanded="false" signature="56654:56737" ph="DELETE FROM " />
-                <marker date="1607161226884" expanded="false" signature="58330:58366" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="58952:59241" ph="SELECT COUNT... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="59601:59852" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="62929:63153" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="64591:64697" ph="SELECT COUNT... tbl_apply" />
-                <marker date="1607161226884" expanded="false" signature="64902:65036" ph="SELECT * FRO... tbl_apply" />
-                <marker date="1607161226884" expanded="false" signature="68503:68629" ph="SELECT user_... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="68967:69053" ph="SELECT `name... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="70849:70946" ph="SELECT COUNT... tbl_saved" />
-                <marker date="1607161226884" expanded="false" signature="71151:71285" ph="SELECT * FRO... tbl_saved" />
-                <marker date="1607161226884" expanded="false" signature="82641:82737" ph="SELECT * FRO... tbl_company" />
-                <marker date="1607161226884" expanded="false" signature="84542:84628" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="86078:86130" ph="SELECT * FRO... tbl_company" />
-                <marker date="1607161226884" expanded="false" signature="87693:87716" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="87732:90494" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="87767:87816" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="87905:90476" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="87928:90454" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="87950:88114" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88180:88452" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88257:88274" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88275:88429" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88474:90169" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88541:90146" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88578:88658" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88728:90121" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88759:90091" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88789:90059" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88834:90028" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="88935:89012" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89013:89995" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89052:89957" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89090:89917" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89130:89878" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89178:89260" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89454:89571" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="89716:89777" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="90191:90430" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="90223:90302" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="94270:94443" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607161226884" expanded="true" signature="94731:94849" ph="UPDATE tbl_u... " />
-                <marker date="1607161226884" expanded="false" signature="96077:96112" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="100678:100843" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607161226884" expanded="false" signature="101116:101151" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="101888:102059" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607161226884" expanded="false" signature="102376:102483" ph="UPDATE tbl_u... " />
-                <marker date="1607161226884" expanded="false" signature="102832:102867" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="true" signature="104252:104310" ph="SELECT curre... tbl_users" />
-                <marker date="1607161226884" expanded="true" signature="104600:104708" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607161226884" expanded="false" signature="106893:106946" ph="SELECT * FRO... tbl_subscription_plan" />
-                <marker date="1607161226884" expanded="true" signature="107797:107865" ph="SELECT tbl_c... tbl_city" />
-                <marker date="1607161226884" expanded="true" signature="107797:107875" ph="SELECT tbl_c... tbl_city" />
-                <marker date="1607161226884" expanded="true" signature="107797:107885" ph="SELECT tbl_c... tbl_city" />
-                <marker date="1607161226884" expanded="true" signature="108203:108302" ph="SELECT `id`,... tbl_region" />
-                <marker date="1607161226884" expanded="true" signature="108588:108748" ph="SELECT `id`,... tbl_region" />
-                <marker date="1607161226884" expanded="true" signature="110020:110108" ph="SELECT `id`,... tbl_country" />
-                <marker date="1607161226884" expanded="true" signature="110674:110770" ph="SELECT `id`,... tbl_region" />
-                <marker date="1607161226884" expanded="true" signature="111264:111394" ph="SELECT `c_id... tbl_city" />
-                <marker date="1607161226884" expanded="false" signature="114289:114373" ph="SELECT * FRO... tbl_subscription_plan" />
-                <marker date="1607161226884" expanded="false" signature="116864:117037" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607161226884" expanded="false" signature="117271:117355" ph="SELECT * FRO... tbl_subscription_plan" />
-                <marker date="1607161226884" expanded="true" signature="119531:119668" ph="SELECT user_... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="120114:120196" ph="SELECT `name... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="120573:120638" ph="SELECT `name... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="121490:121597" ph="UPDATE tbl_u... " />
-                <marker date="1607161226884" expanded="false" signature="121644:121756" ph="UPDATE tbl_u... " />
-                <marker date="1607161226884" expanded="true" signature="122899:122940" ph="SELECT * FRO... tbl_settings" />
-                <marker date="1607161226884" expanded="true" signature="126885:126938" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="false" signature="131265:131313" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="true" signature="133361:133425" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="134085:134156" ph="SELECT * FRO... tbl_company" />
-                <marker date="1607161226884" expanded="false" signature="135676:135766" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607161226884" expanded="true" signature="136068:136261" ph="SELECT * FRO... tbl_reviews_ratings" />
-                <marker date="1607161226884" expanded="false" signature="138216:138286" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="139010:139062" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="142434:142488" ph="SELECT * FRO... tbl_company" />
-                <marker date="1607161226884" expanded="false" signature="145238:145286" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="false" signature="145695:145721" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="145737:147715" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="145766:145815" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="145904:147703" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="145921:147687" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="145937:146101" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146117:147451" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146178:147434" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146213:146291" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146361:147429" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146386:147405" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146410:147358" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146449:147333" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146520:146597" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146598:147328" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146631:147296" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146663:147262" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146697:147229" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146708:146756" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146846:146910" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="146911:147025" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="147068:147151" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="147152:147224" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="147467:147669" ph="..." />
-                <marker date="1607161226884" expanded="false" signature="147493:147572" ph="..." />
-                <marker date="1607161226884" expanded="true" signature="147799:147878" ph="UPDATE tbl_u... " />
-                <marker date="1607161226884" expanded="false" signature="148377:148416" ph="SELECT * FRO... tbl_settings" />
-                <marker date="1607161226884" expanded="false" signature="149146:149215" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607161226884" expanded="true" signature="149657:149698" ph="SELECT * FRO... tbl_settings" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="processData.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/processData.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="199" column="40" lean-forward="false" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
-              <folding>
-                <marker date="1607164426028" expanded="true" signature="1223:1364" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607164426028" expanded="true" signature="1693:1728" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607164426028" expanded="true" signature="2545:2692" ph="SELECT * FRO... tbl_transaction_details" />
-                <marker date="1607164426028" expanded="true" signature="3049:3156" ph="UPDATE tbl_u... " />
-                <marker date="1607164426028" expanded="true" signature="5311:5358" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607164426028" expanded="true" signature="5699:5744" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="5814:5857" ph="SELECT * FRO... ${$tbl_nm}" />
-                <marker date="1607164426028" expanded="true" signature="6211:6252" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="6371:6414" ph="SELECT * FRO... tbl_jobs" />
-                <marker date="1607164426028" expanded="true" signature="6755:6796" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="6872:6919" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="6995:7041" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="7117:7163" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="7284:7326" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="7388:7432" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607164426028" expanded="true" signature="7845:7887" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="7956:8003" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8079:8126" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8202:8250" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8326:8372" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8448:8497" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8573:8637" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8756:8801" ph="SELECT * FRO... tbl_city" />
-                <marker date="1607164426028" expanded="true" signature="8869:8912" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="8981:9027" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="9147:9192" ph="SELECT * FRO... tbl_region" />
-                <marker date="1607164426028" expanded="true" signature="9260:9303" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="9372:9420" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="9496:9544" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="9666:9712" ph="SELECT * FRO... tbl_country" />
-                <marker date="1607164426028" expanded="true" signature="9780:9824" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="9893:9941" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="10017:10068" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="10145:10194" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="10314:10361" ph="SELECT * FRO... tbl_saved" />
-                <marker date="1607164426028" expanded="true" signature="10429:10474" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="10778:10822" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="11226:11270" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="11672:11717" ph="DELETE FROM " />
-                <marker date="1607164426028" expanded="true" signature="12114:12177" ph="SELECT * FRO... tbl_advertisements_request" />
-                <marker date="1607164426028" expanded="true" signature="12569:12630" ph="DELETE FROM " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/includes/function.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="550" column="39" lean-forward="false" selection-start-line="550" selection-start-column="39" selection-end-line="550" selection-end-column="39" />
-              <folding>
-                <element signature="n#adminUser#0;n#!!top" expanded="false" />
-                <element signature="n#Insert#0;n#!!top" expanded="false" />
-                <element signature="n#Update#0;n#!!top" expanded="false" />
-                <element signature="n#thousandsNumberFormat#0;n#!!top" expanded="false" />
-                <element signature="n#calculate_time_span#0;n#!!top" expanded="false" />
-                <element signature="n#user_info#0;n#!!top" expanded="false" />
-                <element signature="n#get_user_full_data#0;n#!!top" expanded="false" />
-                <element signature="n#getTransactionDetails#0;n#!!top" expanded="false" />
-                <element signature="n#cleanInput#0;n#!!top" expanded="false" />
-                <element signature="n#Delete#0;n#!!top" expanded="false" />
-                <element signature="n#Send_GCM_msg#0;n#!!top" expanded="false" />
-                <element signature="n#sendFcmNotification#0;n#!!top" expanded="false" />
-                <element signature="e#7662#7901#0#PHP" expanded="false" />
-                <element signature="e#8193#8391#0#PHP" expanded="false" />
-                <element signature="e#8409#8515#0#PHP" expanded="false" />
-                <element signature="n#compress_image#0;n#!!top" expanded="false" />
-                <element signature="n#create_thumb_image#0;n#!!top" expanded="false" />
-                <element signature="n#getBaseUrl#0;n#!!top" expanded="false" />
-                <element signature="n#checkSignSalt#0;n#!!top" expanded="false" />
-                <element signature="n#verify_envato_purchase_code#0;n#!!top" expanded="false" />
-                <element signature="n#verify_data_on_server#0;n#!!top" expanded="false" />
-                <marker date="1607151488200" expanded="true" signature="714:816" ph="SELECT id,us... tbl_admin" />
-                <marker date="1607151488200" expanded="true" signature="1484:1568" ph="INSERT INTO ${$table}... " />
-                <marker date="1607151488200" expanded="true" signature="4308:4355" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607151488200" expanded="true" signature="4690:4741" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607151488200" expanded="true" signature="5050:5114" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607151488200" expanded="true" signature="6130:6142" ph="DELETE FROM " />
-                <marker date="1607151488200" expanded="true" signature="7476:7549" ph="SELECT `id`,... tbl_users" />
-                <marker date="1607151488200" expanded="true" signature="7968:8050" ph="INSERT INTO `tbl_notification`... " />
-                <marker date="1607151488200" expanded="true" signature="16503:16559" ph="SELECT * FRO... tbl_users" />
-                <marker date="1607151488200" expanded="true" signature="16859:16907" ph="SELECT `name... tbl_region" />
-                <marker date="1607151488200" expanded="true" signature="17203:17252" ph="SELECT city_... tbl_city" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -427,10 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$amount</find>
-      <find>while</find>
-      <find>commission</find>
-      <find>COMISSION_PERCENTAGE</find>
       <find>$rowComp</find>
       <find>GRANDTOTAL</find>
       <find>job_date</find>
@@ -440,7 +75,6 @@
       <find>api_page_limit</find>
       <find>otp</find>
       <find>API_LATEST_LIMIT</find>
-      <find>update</find>
       <find>add_jo</find>
       <find>image</find>
       <find>$thumb_pic1</find>
@@ -457,6 +91,11 @@
       <find>country</find>
       <find>FAV</find>
       <find>register</find>
+      <find>update</find>
+      <find>profile</find>
+      <find>unlink</find>
+      <find>$working_type</find>
+      <find>user_image</find>
     </findStrings>
     <replaceStrings>
       <replace>country</replace>
@@ -502,8 +141,8 @@
         <option value="$PROJECT_DIR$/test.php" />
         <option value="$PROJECT_DIR$/includes/function.php" />
         <option value="$PROJECT_DIR$/assets/ckeditor/lang/da.js" />
-        <option value="$PROJECT_DIR$/api.php" />
         <option value="$PROJECT_DIR$/processData.php" />
+        <option value="$PROJECT_DIR$/api.php" />
       </list>
     </option>
   </component>
@@ -539,6 +178,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -553,8 +194,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="ProjectViewState">
@@ -722,7 +361,9 @@
       <workItem from="1607059227702" duration="1864000" />
       <workItem from="1607061582519" duration="2139000" />
       <workItem from="1607144578913" duration="5932000" />
-      <workItem from="1607156946144" duration="3994000" />
+      <workItem from="1607156946144" duration="4020000" />
+      <workItem from="1607320155621" duration="2525000" />
+      <workItem from="1607428409027" duration="2078000" />
     </task>
     <task id="LOCAL-00001" summary="2nd">
       <created>1603964930301</created>
@@ -864,21 +505,28 @@
       <option name="project" value="LOCAL" />
       <updated>1607156455141</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Changes">
+      <created>1607175134566</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1607175134566</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122356000" />
+    <option name="totallyTimeSpent" value="126985000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1505295" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15506808" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.03927987" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7135843" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45335516" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4304419" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1404,22 +1052,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#1203#1436#0#PHP" expanded="false" />
-            <element signature="e#1438#5643#0#PHP" expanded="false" />
-            <marker date="1607060159697" expanded="true" signature="190:248" ph="SELECT `id`,... tbl_region" />
-            <marker date="1607060159697" expanded="true" signature="190:249" ph="SELECT `id`,... tbl_region" />
-            <marker date="1607060159697" expanded="true" signature="477:537" ph="SELECT * FRO... country" />
-            <marker date="1607060159697" expanded="true" signature="477:540" ph="SELECT `id`,... cities" />
-            <marker date="1607060159697" expanded="true" signature="477:541" ph="SELECT `id`,... cities" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/ckeditor/lang/da.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="5" column="5" lean-forward="false" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/processData.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="206" column="57" lean-forward="false" selection-start-line="206" selection-start-column="57" selection-end-line="206" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/includes/function.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="550" column="39" lean-forward="false" selection-start-line="550" selection-start-column="39" selection-end-line="550" selection-end-column="39" />
+        <state relative-caret-position="376">
+          <caret line="543" column="5" lean-forward="true" selection-start-line="543" selection-start-column="5" selection-end-line="543" selection-end-column="5" />
           <folding>
             <element signature="n#adminUser#0;n#!!top" expanded="false" />
             <element signature="n#Insert#0;n#!!top" expanded="false" />
@@ -1457,17 +1110,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/ckeditor/lang/da.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="5" column="5" lean-forward="false" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="2054" column="32" lean-forward="false" selection-start-line="2054" selection-start-column="25" selection-end-line="2054" selection-end-column="32" />
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding>
             <element signature="e#1024#1054#0#PHP" expanded="false" />
             <element signature="n#generateRandomPassword#0;n#!!top" expanded="false" />
@@ -1483,294 +1129,244 @@
             <element signature="n#getAndSendOtp#0;n#!!top" expanded="false" />
             <element signature="e#5539#5818#0#PHP" expanded="false" />
             <element signature="e#5670#5808#0#PHP" expanded="false" />
-            <element signature="e#6055#151699#0#PHP" expanded="false" />
+            <element signature="e#6055#151809#0#PHP" expanded="false" />
             <element signature="e#12973#13343#0#PHP" expanded="false" />
-            <element signature="e#13593#151699#0#PHP" expanded="false" />
+            <element signature="e#13593#151809#0#PHP" expanded="false" />
             <element signature="e#13649#14633#0#PHP" expanded="false" />
             <element signature="e#14308#14633#0#PHP" expanded="false" />
-            <element signature="e#15257#151699#0#PHP" expanded="false" />
+            <element signature="e#15257#151809#0#PHP" expanded="false" />
             <element signature="e#15519#15692#0#PHP" expanded="false" />
-            <element signature="e#15911#151699#0#PHP" expanded="false" />
+            <element signature="e#15911#151809#0#PHP" expanded="false" />
             <element signature="e#15971#16518#0#PHP" expanded="false" />
             <element signature="e#16236#16475#0#PHP" expanded="false" />
-            <element signature="e#16702#151699#0#PHP" expanded="false" />
+            <element signature="e#16702#151809#0#PHP" expanded="false" />
             <element signature="e#17298#17479#0#PHP" expanded="false" />
-            <element signature="e#18827#151699#0#PHP" expanded="false" />
+            <element signature="e#18827#151809#0#PHP" expanded="false" />
             <element signature="e#19732#22213#0#PHP" expanded="false" />
-            <element signature="e#22432#151699#0#PHP" expanded="false" />
+            <element signature="e#22432#151809#0#PHP" expanded="false" />
             <element signature="e#22755#22979#0#PHP" expanded="false" />
             <element signature="e#22842#22979#0#PHP" expanded="false" />
             <element signature="e#22942#22979#0#PHP" expanded="false" />
-            <element signature="e#25927#151699#0#PHP" expanded="false" />
+            <element signature="e#25927#151809#0#PHP" expanded="false" />
             <element signature="e#27030#29433#0#PHP" expanded="false" />
-            <element signature="e#29653#151699#0#PHP" expanded="false" />
-            <element signature="e#35167#151699#0#PHP" expanded="false" />
+            <element signature="e#29653#151809#0#PHP" expanded="false" />
+            <element signature="e#35167#151809#0#PHP" expanded="false" />
             <element signature="e#36159#38641#0#PHP" expanded="false" />
-            <marker date="1607161226884" expanded="true" signature="652:703" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="2090:2162" ph="SELECT COUNT... tbl_apply" />
-            <marker date="1607161226884" expanded="false" signature="2399:2492" ph="SELECT * FRO... tbl_saved" />
-            <marker date="1607161226884" expanded="false" signature="2673:2766" ph="SELECT * FRO... tbl_apply" />
-            <marker date="1607161226884" expanded="false" signature="2942:3015" ph="SELECT COUNT... tbl_saved" />
-            <marker date="1607161226884" expanded="false" signature="3449:3500" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="3830:3881" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="4203:4335" ph="SELECT COUNT... tbl_apply" />
-            <marker date="1607161226884" expanded="false" signature="4621:4675" ph="SELECT * FRO... tbl_city" />
-            <marker date="1607161226884" expanded="false" signature="6276:6312" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="6705:6918" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="9581:9922" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="9723:9802" ph="SELECT `job_... tbl_recent" />
-            <marker date="1607161226884" expanded="false" signature="12781:12891" ph="SELECT `cid`... tbl_category" />
-            <marker date="1607161226884" expanded="false" signature="13705:13763" ph="SELECT COUNT... tbl_category" />
-            <marker date="1607161226884" expanded="false" signature="14030:14167" ph="SELECT cid,c... tbl_category" />
-            <marker date="1607161226884" expanded="false" signature="14402:14524" ph="SELECT `cid`... tbl_category" />
-            <marker date="1607161226884" expanded="false" signature="15344:15439" ph="SELECT `c_id... tbl_city" />
-            <marker date="1607161226884" expanded="false" signature="16054:16148" ph="SELECT * FRO... tbl_notification" />
-            <marker date="1607161226884" expanded="true" signature="16832:16928" ph="SELECT regio... tbl_users" />
-            <marker date="1607161226884" expanded="true" signature="16832:16937" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="true" signature="17111:17216" ph="SELECT * FRO... tbl_city" />
-            <marker date="1607161226884" expanded="false" signature="17558:17673" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="18059:18125" ph="SELECT * FRO... tbl_category" />
-            <marker date="1607161226884" expanded="false" signature="18985:19186" ph="SELECT COUNT... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="19394:19640" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="22994:23183" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="26039:26382" ph="SELECT COUNT... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="26194:26273" ph="SELECT `job_... tbl_recent" />
-            <marker date="1607161226884" expanded="false" signature="26589:26938" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="26731:26810" ph="SELECT `job_... tbl_recent" />
-            <marker date="1607161226884" expanded="true" signature="31822:31983" ph="SELECT COUNT... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="32175:32282" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="32175:32375" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="35290:35560" ph="SELECT COUNT... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="35767:36067" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="39031:39322" ph="SELECT tbl_j... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="42020:42112" ph="SELECT * FRO... tbl_saved" />
-            <marker date="1607161226884" expanded="false" signature="42412:42472" ph="SELECT * FRO... tbl_recent" />
-            <marker date="1607161226884" expanded="false" signature="43541:43736" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="43884:44147" ph="SELECT COUNT... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="44354:44646" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="47608:47713" ph="SELECT * FRO... tbl_apply" />
-            <marker date="1607161226884" expanded="false" signature="47859:47920" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="48043:48100" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="49560:49586" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="49602:52286" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="49633:49682" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="49771:52272" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="49790:52254" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="49807:49975" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="49993:52010" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50056:51991" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50093:50173" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50243:51970" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50270:51944" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50296:51916" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50337:51889" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50408:50485" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50486:51860" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50521:51826" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50555:51790" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50591:51755" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50634:50717" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50718:50754" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50840:50904" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="50905:50980" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51025:51073" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51178:51242" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51243:51315" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51360:51424" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51425:51499" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51544:51608" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="51609:51683" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52028:52234" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52056:52135" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52628:52654" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52670:55296" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52701:52750" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52839:55282" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52858:55264" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="52876:53044" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53062:55020" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53125:55001" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53162:53242" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53312:54980" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53339:54954" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53365:54926" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53406:54899" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53477:53554" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53555:54870" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53590:54836" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53624:54800" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53660:54765" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53703:53786" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53787:53823" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53909:53973" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="53974:54049" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54095:54159" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54160:54229" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54274:54338" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54339:54410" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54455:54519" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54520:54600" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="54647:54695" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="55038:55244" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="55066:55145" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="56092:56181" ph="SELECT * FRO... tbl_saved" />
-            <marker date="1607161226884" expanded="false" signature="56654:56737" ph="DELETE FROM " />
-            <marker date="1607161226884" expanded="false" signature="58330:58366" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="58952:59241" ph="SELECT COUNT... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="59601:59852" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="62929:63153" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="64591:64697" ph="SELECT COUNT... tbl_apply" />
-            <marker date="1607161226884" expanded="false" signature="64902:65036" ph="SELECT * FRO... tbl_apply" />
-            <marker date="1607161226884" expanded="false" signature="68503:68629" ph="SELECT user_... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="68967:69053" ph="SELECT `name... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="70849:70946" ph="SELECT COUNT... tbl_saved" />
-            <marker date="1607161226884" expanded="false" signature="71151:71285" ph="SELECT * FRO... tbl_saved" />
-            <marker date="1607161226884" expanded="false" signature="82641:82737" ph="SELECT * FRO... tbl_company" />
-            <marker date="1607161226884" expanded="false" signature="84542:84628" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="86078:86130" ph="SELECT * FRO... tbl_company" />
-            <marker date="1607161226884" expanded="false" signature="87693:87716" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="87732:90494" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="87767:87816" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="87905:90476" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="87928:90454" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="87950:88114" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88180:88452" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88257:88274" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88275:88429" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88474:90169" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88541:90146" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88578:88658" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88728:90121" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88759:90091" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88789:90059" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88834:90028" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="88935:89012" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89013:89995" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89052:89957" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89090:89917" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89130:89878" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89178:89260" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89454:89571" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="89716:89777" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="90191:90430" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="90223:90302" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="94270:94443" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607161226884" expanded="true" signature="94731:94849" ph="UPDATE tbl_u... " />
-            <marker date="1607161226884" expanded="false" signature="96077:96112" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="100678:100843" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607161226884" expanded="false" signature="101116:101151" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="101888:102059" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607161226884" expanded="false" signature="102376:102483" ph="UPDATE tbl_u... " />
-            <marker date="1607161226884" expanded="false" signature="102832:102867" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="true" signature="104252:104310" ph="SELECT curre... tbl_users" />
-            <marker date="1607161226884" expanded="true" signature="104600:104708" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607161226884" expanded="false" signature="106893:106946" ph="SELECT * FRO... tbl_subscription_plan" />
-            <marker date="1607161226884" expanded="true" signature="107797:107865" ph="SELECT tbl_c... tbl_city" />
-            <marker date="1607161226884" expanded="true" signature="107797:107875" ph="SELECT tbl_c... tbl_city" />
-            <marker date="1607161226884" expanded="true" signature="107797:107885" ph="SELECT tbl_c... tbl_city" />
-            <marker date="1607161226884" expanded="true" signature="108203:108302" ph="SELECT `id`,... tbl_region" />
-            <marker date="1607161226884" expanded="true" signature="108588:108748" ph="SELECT `id`,... tbl_region" />
-            <marker date="1607161226884" expanded="true" signature="110020:110108" ph="SELECT `id`,... tbl_country" />
-            <marker date="1607161226884" expanded="true" signature="110674:110770" ph="SELECT `id`,... tbl_region" />
-            <marker date="1607161226884" expanded="true" signature="111264:111394" ph="SELECT `c_id... tbl_city" />
-            <marker date="1607161226884" expanded="false" signature="114289:114373" ph="SELECT * FRO... tbl_subscription_plan" />
-            <marker date="1607161226884" expanded="false" signature="116864:117037" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607161226884" expanded="false" signature="117271:117355" ph="SELECT * FRO... tbl_subscription_plan" />
-            <marker date="1607161226884" expanded="true" signature="119531:119668" ph="SELECT user_... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="120114:120196" ph="SELECT `name... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="120573:120638" ph="SELECT `name... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="121490:121597" ph="UPDATE tbl_u... " />
-            <marker date="1607161226884" expanded="false" signature="121644:121756" ph="UPDATE tbl_u... " />
-            <marker date="1607161226884" expanded="true" signature="122899:122940" ph="SELECT * FRO... tbl_settings" />
-            <marker date="1607161226884" expanded="true" signature="126885:126938" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="false" signature="131265:131313" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="true" signature="133361:133425" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="134085:134156" ph="SELECT * FRO... tbl_company" />
-            <marker date="1607161226884" expanded="false" signature="135676:135766" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607161226884" expanded="true" signature="136068:136261" ph="SELECT * FRO... tbl_reviews_ratings" />
-            <marker date="1607161226884" expanded="false" signature="138216:138286" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="139010:139062" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="142434:142488" ph="SELECT * FRO... tbl_company" />
-            <marker date="1607161226884" expanded="false" signature="145238:145286" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="false" signature="145695:145721" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="145737:147715" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="145766:145815" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="145904:147703" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="145921:147687" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="145937:146101" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146117:147451" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146178:147434" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146213:146291" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146361:147429" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146386:147405" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146410:147358" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146449:147333" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146520:146597" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146598:147328" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146631:147296" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146663:147262" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146697:147229" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146708:146756" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146846:146910" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="146911:147025" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="147068:147151" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="147152:147224" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="147467:147669" ph="..." />
-            <marker date="1607161226884" expanded="false" signature="147493:147572" ph="..." />
-            <marker date="1607161226884" expanded="true" signature="147799:147878" ph="UPDATE tbl_u... " />
-            <marker date="1607161226884" expanded="false" signature="148377:148416" ph="SELECT * FRO... tbl_settings" />
-            <marker date="1607161226884" expanded="false" signature="149146:149215" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607161226884" expanded="true" signature="149657:149698" ph="SELECT * FRO... tbl_settings" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/processData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="199" column="40" lean-forward="false" selection-start-line="199" selection-start-column="40" selection-end-line="199" selection-end-column="40" />
-          <folding>
-            <marker date="1607164426028" expanded="true" signature="1223:1364" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607164426028" expanded="true" signature="1693:1728" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607164426028" expanded="true" signature="2545:2692" ph="SELECT * FRO... tbl_transaction_details" />
-            <marker date="1607164426028" expanded="true" signature="3049:3156" ph="UPDATE tbl_u... " />
-            <marker date="1607164426028" expanded="true" signature="5311:5358" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607164426028" expanded="true" signature="5699:5744" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="5814:5857" ph="SELECT * FRO... ${$tbl_nm}" />
-            <marker date="1607164426028" expanded="true" signature="6211:6252" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="6371:6414" ph="SELECT * FRO... tbl_jobs" />
-            <marker date="1607164426028" expanded="true" signature="6755:6796" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="6872:6919" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="6995:7041" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="7117:7163" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="7284:7326" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="7388:7432" ph="SELECT * FRO... tbl_users" />
-            <marker date="1607164426028" expanded="true" signature="7845:7887" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="7956:8003" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8079:8126" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8202:8250" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8326:8372" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8448:8497" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8573:8637" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8756:8801" ph="SELECT * FRO... tbl_city" />
-            <marker date="1607164426028" expanded="true" signature="8869:8912" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="8981:9027" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="9147:9192" ph="SELECT * FRO... tbl_region" />
-            <marker date="1607164426028" expanded="true" signature="9260:9303" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="9372:9420" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="9496:9544" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="9666:9712" ph="SELECT * FRO... tbl_country" />
-            <marker date="1607164426028" expanded="true" signature="9780:9824" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="9893:9941" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="10017:10068" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="10145:10194" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="10314:10361" ph="SELECT * FRO... tbl_saved" />
-            <marker date="1607164426028" expanded="true" signature="10429:10474" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="10778:10822" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="11226:11270" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="11672:11717" ph="DELETE FROM " />
-            <marker date="1607164426028" expanded="true" signature="12114:12177" ph="SELECT * FRO... tbl_advertisements_request" />
-            <marker date="1607164426028" expanded="true" signature="12569:12630" ph="DELETE FROM " />
+            <marker date="1607429851514" expanded="true" signature="652:703" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="2090:2162" ph="SELECT COUNT... tbl_apply" />
+            <marker date="1607429851514" expanded="false" signature="2399:2492" ph="SELECT * FRO... tbl_saved" />
+            <marker date="1607429851514" expanded="false" signature="2673:2766" ph="SELECT * FRO... tbl_apply" />
+            <marker date="1607429851514" expanded="false" signature="2942:3015" ph="SELECT COUNT... tbl_saved" />
+            <marker date="1607429851514" expanded="false" signature="3449:3500" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="3830:3881" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="4203:4335" ph="SELECT COUNT... tbl_apply" />
+            <marker date="1607429851514" expanded="false" signature="4621:4675" ph="SELECT * FRO... tbl_city" />
+            <marker date="1607429851514" expanded="false" signature="6276:6312" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="6705:6918" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="9581:9922" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="9723:9802" ph="SELECT `job_... tbl_recent" />
+            <marker date="1607429851514" expanded="false" signature="12781:12891" ph="SELECT `cid`... tbl_category" />
+            <marker date="1607429851514" expanded="false" signature="13705:13763" ph="SELECT COUNT... tbl_category" />
+            <marker date="1607429851514" expanded="false" signature="14030:14167" ph="SELECT cid,c... tbl_category" />
+            <marker date="1607429851514" expanded="false" signature="14402:14524" ph="SELECT `cid`... tbl_category" />
+            <marker date="1607429851514" expanded="false" signature="15344:15439" ph="SELECT `c_id... tbl_city" />
+            <marker date="1607429851514" expanded="false" signature="16054:16148" ph="SELECT * FRO... tbl_notification" />
+            <marker date="1607429851514" expanded="true" signature="16832:16928" ph="SELECT regio... tbl_users" />
+            <marker date="1607429851514" expanded="true" signature="16832:16937" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="true" signature="17111:17216" ph="SELECT * FRO... tbl_city" />
+            <marker date="1607429851514" expanded="false" signature="17558:17673" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="18059:18125" ph="SELECT * FRO... tbl_category" />
+            <marker date="1607429851514" expanded="false" signature="18985:19186" ph="SELECT COUNT... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="19394:19640" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="22994:23183" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="26039:26382" ph="SELECT COUNT... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="26194:26273" ph="SELECT `job_... tbl_recent" />
+            <marker date="1607429851514" expanded="false" signature="26589:26938" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="26731:26810" ph="SELECT `job_... tbl_recent" />
+            <marker date="1607429851514" expanded="true" signature="31822:31983" ph="SELECT COUNT... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="32175:32282" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="32175:32375" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="35290:35560" ph="SELECT COUNT... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="35767:36067" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="39031:39322" ph="SELECT tbl_j... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="42020:42112" ph="SELECT * FRO... tbl_saved" />
+            <marker date="1607429851514" expanded="false" signature="42412:42472" ph="SELECT * FRO... tbl_recent" />
+            <marker date="1607429851514" expanded="false" signature="43541:43736" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="43884:44147" ph="SELECT COUNT... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="44354:44646" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="47608:47713" ph="SELECT * FRO... tbl_apply" />
+            <marker date="1607429851514" expanded="false" signature="47859:47920" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="48043:48100" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="49560:49586" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="49602:52286" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="49633:49682" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="49771:52272" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="49790:52254" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="49807:49975" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="49993:52010" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50056:51991" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50093:50173" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50243:51970" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50270:51944" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50296:51916" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50337:51889" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50408:50485" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50486:51860" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50521:51826" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50555:51790" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50591:51755" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50634:50717" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50718:50754" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50840:50904" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="50905:50980" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51025:51073" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51178:51242" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51243:51315" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51360:51424" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51425:51499" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51544:51608" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="51609:51683" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52028:52234" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52056:52135" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52628:52654" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52670:55296" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52701:52750" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52839:55282" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52858:55264" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="52876:53044" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53062:55020" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53125:55001" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53162:53242" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53312:54980" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53339:54954" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53365:54926" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53406:54899" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53477:53554" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53555:54870" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53590:54836" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53624:54800" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53660:54765" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53703:53786" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53787:53823" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53909:53973" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="53974:54049" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54095:54159" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54160:54229" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54274:54338" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54339:54410" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54455:54519" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54520:54600" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="54647:54695" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="55038:55244" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="55066:55145" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="56092:56181" ph="SELECT * FRO... tbl_saved" />
+            <marker date="1607429851514" expanded="false" signature="56654:56737" ph="DELETE FROM " />
+            <marker date="1607429851514" expanded="false" signature="58330:58366" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="58952:59241" ph="SELECT COUNT... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="59601:59852" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="62929:63153" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="64591:64697" ph="SELECT COUNT... tbl_apply" />
+            <marker date="1607429851514" expanded="false" signature="64902:65036" ph="SELECT * FRO... tbl_apply" />
+            <marker date="1607429851514" expanded="false" signature="68503:68629" ph="SELECT user_... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="68967:69053" ph="SELECT `name... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="70849:70946" ph="SELECT COUNT... tbl_saved" />
+            <marker date="1607429851514" expanded="false" signature="71151:71285" ph="SELECT * FRO... tbl_saved" />
+            <marker date="1607429851514" expanded="false" signature="82641:82737" ph="SELECT * FRO... tbl_company" />
+            <marker date="1607429851514" expanded="false" signature="84542:84628" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="86078:86130" ph="SELECT * FRO... tbl_company" />
+            <marker date="1607429851514" expanded="false" signature="87693:87716" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="87732:90494" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="87767:87816" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="87905:90476" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="87928:90454" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="87950:88114" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88180:88452" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88257:88274" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88275:88429" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88474:90169" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88541:90146" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88578:88658" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88728:90121" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88759:90091" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88789:90059" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88834:90028" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="88935:89012" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89013:89995" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89052:89957" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89090:89917" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89130:89878" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89178:89260" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89454:89571" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="89716:89777" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="90191:90430" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="90223:90302" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="94270:94443" ph="SELECT * FRO... tbl_transaction_details" />
+            <marker date="1607429851514" expanded="true" signature="94731:94849" ph="UPDATE tbl_u... " />
+            <marker date="1607429851514" expanded="false" signature="96077:96112" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="100678:100843" ph="SELECT * FRO... tbl_transaction_details" />
+            <marker date="1607429851514" expanded="false" signature="101116:101151" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="101888:102059" ph="SELECT * FRO... tbl_transaction_details" />
+            <marker date="1607429851514" expanded="false" signature="102376:102483" ph="UPDATE tbl_u... " />
+            <marker date="1607429851514" expanded="false" signature="102832:102867" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="true" signature="104252:104310" ph="SELECT curre... tbl_users" />
+            <marker date="1607429851514" expanded="true" signature="104600:104708" ph="SELECT * FRO... tbl_transaction_details" />
+            <marker date="1607429851514" expanded="false" signature="106893:106946" ph="SELECT * FRO... tbl_subscription_plan" />
+            <marker date="1607429851514" expanded="true" signature="107797:107865" ph="SELECT tbl_c... tbl_city" />
+            <marker date="1607429851514" expanded="true" signature="107797:107875" ph="SELECT tbl_c... tbl_city" />
+            <marker date="1607429851514" expanded="true" signature="107797:107885" ph="SELECT tbl_c... tbl_city" />
+            <marker date="1607429851514" expanded="true" signature="108203:108302" ph="SELECT `id`,... tbl_region" />
+            <marker date="1607429851514" expanded="true" signature="108588:108748" ph="SELECT `id`,... tbl_region" />
+            <marker date="1607429851514" expanded="true" signature="110020:110108" ph="SELECT `id`,... tbl_country" />
+            <marker date="1607429851514" expanded="true" signature="110674:110770" ph="SELECT `id`,... tbl_region" />
+            <marker date="1607429851514" expanded="true" signature="111264:111394" ph="SELECT `c_id... tbl_city" />
+            <marker date="1607429851514" expanded="false" signature="114289:114373" ph="SELECT * FRO... tbl_subscription_plan" />
+            <marker date="1607429851514" expanded="false" signature="116864:117037" ph="SELECT * FRO... tbl_transaction_details" />
+            <marker date="1607429851514" expanded="false" signature="117271:117355" ph="SELECT * FRO... tbl_subscription_plan" />
+            <marker date="1607429851514" expanded="true" signature="119531:119668" ph="SELECT user_... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="120114:120196" ph="SELECT `name... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="120573:120638" ph="SELECT `name... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="121490:121597" ph="UPDATE tbl_u... " />
+            <marker date="1607429851514" expanded="false" signature="121644:121756" ph="UPDATE tbl_u... " />
+            <marker date="1607429851514" expanded="true" signature="122899:122940" ph="SELECT * FRO... tbl_settings" />
+            <marker date="1607429851514" expanded="true" signature="126885:126938" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="false" signature="131265:131313" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="true" signature="133361:133425" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="134085:134156" ph="SELECT * FRO... tbl_company" />
+            <marker date="1607429851514" expanded="false" signature="135676:135766" ph="SELECT * FRO... tbl_jobs" />
+            <marker date="1607429851514" expanded="true" signature="136068:136261" ph="SELECT * FRO... tbl_reviews_ratings" />
+            <marker date="1607429851514" expanded="false" signature="138216:138286" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="139112:139164" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="142540:142594" ph="SELECT * FRO... tbl_company" />
+            <marker date="1607429851514" expanded="false" signature="145348:145396" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="false" signature="145805:145831" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="145847:147825" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="145876:145925" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146014:147813" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146031:147797" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146047:146211" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146227:147561" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146288:147544" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146323:146401" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146471:147539" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146496:147515" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146520:147468" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146559:147443" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146630:146707" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146708:147438" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146741:147406" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146773:147372" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146807:147339" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146818:146866" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="146956:147020" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="147021:147135" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="147178:147261" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="147262:147334" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="147577:147779" ph="..." />
+            <marker date="1607429851514" expanded="false" signature="147603:147682" ph="..." />
+            <marker date="1607429851514" expanded="true" signature="147909:147988" ph="UPDATE tbl_u... " />
+            <marker date="1607429851514" expanded="false" signature="148487:148526" ph="SELECT * FRO... tbl_settings" />
+            <marker date="1607429851514" expanded="false" signature="149256:149325" ph="SELECT * FRO... tbl_users" />
+            <marker date="1607429851514" expanded="true" signature="149767:149808" ph="SELECT * FRO... tbl_settings" />
           </folding>
         </state>
       </provider>

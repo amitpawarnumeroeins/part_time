@@ -3136,9 +3136,11 @@ else if ($get_method['method_name'] == "user_profile_update") {
 
     if ($_FILES['user_image']['name'] != '') {
 
-        if ($row['user_image'] != "") {
+       /* if ($row['user_image'] != "") {
             unlink('images/' . $row['user_image']);
-        }
+        }*//* if ($row['user_image'] != "") {
+            unlink('images/' . $row['user_image']);
+        }*/
 
         $user_image = rand(0, 99999) . "_" . $_FILES['user_image']['name'];
 
@@ -3155,9 +3157,9 @@ else if ($get_method['method_name'] == "user_profile_update") {
         $img_res1 = mysqli_query($mysqli, 'SELECT * FROM tbl_users WHERE `id`=' . $user_id . '');
         $img_res_row1 = mysqli_fetch_assoc($img_res1);
 
-        if ($img_res_row1['user_resume'] != "") {
+        /*if ($img_res_row1['user_resume'] != "") {
             unlink('uploads/' . $img_res_row1['user_resume']);
-        }
+        }*/
         $user_resume = rand(0, 99999) . "_" . $_FILES['user_resume']['name'];
 
         //Main Image
@@ -3236,9 +3238,9 @@ else if ($get_method['method_name'] == "user_profile_update") {
         $img_res_company = mysqli_query($mysqli, 'SELECT * FROM tbl_company WHERE `id`=' . $user_id . '');
         $img_res_row_company = mysqli_fetch_assoc($img_res_company);
 
-        if ($img_res_row_company['company_logo'] != "") {
+       /* if ($img_res_row_company['company_logo'] != "") {
             unlink('images/' . $img_res_row_company['company_logo']);
-        }
+        }*/
 
         $ext = pathinfo($_FILES['company_logo']['name'], PATHINFO_EXTENSION);
 
