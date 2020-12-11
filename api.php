@@ -792,16 +792,16 @@ else if ($get_method['method_name'] == "get_search_job") {
     switch ($budget_range)
     {
         case 1:
-            $budget_range="0-500";
+            $budget_range="0-400";
             break;
         case 2:
-            $budget_range="500-5000";
+            $budget_range="400-600";
             break;
         case 3:
-            $budget_range="5000-10000";
+            $budget_range="600-1000";
             break;
         case 4:
-            $budget_range="10000-1000000000";
+            $budget_range="1000-1000000000";
             break;
     }
 
@@ -875,6 +875,7 @@ else if ($get_method['method_name'] == "get_search_job") {
 		WHERE tbl_jobs.`status`=1 AND tbl_jobs.`job_status`= 0 $sqlFilter ORDER BY tbl_jobs.`job_name` LIMIT $limit, $page_limit";
 
     $sql = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
 
     while ($data = mysqli_fetch_assoc($sql)) {
         $row['total_item'] = $total_pages['num'];
@@ -1647,8 +1648,10 @@ else if ($get_method['method_name'] == "user_apply_list") {
         $row['job_image'] = $file_path . 'images/' . get_job_info($data['job_id'], 'job_image');
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . get_job_info($data['job_id'], 'job_image');
         $row['job_date'] = date('d-m-Y', get_job_info($data['job_id'], 'job_date'));
-        $row['job_start_time'] = $data['job_start_time'];
-        $row['job_end_time'] = $data['job_end_time'];
+       
+
+        $row['job_start_time'] = get_job_info($data['job_id'],'job_start_time');
+        $row['job_end_time'] = get_job_info($data['job_id'],'job_end_time');
         $row['apply_date'] = date('Y-m-d', strtotime($data['apply_date']));
         $row['job_status'] = get_job_info($data['job_id'], 'job_status');
 
@@ -1775,10 +1778,10 @@ else if ($get_method['method_name'] == "user_saved_list") {
         $row['job_image'] = $file_path . 'images/' . get_job_info($data['job_id'], 'job_image');
         $row['job_image_thumb'] = $file_path . 'images/thumbs/' . get_job_info($data['job_id'], 'job_image');
         $row['job_date'] = date('m/d/Y', get_job_info($data['job_id'], 'job_date'));
-        $row['job_start_time'] = $data['job_start_time'];
-        $row['job_end_time'] = $data['job_end_time'];
+        $row['job_start_time'] = get_job_info($data['job_id'],'job_start_time');
+        $row['job_end_time'] = get_job_info($data['job_id'],'job_end_time');
         $row['is_favourite'] = get_saved_info($get_method['user_id'], $data['job_id']);
-        $row['is_applied'] = get_applied_info($get_method['user_id'], $data['id']);
+        $row['is_applied'] = get_applied_info($get_method['user_id'], $data['job_id']);
         array_push($jsonObj, $row);
 
     }
