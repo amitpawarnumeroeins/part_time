@@ -1,4 +1,44 @@
 <?php
+include("src/Twilio/autoload.php");
+use Twilio\Rest\Client;
+
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
+
+$generator = "1357902468";
+
+//$account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';//LIVE
+//$auth_token = '3e3b6c7f714124ac4d5a2b3578bd21b1';//LIVE
+$account_sid = 'AC06c7fabd7484793ededb46d8c12e0bbe';
+$auth_token = '682301500efb6ae2ffad44b7afab9cec';
+
+//$twilio_number = "+15597154186";//LIVE
+$twilio_number = "+18652704189";
+try {
+    $thistpGen = "";
+    for ($i = 1; $i <= 4; $i++)
+    {
+        $thistpGen .= substr($generator, (rand() % (strlen($generator))), 1);
+    }
+    $thisOTP = $thistpGen;
+    $client = new Client($account_sid, $auth_token);
+    $client->messages->create(
+        "+919584092141",
+        array(
+            'from' => $twilio_number,
+            'body' => 'Your PART TIME Verification Code is ' . $thisOTP
+        )
+    );
+} catch (Exception $e) {
+    $thisOTP = 0;
+    echo $e;
+}
+
+
+/*
+ *
 include("includes/connection.php");
 include("includes/function.php");
 
@@ -34,7 +74,7 @@ while ($dataState = mysqli_fetch_assoc($sqlState)) {
         $qry = Insert('tbl_city', $data);
 
     }
-}
+}*/
 
 //$job_search = "flutter";
 /*$cat_id = $get_method['cat_id'];

@@ -198,39 +198,31 @@ function getAndSendOtp($mobileNumber)
 {
     $generator = "1357902468";
 
+    //$account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';//LIVE
+    //$auth_token = '3e3b6c7f714124ac4d5a2b3578bd21b1';//LIVE
+    $account_sid = 'AC06c7fabd7484793ededb46d8c12e0bbe';
+    $auth_token = '682301500efb6ae2ffad44b7afab9cec';
 
-    $thisOTP = 0;
-// Your Account SID and Auth Token from twilio.com/console
-    $account_sid = 'AC58368fe26d4cd6ddade89ba79cb227e4';
-    $auth_token = '3e3b6c7f714124ac4d5a2b3578bd21b1';
-
-// In production, these should be environment variables. E.g.:
-// $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
-// A Twilio number you own with SMS capabilities
-    $twilio_number = "+15597154186";
+    //$twilio_number = "+15597154186";//LIVE
+    $twilio_number = "+18652704189";
     try {
         $thistpGen = "";
         for ($i = 1; $i <= 4; $i++)
         {
             $thistpGen .= substr($generator, (rand() % (strlen($generator))), 1);
         }
-
         $thisOTP = $thistpGen;
         $client = new Client($account_sid, $auth_token);
         $client->messages->create(
-        // Where to send a text message (your cell phone?)
             "+" . $mobileNumber,
             array(
                 'from' => $twilio_number,
                 'body' => 'Your PART TIME Verification Code is ' . $thisOTP
             )
         );
-
     } catch (Exception $e) {
-        //echo $e->getCode() . ' : ' . $e->getMessage() . "<br>";
         $thisOTP = 0;
     }
-    //print_r($client);
     return ($thisOTP) ? $thisOTP : 0;
 }
 
